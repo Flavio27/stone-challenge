@@ -1,5 +1,4 @@
-import logo from './logo.svg';
-import NavBar from './components/navBar'
+import NavBar from './components/bottomAppBar'
 import SearchBar from './components/searchBar'
 import './App.css';
 
@@ -8,6 +7,11 @@ function App() {
     <div>
 
         <SearchBar/>
+        <br/>
+        <br/>
+        <br/>
+        <h1>MAP</h1>
+        <NavBar/>
 
     </div>
   );

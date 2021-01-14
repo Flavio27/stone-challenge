@@ -6,16 +6,18 @@ export const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     flexGrow: 1,
     justifyItems: 'center',
+    marginBottom: '1%',
+    borderRadius: '10%'
   },
   bgColor: {
-    background: '#00734D',
+    background: '#07AA33',
   },
   search: {
     position: 'relative',
     display: 'flex',
     width: '100%',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: fade(theme.palette.common.white, 0.40),
     '&:hover': {
       backgroundColor: fade(theme.palette.common.black, 0.15),
     },
