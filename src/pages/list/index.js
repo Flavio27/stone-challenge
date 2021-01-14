@@ -1,7 +1,7 @@
 import React from 'react'
 import './styles.css'
 
-function index() {
+function List() {
   return (
     <div>
       
@@ -9,4 +9,4 @@ function index() {
   )
 }
 
-export default index
+export default List

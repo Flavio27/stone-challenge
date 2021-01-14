@@ -1,7 +1,6 @@
 import React from 'react'
-import './styles.css'
 
-function Home() {
+function Pin() {
   return (
     <div>
       
@@ -9,4 +8,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Pin

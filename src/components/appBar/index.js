@@ -1,7 +1,6 @@
 import React from 'react'
-import './styles.css'
 
-function Home() {
+function AppBar() {
   return (
     <div>
       
@@ -9,4 +8,4 @@ function Home() {
   )
 }
 
-export default Home
+export default AppBar
