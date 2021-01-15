@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   appBar: {
     top: 'auto',
+    maxHeight: '10%',
     width: '100%',
     bottom: 0,
     display: 'flex',
@@ -10,7 +11,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyItems: 'center',
     alignItems: 'center',
     overflowX: 'scroll',
-    
   },
   iconsBar: {
     color: 'rgba(255, 255, 255, 0.50)',
