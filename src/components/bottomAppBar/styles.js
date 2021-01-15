@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   appBar: {
     top: 'auto',
     maxHeight: '10%',
-    position: 'relative',
+    position: 'fixed',
     width: '100%',
     bottom: 0,
     display: 'flex',
@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyItems: 'center',
     alignItems: 'center',
     overflowX: 'scroll',
-    marginTop: '5%',
+    marginTop: '100',
     [theme.breakpoints.up('sm')]: {
       marginTop: '3%',
     },
@@ -23,6 +23,10 @@ export const useStyles = makeStyles((theme) => ({
       marginTop: '2%',
     },
   },
+  space: {
+    marginTop: 100,
+  }
+  ,
   iconsBar: {
     color: 'rgba(255, 255, 255, 0.50)',
     textAlign: 'center'

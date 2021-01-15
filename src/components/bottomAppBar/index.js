@@ -14,6 +14,8 @@ export default function BottomAppBar() {
   const classes = useStyles();
 
   return (
+    <React.Fragment>
+      <div className={classes.space}/>
     <AppBar position="fixed" color="primary" className={classes.appBar}>
       <Toolbar className={classes.iconsBar}>
         <div className={classes.item}>
@@ -48,5 +50,6 @@ export default function BottomAppBar() {
         </div>
       </Toolbar>
     </AppBar>
+    </React.Fragment>
   );
 }
