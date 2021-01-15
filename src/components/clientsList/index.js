@@ -8,15 +8,13 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import Typography from '@material-ui/core/Typography';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import RoomIcon from '@material-ui/icons/Room';
-
 import Fab from '@material-ui/core/Fab';
-
 import { useStyles } from './styles'
 
-
-export default function OutlinedCard() {
+ function ClientList() {
   const classes = useStyles();
   return (
+    <div className={classes.main}>
     <Card className={classes.root}>
       <div className={classes.firstComponent}>
         <Typography className={classes.title} gutterBottom>
@@ -62,5 +60,8 @@ export default function OutlinedCard() {
       </div>
      
     </Card>
+    </div>
   );
 }
+
+export default ClientList
