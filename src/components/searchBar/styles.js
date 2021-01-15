@@ -8,6 +8,9 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: '18%',
     borderRadius: '10%',
     top: 0,
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: '10%',
+    },
     [theme.breakpoints.up('md')]: {
       marginBottom: '10%',
     },
