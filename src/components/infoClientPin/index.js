@@ -28,7 +28,7 @@ function InfoClientPin() {
           <br />
           <CalendarTodayIcon className={classes.icons} />
           19/10
-          </Typography >
+        </Typography >
         <div className={classes.secondComponent}>
           <Typography className={classes.pos}>
             <AttachMoneyIcon className={classes.icons} />
@@ -49,10 +49,7 @@ function InfoClientPin() {
             onClick={() => alert('add task')}>
             Minuto de ouro
         </Fab>
-        <StarBorderIcon className={classes.favorite}/>
-          {/* <Fab aria-label="add" size="small" className={classes.newTask}>
-            <StarBorderIcon />
-          </Fab> */}
+          <StarBorderIcon className={classes.favorite} />
         </div>
       </Card>
     </div>

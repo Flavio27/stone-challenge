@@ -11,7 +11,7 @@ import RoomIcon from '@material-ui/icons/Room';
 import Fab from '@material-ui/core/Fab';
 import { useStyles } from './styles'
 
- function ClientList() {
+ function ClientInfo() {
   const classes = useStyles();
   return (
     <div className={classes.main}>
@@ -64,4 +64,4 @@ import { useStyles } from './styles'
   );
 }
 
-export default ClientList
+export default ClientInfo

@@ -1,7 +1,8 @@
 import NavBar from './components/bottomAppBar'
 import SearchBar from './components/searchBar'
-import ClientsList from './components/clientsList'
+import ClientsList from './components/clientInfo'
 import InfoClientPin from './components/infoClientPin'
+import PintFilterBar from './components/pinFilterBar' 
 import './App.css';
 
 function App() {
@@ -12,8 +13,7 @@ function App() {
         <ClientsList/>
         <ClientsList/>
         <ClientsList/>
-        <ClientsList/>
-        <InfoClientPin/>
+        <PintFilterBar/>
         <NavBar/>
 
     </div>

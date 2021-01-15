@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   bgColor: {
-    background: '#07AA33',
+    background: '#14A94B',
     position: 'fixed',
    
   },

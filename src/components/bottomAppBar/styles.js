@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     bottom: 0,
     display: 'flex',
-    background: '#07AA33',
+    background: '#14A94B',
     justifyItems: 'center',
     alignItems: 'center',
     overflowX: 'scroll',

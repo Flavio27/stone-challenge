@@ -9,7 +9,7 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'left',
     color: '#757575',
     maxWidth: '600px',
-    margin: '5% 1%',
+    margin: '2% 1%',
     padding: '1%',
     borderLeft: '5px solid green',
     flexWrap: 'wrap',
@@ -22,7 +22,7 @@ export const useStyles = makeStyles((theme) => ({
       padding: '2%',
     },
     [theme.breakpoints.up('lg')]: {
-      margin: '1% 1%',
+      margin: '0.5% 1%',
       padding: '2%',
     },
     '&:hover': {
