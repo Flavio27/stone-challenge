@@ -3,14 +3,22 @@ import InputBase from '@material-ui/core/InputBase';
 
 export const useStyles = makeStyles((theme) => ({
   grow: {
-    position: 'fixed',
-    flexGrow: 1,
+    position: 'relative',
     justifyItems: 'center',
-    marginBottom: '1%',
-    borderRadius: '10%'
+    marginBottom: '18%',
+    borderRadius: '10%',
+    top: 0,
+    [theme.breakpoints.up('md')]: {
+      marginBottom: '10%',
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginBottom: '5%',
+    },
   },
   bgColor: {
     background: '#07AA33',
+    position: 'fixed',
+   
   },
   search: {
     position: 'relative',

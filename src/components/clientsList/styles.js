@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
@@ -9,12 +9,18 @@ export const useStyles = makeStyles({
     textAlign: 'left',
     color: '#757575',
     maxWidth: '600px',
-    margin: '1%',
+    margin: '5% 1%',
     padding: '1%',
     borderLeft: '5px solid green',
     flexWrap: 'wrap',
+    [theme.breakpoints.up('md')]: {
+      margin: '1% 1%',
+    },
+    [theme.breakpoints.up('lg')]: {
+      margin: '1% 1%',
+    },
     '&:hover': {
-      background: '#f2f2f2',
+      background: '#f0f0f0',
     },
   },
 
@@ -62,4 +68,4 @@ export const useStyles = makeStyles({
     background: '#fff'
     
   },
-});
+}));

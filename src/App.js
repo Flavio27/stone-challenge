@@ -6,12 +6,11 @@ import './App.css';
 function App() {
   return (
     <div>
-
         <SearchBar/>
-        <br/>
-        <br/>
-        <br/>
-        <h1>MAP</h1>
+        <ClientsList/>
+        <ClientsList/>
+        <ClientsList/>
+        <ClientsList/>
         <ClientsList/>
         <ClientsList/>
         <ClientsList/>
