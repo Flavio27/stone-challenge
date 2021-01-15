@@ -30,11 +30,20 @@ export const useStyles = makeStyles((theme) => ({
   item: {
     display: 'flex',
     cursor: 'pointer',
-    margin: '10px 20px',
+    margin: '10px 8px',
     textAlign: 'center',
     flexDirection: 'column',
     alignItems: 'center',
     flexGrow: 1,
+    [theme.breakpoints.up('sm')]: {
+      margin: '10px 15px',
+    },
+    [theme.breakpoints.up('md')]: {
+      margin: '10px 15px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      margin: '10px 15px',
+    },
     '&:hover': {
       color: 'rgba(255, 255, 255)',
     },

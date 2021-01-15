@@ -13,11 +13,17 @@ export const useStyles = makeStyles((theme) => ({
     padding: '1%',
     borderLeft: '5px solid green',
     flexWrap: 'wrap',
+    [theme.breakpoints.up('sm')]: {
+      margin: '1% 1%',
+      padding: '3%',
+    },
     [theme.breakpoints.up('md')]: {
       margin: '1% 1%',
+      padding: '2%',
     },
     [theme.breakpoints.up('lg')]: {
       margin: '1% 1%',
+      padding: '2%',
     },
     '&:hover': {
       background: '#f0f0f0',
@@ -60,12 +66,22 @@ export const useStyles = makeStyles((theme) => ({
   },
   pin: {
     marginLeft: '30%',
+    marginBottom: '3%',
     width: '40px',
     height: '40px',
     fontSize: '80%',
     fontWeight: '600',
     color: '#757575',
-    background: '#fff'
+    background: '#fff',
+    [theme.breakpoints.up('xs')]: {
+      marginLeft: '10%',
+    },
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: '20%',
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginLeft: '30%',
+    },
     
   },
 }));
