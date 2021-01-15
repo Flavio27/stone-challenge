@@ -18,7 +18,7 @@ export default function OutlinedCard() {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
-      <div className={classes.components}>
+      <div className={classes.firstComponent}>
         <Typography className={classes.title} gutterBottom>
           Bar José
           </Typography>
@@ -60,6 +60,7 @@ export default function OutlinedCard() {
             <RoomIcon/>
         </Fab>
       </div>
+     
     </Card>
   );
 }

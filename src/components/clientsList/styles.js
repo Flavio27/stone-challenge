@@ -11,18 +11,17 @@ export const useStyles = makeStyles({
     maxWidth: '600px',
     margin: '1%',
     padding: '1%',
+    borderLeft: '5px solid green',
     flexWrap: 'wrap',
     '&:hover': {
-      background: '#fafafa',
+      background: '#f2f2f2',
     },
   },
-  components:{
+
+  firstComponent:{
     margin: '1%',
   }
   ,
-  firstComponent: {
-    width: '30%',
-  },
   secondComponent: {
     margin: '3%',
     fontSize: '100%',
