@@ -9,7 +9,7 @@ import Badge from '@material-ui/core/Badge';
 import { useStyles } from './styles'
 
 function PinFilterBar() {
-  const { data } = useClienteData();
+  const { clientsData } = useClienteData();
   const classes = useStyles();
 
   return (
@@ -34,7 +34,7 @@ function PinFilterBar() {
               </div>
             </div>
             <div className={classes.item}>
-              <Badge badgeContent={data.length} color="secondary">
+              <Badge badgeContent={clientsData.length} color="secondary">
                 <PersonPinCircleIcon />
               </Badge>
               <div className={classes.info}>

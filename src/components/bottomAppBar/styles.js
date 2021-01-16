@@ -25,6 +25,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   space: {
     marginTop: 100,
+    transition: 'all 0.5s ease',
   }
   ,
   iconsBar: {
@@ -34,19 +35,24 @@ export const useStyles = makeStyles((theme) => ({
   item: {
     display: 'flex',
     cursor: 'pointer',
-    margin: '10px 8px',
+    margin: '10px 10px',
     textAlign: 'center',
+    justifyContent: 'center',
     flexDirection: 'column',
     alignItems: 'center',
     flexGrow: 1,
+    color: 'rgba(255, 255, 255, 0.50)',
+    textDecoration: 'none',
     [theme.breakpoints.up('sm')]: {
       margin: '10px 15px',
     },
     [theme.breakpoints.up('md')]: {
       margin: '10px 15px',
+      fontSize: '20px'
     },
     [theme.breakpoints.up('lg')]: {
-      margin: '10px 15px',
+      margin: '5px 20px',
+      fontSize: '20px'
     },
     '&:hover': {
       color: 'rgba(255, 255, 255)',
@@ -59,4 +65,5 @@ export const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
+  
 }));

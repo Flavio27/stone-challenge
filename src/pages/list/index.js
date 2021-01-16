@@ -6,22 +6,12 @@ import BottomAppBar from '../../components/bottomAppBar'
 
 
 function List() {
-  const { data, setData} = useClienteData();
-
-  useEffect(async => {
-
-    async function getClients() {
-      const response = await fetch('https://60020a1208587400174db8f0.mockapi.io/api/v1/cliente')
-      const data = await response.json();
-      setData(data)
-    } getClients();
-
-  },[])
+  const { data, setData, clientsData} = useClienteData();
 
   return (
     <div>
       <SearchBar/>
-      {data.map((client, index) => (
+      {clientsData.map((client, index) => (
         <ClientInfo key={client.id} client={client}/>
       ))}
       <BottomAppBar/>

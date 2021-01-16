@@ -1,4 +1,5 @@
 import React from 'react';
+import { useClienteData } from '../../store/Clients'
 import Card from '@material-ui/core/Card';
 import RestoreIcon from '@material-ui/icons/Restore';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
@@ -9,19 +10,26 @@ import Typography from '@material-ui/core/Typography';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import RoomIcon from '@material-ui/icons/Room';
 import Fab from '@material-ui/core/Fab';
+import { Link } from 'react-router-dom'
 import { useStyles } from './styles'
 
 function ClientInfo({ client }) {
+  const { localization, setLocalization } = useClienteData();
   const classes = useStyles();
+
+  const goToCordenates = () =>{
+    setLocalization({...localization, lat: client.address[0].lat, lng: client.address[0].lng, zoom: 20})
+  }
+
   return (
     <div className={classes.main}>
       <Card className={classes.root}>
         <div className={classes.firstComponent}>
-          <Typography className={classes.title} gutterBottom>
+          <Typography className={classes.title}>
             {client.commercial_name}
           </Typography>
           <Typography className={classes.pos}>
-          {client.address[0].street}
+          {client.address && client.address[0].street}
           </Typography>
           <Typography className={classes.pos}>
             <CheckIcon fontSize="small" />
@@ -53,10 +61,12 @@ function ClientInfo({ client }) {
             <AddIcon />
                Nova Tarefa
         </Fab>
+        <Link to={'./'}>
           <Fab className={classes.pin}
-            onClick={() => alert('go to local')}>
+            onClick={goToCordenates}>
             <RoomIcon />
           </Fab>
+          </Link>
         </div>
 
       </Card>

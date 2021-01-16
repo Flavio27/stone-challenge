@@ -2,15 +2,18 @@ import React from 'react'
 import { Router, Switch, Route } from 'react-router-dom'
 import Home from '../pages/home'
 import List from '../pages/list'
+import NotFound from '../pages/notFound'
 import { history } from './history'
 
-const Routes = () => (
-  <Router history={history}>
+export const Routes = () => {
+  return (
     <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/list" exact component={List} />
+      <Route path="/" component={Home} exact />
+      <Route path="/list" component={List} />
+      <Route path="/list" component={List} />
+      <Route component={NotFound} />
+      
     </Switch>
-  </Router>
-)
+  )
+}
 
-  export default Routes
