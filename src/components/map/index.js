@@ -5,7 +5,7 @@ import Pin from '../pin'
 import './styles.css'
 
 function Map() {
-	const { localization, clientsData } = useClienteData();
+	const { localization, clientsData, screen } = useClienteData();
 	return (
 		<div style={{ height: '91vh', width: '100%', marginTop: -50, marginBottom: -15 }}>
 			<GoogleMapReact
@@ -18,7 +18,7 @@ function Map() {
 				text="My Marker"
 				defaultZoom={localization.zoom}
 			>
-				{clientsData.map(clientPin =>
+				{screen.filter.clients && clientsData.map(clientPin =>
 					<Pin
 					key={clientPin.id}
 					lat={clientPin.address[0].lat} 

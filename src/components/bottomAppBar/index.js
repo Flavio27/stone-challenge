@@ -20,7 +20,7 @@ export default function BottomAppBar() {
   const goToList = () => {
     history.push('/list')
     console.log(screen)
-    dispatchScreen({type: 'CHANGE_TO_LIST', payload: false})
+    dispatchScreen({type: 'ACTIVE_FILTER_PIN_CLIENT', payload: true})
     console.log(screen)
   }
 

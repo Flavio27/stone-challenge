@@ -37,25 +37,32 @@ const INITIAL_SCREENS = {
   },
   script: false,
   more: false,
+  filter: {
+    clients: false,
+    tenders: false,
+    qualifications: false,
+  }
+}
+
+const INITIAL_LOCATION = {
+  lat: -23.551062277415877,
+  lng: -46.63144359174961,
+  zoom: 16
 }
 
 export default function Clients({ children }) {
-  const [localization, setLocalization] = useState({lat: -23.551062277415877, lng: -46.63144359174961, zoom: 16})
+  const [localization, setLocalization] = useState(INITIAL_LOCATION)
   const [clientsData, dispatch] = useReducer(clientReducer, CLIENTS_INITAL_STATE)
   const [screen, dispatchScreen] = useReducer(screenReducer, INITIAL_SCREENS)
   const [data, setData] = useState([])
 
   useEffect(async => {
-
     async function getClients() {
       const response = await fetch('https://60020a1208587400174db8f0.mockapi.io/api/v1/cliente')
       const data = await response.json();
-      dispatchScreen({type: 'START', payload: INITIAL_SCREENS})
+      dispatchScreen({ type: 'START', payload: INITIAL_SCREENS })
       dispatch({ type: 'ADD_CLIENT', payload: data })
-      // console.log(clientData)
-
     } getClients();
-
   }, [])
 
   return (

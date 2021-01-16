@@ -9,8 +9,15 @@ import Badge from '@material-ui/core/Badge';
 import { useStyles } from './styles'
 
 function PinFilterBar() {
-  const { clientsData } = useClienteData();
+  const { clientsData, screen , dispatchScreen } = useClienteData();
   const classes = useStyles();
+
+  const filterClients = () =>{
+    dispatchScreen({
+      type: 'ACTIVE_FILTER_PIN_CLIENT', 
+      payload: screen.filter.clients ? false : true
+    });
+  }
 
   return (
     <div className={classes.main}>
@@ -18,7 +25,7 @@ function PinFilterBar() {
         <AppBar position="static" className={classes.bar}>
           <div className={classes.itens}>
             <div className={classes.item}>
-              <Badge badgeContent={3} color="secondary">
+              <Badge badgeContent={0} color="secondary">
                 <AssistantIcon />
               </Badge>
               <div className={classes.info}>
@@ -26,14 +33,14 @@ function PinFilterBar() {
               </div>
             </div>
             <div className={classes.item}>
-              <Badge badgeContent={3} color="secondary">
+              <Badge badgeContent={0} color="secondary">
                 <NotListedLocationIcon />
               </Badge>
               <div className={classes.info}>
                 <Typography className={classes.info}>Propostas</Typography>
               </div>
             </div>
-            <div className={classes.item}>
+            <div className={classes.item} onClick={filterClients}>
               <Badge badgeContent={clientsData.length} color="secondary">
                 <PersonPinCircleIcon />
               </Badge>
