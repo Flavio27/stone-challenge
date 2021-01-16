@@ -2,7 +2,6 @@ import React from 'react'
 import { useClienteData } from '../../store/Clients'
 import GoogleMapReact from 'google-map-react'
 import Pin from '../pin'
-import RoomIcon from '@material-ui/icons/Room';
 import './styles.css'
 
 function Map() {
@@ -20,7 +19,12 @@ function Map() {
 				defaultZoom={localization.zoom}
 			>
 				{clientsData.map(clientPin =>
-					<Pin lat={clientPin.address[0].lat} lng={clientPin.address[0].lng} info={clientPin}/>
+					<Pin
+					key={clientPin.id}
+					lat={clientPin.address[0].lat} 
+					lng={clientPin.address[0].lng} 
+					info={clientPin}
+					/>
 				)}
 			</GoogleMapReact>
 		</div>

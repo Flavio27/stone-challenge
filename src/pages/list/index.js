@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React from 'react'
 import { useClienteData } from '../../store/Clients'
 import ClientInfo from '../../components/clientInfo'
 import SearchBar from '../../components/searchBar'
@@ -6,7 +6,7 @@ import BottomAppBar from '../../components/bottomAppBar'
 
 
 function List() {
-  const { data, setData, clientsData} = useClienteData();
+  const { clientsData} = useClienteData();
 
   return (
     <div>

@@ -1,9 +1,8 @@
 import React from 'react'
-import { Router, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import Home from '../pages/home'
 import List from '../pages/list'
 import NotFound from '../pages/notFound'
-import { history } from './history'
 
 export const Routes = () => {
   return (

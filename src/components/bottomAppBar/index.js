@@ -14,13 +14,13 @@ import { Link } from 'react-router-dom'
 
 
 export default function BottomAppBar() {
-  const { screen, clientsData, dispatchScreen, localization, setLocalization } = useClienteData();
+  const { screen, dispatchScreen, localization, setLocalization } = useClienteData();
   const classes = useStyles();
 
   const goToList = () => {
     history.push('/list')
     console.log(screen)
-    // dispatchScreen({type: 'CHANGE_TO_LIST', payload: false})
+    dispatchScreen({type: 'CHANGE_TO_LIST', payload: false})
     console.log(screen)
   }
 
@@ -28,7 +28,6 @@ export default function BottomAppBar() {
     history.push('/')
     console.log(screen)
     setLocalization({...localization, lat: -23.561684, lng: -46.625378, zoom: 13})
-    
   }
 
   const goToScript = () => {

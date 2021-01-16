@@ -40,7 +40,7 @@ const INITIAL_SCREENS = {
 }
 
 export default function Clients({ children }) {
-  const [localization, setLocalization] = useState({lat: -23.561684, lng: -46.625378, zoom: 13})
+  const [localization, setLocalization] = useState({lat: -23.551062277415877, lng: -46.63144359174961, zoom: 16})
   const [clientsData, dispatch] = useReducer(clientReducer, CLIENTS_INITAL_STATE)
   const [screen, dispatchScreen] = useReducer(screenReducer, INITIAL_SCREENS)
   const [data, setData] = useState([])

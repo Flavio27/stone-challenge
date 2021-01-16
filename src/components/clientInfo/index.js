@@ -10,15 +10,15 @@ import Typography from '@material-ui/core/Typography';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import RoomIcon from '@material-ui/icons/Room';
 import Fab from '@material-ui/core/Fab';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { useStyles } from './styles'
 
 function ClientInfo({ client }) {
   const { localization, setLocalization } = useClienteData();
   const classes = useStyles();
 
-  const goToCordenates = () =>{
-    setLocalization({...localization, lat: client.address[0].lat, lng: client.address[0].lng, zoom: 20})
+  const goToCordenates = () => {
+    setLocalization({ ...localization, lat: client.address[0].lat, lng: client.address[0].lng, zoom: 20 })
   }
 
   return (
@@ -29,7 +29,7 @@ function ClientInfo({ client }) {
             {client.commercial_name}
           </Typography>
           <Typography className={classes.pos}>
-          {client.address && client.address[0].street}
+            {client.address && client.address[0].street}
           </Typography>
           <Typography className={classes.pos}>
             <CheckIcon fontSize="small" />
@@ -48,10 +48,10 @@ function ClientInfo({ client }) {
         <div className={classes.secondComponent}>
           <Typography className={classes.pos}>
             <AttachMoneyIcon className={classes.icons} />
-          {client.tpv/1000}k
+            {client.tpv / 1000}k
           <br />
             <AccountBalanceWalletIcon className={classes.icons} />
-            {(client.tpv*(2.5/100))}
+            {(client.tpv * (2.5 / 100))}
           </Typography>
         </div>
         <div className={classes.buttons}>
@@ -61,16 +61,16 @@ function ClientInfo({ client }) {
             <AddIcon />
                Nova Tarefa
         </Fab>
-        <Link to={'./'}>
-          <Fab className={classes.pin}
-            onClick={goToCordenates}>
-            <RoomIcon />
-          </Fab>
+          <Link to={'./'}>
+            <Fab className={classes.pin}
+              onClick={goToCordenates}>
+              <RoomIcon />
+            </Fab>
           </Link>
         </div>
-
       </Card>
     </div>
+
   );
 }
 
