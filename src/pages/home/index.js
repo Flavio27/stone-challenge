@@ -1,10 +1,18 @@
 import React from 'react'
+import SearchBar from '../../components/searchBar'
+import BottomAppBar from '../../components/bottomAppBar'
+import PintFilterBar from '../../components/pinFilterBar'
+import InfoClientPin from '../../components/infoClientPin'
+import Map from '../../components/map'
 import './styles.css'
 
 function Home() {
   return (
     <div>
-      
+      <SearchBar/>
+      <Map/>
+      <PintFilterBar/>
+      <BottomAppBar/>
     </div>
   )
 }

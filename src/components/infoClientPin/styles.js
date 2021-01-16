@@ -34,7 +34,7 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       margin: '0% 1%',
       padding: '1.6%',
-      height: '150px'
+      height: '90px'
     },
     '&:hover': {
       background: '#f0f0f0',
@@ -58,6 +58,10 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '-5%',
     fontSize: '90%',
     fontWeight: '600',
+    [theme.breakpoints.up('lg')]: {
+      marginTop: '-10%',
+    },
+ 
   },
   pos: {
     marginBottom: 15,

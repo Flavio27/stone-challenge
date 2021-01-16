@@ -8,7 +8,8 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     textAlign: 'left',
     color: '#757575',
-    maxWidth: '600px',
+    maxWidth: '445px',
+    width: '445px',
     margin: '2% 1%',
     padding: '1%',
     borderLeft: '5px solid green',
@@ -16,14 +17,17 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       margin: '1% 1%',
       padding: '3%',
+      width: '400px',
     },
     [theme.breakpoints.up('md')]: {
       margin: '1% 1%',
       padding: '2%',
+      width: '450px',
     },
     [theme.breakpoints.up('lg')]: {
       margin: '0.5% 1%',
       padding: '2%',
+      width: '500px',
     },
     '&:hover': {
       background: '#f0f0f0',
@@ -38,6 +42,15 @@ export const useStyles = makeStyles((theme) => ({
 
   firstComponent:{
     margin: '1%',
+    [theme.breakpoints.up('xs')]: {
+      maxWidth: '155px',
+    },
+    [theme.breakpoints.up('sm')]: {
+      maxWidth: '180px',
+    },
+    [theme.breakpoints.up('md', 'lg')]: {
+      maxWidth: '200px',
+    },
   }
   ,
   secondComponent: {

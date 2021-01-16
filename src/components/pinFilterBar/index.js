@@ -1,15 +1,17 @@
 import React from 'react';
+import { useClienteData } from '../../store/Clients'
 import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
 import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import AssistantIcon from '@material-ui/icons/Assistant';
 import Badge from '@material-ui/core/Badge';
-import {useStyles} from './styles'
+import { useStyles } from './styles'
 
- function PinFilterBar() {
+function PinFilterBar() {
+  const { data } = useClienteData();
   const classes = useStyles();
-  
+
   return (
     <div className={classes.main}>
       <div className={classes.grow}>
@@ -32,7 +34,7 @@ import {useStyles} from './styles'
               </div>
             </div>
             <div className={classes.item}>
-              <Badge badgeContent={3} color="secondary">
+              <Badge badgeContent={data.length} color="secondary">
                 <PersonPinCircleIcon />
               </Badge>
               <div className={classes.info}>

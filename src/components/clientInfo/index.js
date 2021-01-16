@@ -11,55 +11,55 @@ import RoomIcon from '@material-ui/icons/Room';
 import Fab from '@material-ui/core/Fab';
 import { useStyles } from './styles'
 
- function ClientInfo() {
+function ClientInfo({ client }) {
   const classes = useStyles();
   return (
     <div className={classes.main}>
-    <Card className={classes.root}>
-      <div className={classes.firstComponent}>
-        <Typography className={classes.title} gutterBottom>
-          Bar José
+      <Card className={classes.root}>
+        <div className={classes.firstComponent}>
+          <Typography className={classes.title} gutterBottom>
+            {client.commercial_name}
           </Typography>
-        <Typography className={classes.pos}>
-          Rua Capitão Francisco, 1050
+          <Typography className={classes.pos}>
+          {client.address[0].street}
           </Typography>
-        <Typography className={classes.pos}>
-          <CheckIcon fontSize="small" />
+          <Typography className={classes.pos}>
+            <CheckIcon fontSize="small" />
            Aprovado
           </Typography>
-      </div>
-      <div className={classes.secondComponent}>
-        <Typography className={classes.pos}>
-          <RestoreIcon className={classes.icons} />
+        </div>
+        <div className={classes.secondComponent}>
+          <Typography className={classes.pos}>
+            <RestoreIcon className={classes.icons} />
           Há 20 Dias
           <br />
-          <CalendarTodayIcon className={classes.icons} />
+            <CalendarTodayIcon className={classes.icons} />
           19/10
           </Typography >
-      </div>
-      <div className={classes.secondComponent}>
-        <Typography className={classes.pos}>
-          <AttachMoneyIcon className={classes.icons} />
-          10k
+        </div>
+        <div className={classes.secondComponent}>
+          <Typography className={classes.pos}>
+            <AttachMoneyIcon className={classes.icons} />
+          {client.tpv/1000}k
           <br />
-          <AccountBalanceWalletIcon className={classes.icons} />
-           1.1k
+            <AccountBalanceWalletIcon className={classes.icons} />
+            {(client.tpv*(2.5/100))}
           </Typography>
-      </div>
-      <div className={classes.buttons}>
-        <Fab className={classes.newTask}
-          variant="extended"
-          onClick={() => alert('add task')}>
-          <AddIcon />
+        </div>
+        <div className={classes.buttons}>
+          <Fab className={classes.newTask}
+            variant="extended"
+            onClick={() => alert('add task')}>
+            <AddIcon />
                Nova Tarefa
         </Fab>
-        <Fab className={classes.pin}
-          onClick={() => alert('go to local')}>
-            <RoomIcon/>
-        </Fab>
-      </div>
-     
-    </Card>
+          <Fab className={classes.pin}
+            onClick={() => alert('go to local')}>
+            <RoomIcon />
+          </Fab>
+        </div>
+
+      </Card>
     </div>
   );
 }
