@@ -1,5 +1,6 @@
 import React, { useState, createContext, useContext, useEffect, useReducer } from 'react';
 import { clientReducer } from './clientReducer'
+import { tenderReducer } from './tenderReducer'
 import { screenReducer } from './screenReducer'
 
 const dataContext = createContext()
@@ -26,6 +27,27 @@ const CLIENTS_INITAL_STATE = [{
   }],
 }]
 
+const INITIAL_TENDERS = {
+  id: 0,
+  name: '',
+  tpv: 0,
+  negotiation: [{
+    id: 0,
+    tenderId: 0,
+    status: '',
+    request: false,
+    observations: '',
+  }],
+  address: [{
+    id: 0,
+    tenderId: 0,
+    city: '',
+    street: '',
+    lat: 0,
+    lng: 0,
+    state: '',
+  }]
+}
 const INITIAL_SCREENS = {
   funnel: false,
   list: false,
@@ -53,15 +75,19 @@ const INITIAL_LOCATION = {
 export default function Clients({ children }) {
   const [localization, setLocalization] = useState(INITIAL_LOCATION)
   const [clientsData, dispatch] = useReducer(clientReducer, CLIENTS_INITAL_STATE)
+  const [tendersData, dispatchTender] = useReducer(tenderReducer, INITIAL_TENDERS)
   const [screen, dispatchScreen] = useReducer(screenReducer, INITIAL_SCREENS)
   const [data, setData] = useState([])
 
   useEffect(async => {
     async function getClients() {
-      const response = await fetch('https://60020a1208587400174db8f0.mockapi.io/api/v1/cliente')
-      const data = await response.json();
-      dispatchScreen({ type: 'START', payload: INITIAL_SCREENS })
-      dispatch({ type: 'ADD_CLIENT', payload: data })
+      const responseClients = await fetch('https://60020a1208587400174db8f0.mockapi.io/api/v1/cliente')
+      const dataClient = await responseClients.json();
+      dispatch({ type: 'ADD_CLIENT', payload: dataClient })
+
+      const responseTenders = await fetch('https://60037e6da3c5f100179133d3.mockapi.io/tenders')
+      const dataTender = await responseTenders.json();
+      dispatchTender({ type: 'ADD_TENDER', payload: dataTender })
     } getClients();
   }, [])
 
@@ -71,8 +97,8 @@ export default function Clients({ children }) {
         data, setData,
         localization, setLocalization,
         clientsData, dispatch,
+        tendersData, dispatchTender,
         screen, dispatchScreen
-
       }}>
       {children}
     </dataContext.Provider>
@@ -82,6 +108,12 @@ export default function Clients({ children }) {
 export function useClienteData() {
   const clientContext = useContext(dataContext);
   if (!clientContext) throw new Error("useClienteData must be used within a Clients provider");
-  const { data, setData, clientsData, dispatch, screen, dispatchScreen, localization, setLocalization } = clientContext;
-  return { data, setData, clientsData, dispatch, screen, dispatchScreen, localization, setLocalization }
+  const {
+    data, setData, clientsData, dispatch, screen,
+    dispatchScreen, localization, setLocalization, tendersData, dispatchTender,
+  } = clientContext;
+  return {
+    data, setData, clientsData, dispatch, screen,
+    dispatchScreen, localization, setLocalization, tendersData, dispatchTender,
+  }
 }

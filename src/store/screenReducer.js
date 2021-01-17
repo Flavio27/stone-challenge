@@ -10,7 +10,12 @@ export const screenReducer = (state, action) => {
     case "ACTIVE_FILTER_PIN_CLIENT":
       const activeClientPin = { ...state }
       activeClientPin.filter.clients = action.payload;
+
       return activeClientPin
+    case "ACTIVE_FILTER_PIN_TENDER":
+      const activeTenderPin = { ...state }
+      activeTenderPin.filter.tenders = action.payload;
+      return activeTenderPin
     default:
       return state
   }

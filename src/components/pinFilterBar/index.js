@@ -9,13 +9,19 @@ import Badge from '@material-ui/core/Badge';
 import { useStyles } from './styles'
 
 function PinFilterBar() {
-  const { clientsData, screen , dispatchScreen } = useClienteData();
+  const { clientsData, tendersData, screen , dispatchScreen } = useClienteData();
   const classes = useStyles();
 
   const filterClients = () =>{
     dispatchScreen({
       type: 'ACTIVE_FILTER_PIN_CLIENT', 
       payload: screen.filter.clients ? false : true
+    });
+  }
+  const filterTenders = () =>{
+    dispatchScreen({
+      type: 'ACTIVE_FILTER_PIN_TENDER', 
+      payload: screen.filter.tenders ? false : true
     });
   }
 
@@ -32,9 +38,9 @@ function PinFilterBar() {
                 <Typography className={classes.info}>Qualificações</Typography>
               </div>
             </div>
-            <div className={classes.item}>
-              <Badge badgeContent={0} color="secondary">
-                <NotListedLocationIcon />
+            <div className={classes.item} onClick={filterTenders}>
+              <Badge badgeContent={tendersData.length} color="secondary">
+                <NotListedLocationIcon style={{color: '#c66b2f'}}/>
               </Badge>
               <div className={classes.info}>
                 <Typography className={classes.info}>Propostas</Typography>
@@ -42,7 +48,7 @@ function PinFilterBar() {
             </div>
             <div className={classes.item} onClick={filterClients}>
               <Badge badgeContent={clientsData.length} color="secondary">
-                <PersonPinCircleIcon />
+                <PersonPinCircleIcon style={{color: '#38bc72'}}/>
               </Badge>
               <div className={classes.info}>
                 <Typography className={classes.info}>Clientes</Typography>

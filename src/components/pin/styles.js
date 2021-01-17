@@ -2,7 +2,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   divPin: {
-    cursor: 'pointer'
+    cursor: 'pointer',
+    textALign: 'center'
+  },
+  name:{
+    color: '#757575',
+    fontWeight: 700,
   },
   modalDiv: {
     width: 'auto',
