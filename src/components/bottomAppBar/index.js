@@ -8,9 +8,10 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import MapIcon from '@material-ui/icons/Map';
 import EventIcon from '@material-ui/icons/Event';
+import { Link } from 'react-router-dom'
 import { history } from '../../config/history'
 import { useStyles } from './styles'
-import { Link } from 'react-router-dom'
+
 
 
 export default function BottomAppBar() {
@@ -36,7 +37,6 @@ export default function BottomAppBar() {
   return (
     <React.Fragment>
       <div className={classes.space} />
-      
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar className={classes.iconsBar}>
           <div className={classes.item}>

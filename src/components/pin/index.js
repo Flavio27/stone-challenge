@@ -24,7 +24,7 @@ function Pin({ info, type }) {
       <div onClick={handleClickOpen} className={classes.divPin}>
         <Typography className={classes.name}>
           {info.commercial_name}
-        </Typography >
+        </Typography>
         {type === 'tender' && <NotListedLocationIcon fontSize="large" style={{ color: '#c66b2f' }} />}
         {type === 'client' && <PersonPinCircleIcon fontSize="large" style={{ color: '#38bc72' }} />}
       </div>

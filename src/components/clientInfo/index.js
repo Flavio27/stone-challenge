@@ -14,11 +14,15 @@ import { Link } from 'react-router-dom';
 import { useStyles } from './styles'
 
 function ClientInfo({ client }) {
-  const { localization, setLocalization } = useClienteData();
+  const { localization, setLocalization, dispatchScreen} = useClienteData();
   const classes = useStyles();
 
   const goToCordenates = () => {
     setLocalization({ ...localization, lat: client.address[0].lat, lng: client.address[0].lng, zoom: 20 })
+    dispatchScreen({
+      type: 'ACTIVE_FILTER_PIN_CLIENT', 
+      payload: true
+    });
   }
 
   return (
@@ -33,23 +37,23 @@ function ClientInfo({ client }) {
           </Typography>
           <Typography className={classes.pos}>
             <CheckIcon fontSize="small" />
-           Aprovado
+            Aprovado
           </Typography>
         </div>
         <div className={classes.secondComponent}>
           <Typography className={classes.pos}>
             <RestoreIcon className={classes.icons} />
-          Há 20 Dias
-          <br />
+            Há 20 Dias
+            <br />
             <CalendarTodayIcon className={classes.icons} />
-          19/10
+            19/10
           </Typography >
         </div>
         <div className={classes.secondComponent}>
           <Typography className={classes.pos}>
             <AttachMoneyIcon className={classes.icons} />
             {client.tpv / 1000}k
-          <br />
+            <br />
             <AccountBalanceWalletIcon className={classes.icons} />
             {(client.tpv * (2.5 / 100))}
           </Typography>
@@ -59,8 +63,8 @@ function ClientInfo({ client }) {
             variant="extended"
             onClick={() => alert('add task')}>
             <AddIcon />
-               Nova Tarefa
-        </Fab>
+             Nova Tarefa
+          </Fab>
           <Link to={'./'}>
             <Fab className={classes.pin}
               onClick={goToCordenates}>
