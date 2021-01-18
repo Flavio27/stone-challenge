@@ -12,7 +12,6 @@ export const useStyles = makeStyles((theme) => ({
     width: '445px',
     margin: '2% 1%',
     padding: '1%',
-    borderLeft: '5px solid green',
     flexWrap: 'wrap',
     [theme.breakpoints.up('sm')]: {
       margin: '1% 1%',
@@ -65,6 +64,14 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: 15,
     fontSize: '80%',
     fontWeight: '100',
+  },
+  result: {
+    marginBottom: 15,
+    fontSize: '80%',
+    fontWeight: '100',
+    textAlign: 'left',
+    display: 'flex',
+    alignItems: 'center',
   },
   icons: {
     marginRight: '2px',

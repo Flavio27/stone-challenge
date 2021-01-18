@@ -46,8 +46,8 @@ function Input({ type }) {
           <option aria-label="None" value="" />
           {type === 'Leads' &&
             <>
-              <option value={10}>proposta enviada</option>
-              <option value={20}>sem proposta</option>
+              <option value={true}>proposta enviada</option>
+              <option value={false}>sem proposta</option>
             </>}
           {type === 'Segmento' &&
             <>
@@ -58,7 +58,7 @@ function Input({ type }) {
             <>
               <option value={10}>Menos de 10k</option>
               <option value={20}>De 10k a 20k</option>
-              <option value={30}>Mais de 20k</option>
+              <option value={21}>Mais de 20k</option>
             </>}
 
         </Select>
