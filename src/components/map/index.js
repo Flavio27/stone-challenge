@@ -2,7 +2,6 @@ import React from 'react'
 import { useClienteData } from '../../store/Clients'
 import GoogleMapReact from 'google-map-react'
 import { fitBounds, Bounds } from 'google-map-react'
-import DrawingManager from "react-google-maps/lib/components/drawing/DrawingManager";
 
 import Pin from '../pin'
 import './styles.css'

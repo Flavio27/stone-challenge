@@ -11,13 +11,20 @@ import EventIcon from '@material-ui/icons/Event';
 import { Link } from 'react-router-dom'
 import { history } from '../../config/history'
 import { useStyles } from './styles'
-
+import { useLocation } from 'react-router-dom'
 
 
 export default function BottomAppBar() {
   const { screen, dispatchScreen, localization, setLocalization } = useClienteData();
   const classes = useStyles();
+  let location = useLocation();
 
+  const goToFunnel = async () => {
+    await dispatchScreen({
+      type: 'ACTIVE_FUNNEL',
+      payload: screen.funnel ? false : true
+    })
+  }
   const goToList = () => {
     history.push('/list')
     console.log(screen)
@@ -39,13 +46,12 @@ export default function BottomAppBar() {
       <div className={classes.space} />
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar className={classes.iconsBar}>
-          <div className={classes.item}>
-            {screen.list && 'a'}
+          <Link type="div" to={'./'} className={classes.item} onClick={goToFunnel}>
             <FilterListIcon />
             <div className={classes.info}>
               <Typography className={classes.info}>Funil</Typography>
             </div>
-          </div>
+          </Link>
           <Link type="div" to={'./list'} className={classes.item} onClick={goToList}>
             <DashboardIcon />
             <div className={classes.info}>

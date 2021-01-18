@@ -9,32 +9,18 @@ export const useStyles = makeStyles((theme) => ({
   },
   grow: {
     display: 'flex',
-    flexGrow: 1,
-    width: '100%',
-    margin: '5%',
+    color: '#757575',
+    bottom: '11%',
+    left: '1%',
+    top: '5%',
     position: 'fixed',
-    bottom: 50,
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    color: '#757575',
-    [theme.breakpoints.up('xs')]: {
-      margin: '5% 5%',
-      width: '90%',
-      bottom: 60,
-    },
-    [theme.breakpoints.up('sm')]: {
-      margin: '5%',
-      width: '60%',
-    },
-    [theme.breakpoints.up('md')]: {
-      width: '40%',
-      margin: '3%',
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '20%',
-      margin: '3%',
-    },
+    fontSize: '100%',
+    size: '100%',
+    flexDirection: 'column',
+
   },
   bar: {
     color: '#757575',
@@ -46,26 +32,18 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     textAlign: 'center',
     alignItems: 'center',
+    flexDirection: 'column',
   },
   item: {
     display: 'flex',
     cursor: 'pointer',
-    maxWidth: '50px',
+    maxWidth: '100%',
     justifyContent: 'center',
     margin: '10px 15px',
     textAlign: 'center',
     flexDirection: 'column',
     alignItems: 'center',
     flexGrow: 1,
-    [theme.breakpoints.up('sm')]: {
-      margin: '10px 15px',
-    },
-    [theme.breakpoints.up('md')]: {
-      margin: '10px 15px',
-    },
-    [theme.breakpoints.up('lg')]: {
-      margin: '10px 15px',
-    },
     '&:hover': {
       color: '#5c5c5c',
     },

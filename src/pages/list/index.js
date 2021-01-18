@@ -3,18 +3,20 @@ import { useClienteData } from '../../store/Clients'
 import ClientInfo from '../../components/clientInfo'
 import SearchBar from '../../components/searchBar'
 import BottomAppBar from '../../components/bottomAppBar'
+import { useStyles } from './styles'
 
 
 function List() {
-  const { clientsData} = useClienteData();
-
+  const { clientsData } = useClienteData();
+  const classes = useStyles();
   return (
     <div>
-      <SearchBar/>
+      <SearchBar />
       {clientsData.map((client, index) => (
-        <ClientInfo key={client.id} client={client}/>
+        <ClientInfo key={client.id} client={client} />
       ))}
-      <BottomAppBar/>
+      <div className={classes.topSpace}/>
+      <BottomAppBar />
     </div>
   )
 }

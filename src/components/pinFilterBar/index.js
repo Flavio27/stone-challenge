@@ -30,20 +30,20 @@ function PinFilterBar() {
       <div className={classes.grow}>
         <AppBar position="static" className={classes.bar}>
           <div className={classes.itens}>
-            <div className={classes.item}>
-              <Badge badgeContent={0} color="secondary">
-                <AssistantIcon />
-              </Badge>
-              <div className={classes.info}>
-                <Typography className={classes.info}>Qualificações</Typography>
-              </div>
-            </div>
             <div className={classes.item} onClick={filterTenders}>
               <Badge badgeContent={tendersData.length} color="secondary">
                 <NotListedLocationIcon style={{color: '#c66b2f'}}/>
               </Badge>
               <div className={classes.info}>
                 <Typography className={classes.info}>Propostas</Typography>
+              </div>
+            </div>
+            <div className={classes.item}>
+              <Badge badgeContent={0} color="secondary">
+                <NotListedLocationIcon style={{color: '#757575'}}/>
+              </Badge>
+              <div className={classes.info}>
+                <Typography className={classes.info}>TPV</Typography>
               </div>
             </div>
             <div className={classes.item} onClick={filterClients}>

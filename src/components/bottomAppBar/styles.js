@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   appBar: {
     top: 'auto',
-    maxHeight: '10%',
+    maxHeight: '18%',
     position: 'fixed',
     width: '100%',
     bottom: 0,
@@ -13,8 +13,13 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     overflowX: 'scroll',
     marginTop: '100',
+    [theme.breakpoints.up('xs')]: {
+      marginTop: '3%',
+      maxHeight: '15%',
+    },
     [theme.breakpoints.up('sm')]: {
       marginTop: '3%',
+      maxHeight: '15%',
     },
     [theme.breakpoints.up('md')]: {
       marginTop: '3%',
@@ -24,13 +29,24 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   space: {
-    marginTop: 100,
     transition: 'all 0.5s ease',
   }
   ,
   iconsBar: {
     color: 'rgba(255, 255, 255, 0.50)',
-    textAlign: 'center'
+    textAlign: 'center',
+    [theme.breakpoints.up('xs')]: {
+      margin: '1px 1px',
+    },
+    [theme.breakpoints.up('sm')]: {
+      margin: '-10px 1px',
+    },
+    [theme.breakpoints.up('md')]: {
+      margin: '1px 1px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      margin: '1px 1px',
+    },
   },
   item: {
     display: 'flex',
