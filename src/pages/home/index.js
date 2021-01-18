@@ -5,6 +5,7 @@ import PintFilterBar from '../../components/pinFilterBar'
 import Map from '../../components/map'
 import './styles.css'
 
+
 function Home() {
   return (
     <div>

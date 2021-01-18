@@ -66,9 +66,9 @@ const INITIAL_SCREENS = {
   }
 }
 
-const INITIAL_LOCATION = {
-  lat: -23.551062277415877,
-  lng: -46.63144359174961,
+export const INITIAL_LOCATION = {
+  lat: -23.5564616232912,
+  lng: -46.63087491974125,
   zoom: 16
 }
 
@@ -81,11 +81,11 @@ export default function Clients({ children }) {
 
   useEffect(async => {
     async function getClients() {
-      const responseClients = await fetch('https://60020a1208587400174db8f0.mockapi.io/api/v1/cliente')
+      const responseClients = await fetch('http://localhost:3001/clients')
       const dataClient = await responseClients.json();
       dispatch({ type: 'ADD_CLIENT', payload: dataClient })
 
-      const responseTenders = await fetch('https://60037e6da3c5f100179133d3.mockapi.io/tenders')
+      const responseTenders = await fetch('http://localhost:3001/tenders')
       const dataTender = await responseTenders.json();
       dispatchTender({ type: 'ADD_TENDER', payload: dataTender })
     } getClients();

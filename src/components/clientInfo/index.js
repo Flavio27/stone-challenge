@@ -33,7 +33,9 @@ function ClientInfo({ client }) {
             {client.commercial_name}
           </Typography>
           <Typography className={classes.pos}>
-            {client.address && client.address[0].street}
+            • <strong>{client.business_type}</strong>
+            <br/>
+            • {client.address && client.address[0].street}
           </Typography>
           <Typography className={classes.pos}>
             <CheckIcon fontSize="small" />

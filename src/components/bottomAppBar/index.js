@@ -1,5 +1,5 @@
 import React from 'react';
-import { useClienteData } from '../../store/Clients'
+import { useClienteData, INITIAL_LOCATION } from '../../store/Clients'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -27,7 +27,7 @@ export default function BottomAppBar() {
   const goToMap = () => {
     history.push('/')
     console.log(screen)
-    setLocalization({...localization, lat: -23.561684, lng: -46.625378, zoom: 13})
+    setLocalization(INITIAL_LOCATION)
   }
 
   const goToScript = () => {
