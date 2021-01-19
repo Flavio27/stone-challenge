@@ -13,7 +13,7 @@ import { useStyles } from './styles'
 
 export default function NestedList() {
   const classes = useStyles();
-  const { dispatchScreen }= useClienteData();
+  const { dispatchScreen, tendersData, clientsData } = useClienteData();
   const [checked, setChecked] = useState([0]);
 
   const applyFilter = async () =>{
@@ -23,13 +23,18 @@ export default function NestedList() {
     })
   }
 
-  const handleToggle = (value) => () => {
+  const filterVisitToday = () =>{
+    
+  }
+
+  const select = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
     if (currentIndex === -1) {
-      newChecked.push(value);
+      newChecked.push(value);    
     } else {
       newChecked.splice(currentIndex, 1);
+      filterVisitToday()
     }
     setChecked(newChecked);
   };
@@ -45,10 +50,10 @@ export default function NestedList() {
         </ListSubheader>
       }
     >
-      <InputFilter type={'Leads'} />
-      <InputFilter type={'Segmento'} />
-      <InputFilter type={'TPV'} />
-      <ListItem role={undefined} dense button onClick={handleToggle()}>
+      <InputFilter type={'leads'} />
+      <InputFilter type={'segmento'} />
+      <InputFilter type={'tpv'} />
+      <ListItem role={undefined} dense button onClick={select()}>
         <ListItemIcon>
           <Checkbox
             edge="start"

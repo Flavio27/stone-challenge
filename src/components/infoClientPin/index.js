@@ -17,6 +17,8 @@ function InfoClientPin() {
         <div className={classes.firstComponent}>
           <Typography className={classes.title} gutterBottom>
             Bar José
+            <br/>
+            (Restaurante)
           </Typography>
           <Typography className={classes.pos}>
             Rua Capitão Francisco, 1050

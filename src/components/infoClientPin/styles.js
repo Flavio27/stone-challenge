@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   root: {
     position: 'fixed',
-    bottom: '10%',
+    bottom: '15%',
     display: 'flex',
     flexDirection: 'row',
     justifyItems: 'center',
@@ -34,7 +34,7 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       margin: '0% 1%',
       padding: '1.6%',
-      height: '90px'
+      height: '100px'
     },
     '&:hover': {
       background: '#f0f0f0',

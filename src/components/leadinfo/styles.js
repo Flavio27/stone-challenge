@@ -111,8 +111,11 @@ export const useStyles = makeStyles((theme) => ({
     maxHeight: '40px',
     fontSize: '80%',
     fontWeight: '600',
-    color: '#757575',
-    background: '#fff',
+    color: '#FFFF',
+    background: '#00AB63',
+    '&:hover': {
+      background: '#00ad82',
+    },
   },
   pin: {
     marginLeft: '50%',
