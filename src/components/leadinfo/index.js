@@ -26,15 +26,23 @@ function LeadInfo({ client }) {
   return (
     <div className={classes.main}>
       <Card className={classes.root}>
-        <Typography className={classes.title}>
-          {client.commercial_name}
-        </Typography>
+        <div className={classes.head}>
+          <Typography className={classes.title}>
+            {client.commercial_name}
+          </Typography>
+          <Link to={'./'}>
+            <Fab className={classes.pin}
+              onClick={goToCordenates}>
+              <RoomIcon />
+            </Fab>
+          </Link>
+        </div>
         <div className={classes.firstComponent}>
           <Typography className={classes.pos}>
             <strong>({client.business_type})</strong>
             <br />
             {client.address && client.address[0].street}
-          </Typography>    
+          </Typography>
           <Typography className={classes.status}>
             <CachedIcon className={classes.icons} />
             <strong>Status da negociação</strong>
@@ -47,16 +55,16 @@ function LeadInfo({ client }) {
             <br />
             {client.visit && client.visit[0].last_visit}
           </Typography >
-          {client.visit &&
-            client.visit[0].visit_today &&
             <Typography className={classes.status}>
               <>
                 <CalendarTodayIcon className={classes.icons} />
                 <strong>Visita hoje</strong>
                 <br />
-                Sim
+                {client.visit &&
+                  client.visit[0].visit_today ? 'Sim' : 'Não'
+                }
               </>
-            </Typography>}
+            </Typography>
         </div>
         <div className={classes.secondComponent}>
           <Typography className={classes.pos}>
@@ -79,13 +87,7 @@ function LeadInfo({ client }) {
             onClick={() => alert('add task')}>
             Enviar Proposta
           </Fab>
-            <Link to={'./'}>
-              <Fab className={classes.pin}
-                onClick={goToCordenates}>
-                <RoomIcon />
-              </Fab>
-            </Link>
-        </div>    
+        </div>
       </Card>
     </div>
 

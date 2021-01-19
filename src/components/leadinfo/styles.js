@@ -43,10 +43,22 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
+  title: {
+    fontWeight: 700,
+    width: '50%'
+  },
+  head: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginLeft: 3,
+    flexBasis: '100%',
+    fontSize: '100%',
+    fontWeight: '600',
+  },
   firstComponent:{
     margin: '1%',
-    maxWidth: '49%',
+    marginRight: '10%',
+    maxWidth: '50%',
     [theme.breakpoints.up('xs')]: {
       maxWidth: '155px',
     },
@@ -59,15 +71,9 @@ export const useStyles = makeStyles((theme) => ({
   }
   ,
   secondComponent: {
-    margin: '1%',
+    margin: '1% 1%',
     maxWidth: '49%',
     fontSize: '100%',
-  },
-  title: {
-    marginLeft: 3,
-    flexBasis: '100%',
-    fontSize: '100%',
-    fontWeight: '600',
   },
   pos: {
     marginBottom: 15,
@@ -94,26 +100,25 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: 'medium'
   },
   buttons: {
-    flexBasis: '100%',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'end',
+    borderRadius: '50%'
   },
   newTask: {
-    marginBottom: '3%',
+    margin: '3%',
+    position: 'center',
     maxHeight: '40px',
     fontSize: '80%',
     fontWeight: '600',
     color: '#757575',
     background: '#fff',
-    [theme.breakpoints.only('xs')]: {
-      maxWidth: 120,
-    },
   },
   pin: {
-    marginBottom: '3%',
-    position: 'right',
-    marginLeft: 30,
+    marginLeft: '50%',
+    textAlign: 'center',
     width: '40px',
     height: '40px',
-    fontSize: '80%',
     fontWeight: '600',
     color: '#757575',
     background: '#fff',

@@ -21,13 +21,13 @@ function ClientInfo({ client }) {
     border: null,
   }
   if (client.satisfaction < 5) {
-    satisfaction.emote = <SentimentVeryDissatisfiedIcon />
+    satisfaction.emote = <SentimentVeryDissatisfiedIcon className={classes.icons} />
     satisfaction.border = '3px solid red'
   } else if (client.satisfaction >= 5 && client.satisfaction < 8) {
-    satisfaction.emote = <SentimentSatisfiedIcon />
+    satisfaction.emote = <SentimentSatisfiedIcon className={classes.icons} />
     satisfaction.border = '3px solid gold'
   } else if (client.satisfaction >= 8) {
-    satisfaction.emote = <SentimentSatisfiedAltIcon />
+    satisfaction.emote = <SentimentSatisfiedAltIcon className={classes.icons} />
     satisfaction.border = '3px solid green'
   }
 
@@ -42,39 +42,51 @@ function ClientInfo({ client }) {
   return (
     <div className={classes.main}>
       <Card className={classes.root} style={{ borderLeft: satisfaction.border }}>
-        <Typography className={classes.title}>
-          {client.commercial_name}
-        </Typography>
+        <div className={classes.head}>
+          <Typography className={classes.title}>
+            {client.commercial_name}
+          </Typography>
+          <Link to={'./'}>
+            <Fab className={classes.pin}
+              onClick={goToCordenates}>
+              <RoomIcon />
+            </Fab>
+          </Link>
+        </div>
         <div className={classes.firstComponent}>
           <Typography className={classes.pos}>
             <strong>({client.business_type})</strong>
             <br />
             {client.address && client.address[0].street}
           </Typography>
-          {!client.negotiation &&
-            <Typography className={classes.result}>
-              <strong>
-                {satisfaction.emote} {client.satisfaction * 10}% de aprovação
-          </strong>
-            </Typography>}
           <Typography className={classes.status}>
             <CalendarTodayIcon className={classes.icons} />
             <strong>Ultima visita</strong>
             <br />
             {client.visit && client.visit[0].last_visit}
           </Typography >
-          {client.visit &&
-            client.visit[0].visit_today &&
-            <Typography className={classes.status}>
-              <>
-                <CalendarTodayIcon className={classes.icons} />
-                <strong>Visita hoje</strong>
-                <br />
-                Sim
-              </>
-            </Typography>}
+
+          <Typography className={classes.status}>
+            <>
+              <CalendarTodayIcon className={classes.icons} />
+              <strong>Visita hoje</strong>
+              <br />
+              {client.visit &&
+                client.visit[0].visit_today ? 'Sim' : 'Não'
+              }
+            </>
+          </Typography>
         </div>
         <div className={classes.secondComponent}>
+          {!client.negotiation &&
+            <Typography className={classes.result}>
+              <strong>
+                {satisfaction.emote}
+                Status
+                <br />
+                {client.satisfaction * 10}% de aprovação
+          </strong>
+            </Typography>}
           <Typography className={classes.pos}>
             <AttachMoneyIcon className={classes.icons} />
             {client.tpv / 1000}k
@@ -83,21 +95,7 @@ function ClientInfo({ client }) {
             {(client.tpv * (2.5 / 100))}
           </Typography>
         </div>
-        <div className={classes.buttons}>
-          <Fab
-            className={classes.newTask}
-            variant="extended"
-            onClick={() => alert('add task')}>
-            Enviar Proposta
-          </Fab>
 
-          <Link to={'./'}>
-            <Fab className={classes.pin}
-              onClick={goToCordenates}>
-              <RoomIcon />
-            </Fab>
-          </Link>
-        </div>
       </Card>
     </div>
 
