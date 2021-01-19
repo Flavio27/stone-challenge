@@ -25,19 +25,15 @@ export default function BottomAppBar() {
   }
   const goToList = () => {
     history.push('/list')
-    console.log(screen)
-    console.log(screen)
   }
 
   const goToMap = () => {
     history.push('/')
-    console.log(screen)
     setLocalization(INITIAL_LOCATION)
   }
 
   const goToScript = () => {
     history.push('/')
-    console.log(screen)
     setLocalization(INITIAL_LOCATION)
   }
 

@@ -18,7 +18,7 @@ function LeadInfo({ client }) {
   const goToCordenates = () => {
     setLocalization({ ...localization, lat: client.address[0].lat, lng: client.address[0].lng, zoom: 20 })
     dispatchScreen({
-      type: 'ACTIVE_FILTER_PIN_CLIENT',
+      type: 'ACTIVE_FILTER_PIN_TENDER',
       payload: true
     });
   }
@@ -34,8 +34,7 @@ function LeadInfo({ client }) {
             <strong>({client.business_type})</strong>
             <br />
             {client.address && client.address[0].street}
-          </Typography>
-          
+          </Typography>    
           <Typography className={classes.status}>
             <CachedIcon className={classes.icons} />
             <strong>Status da negociação</strong>
@@ -80,7 +79,6 @@ function LeadInfo({ client }) {
             onClick={() => alert('add task')}>
             Enviar Proposta
           </Fab>
-
             <Link to={'./'}>
               <Fab className={classes.pin}
                 onClick={goToCordenates}>
