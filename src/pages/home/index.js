@@ -5,7 +5,6 @@ import PintFilterBar from '../../components/pinFilterBar'
 import Map from '../../components/map'
 import Modal from '../../components/modal'
 import Filter from '../../components/filter'
-import InfoClientPin from '../../components/infoClientPin'
 import { useClienteData} from '../../store/Clients'
 import './styles.css'
 

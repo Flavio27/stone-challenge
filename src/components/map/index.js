@@ -1,7 +1,6 @@
 import React from 'react'
 import { useClienteData } from '../../store/Clients'
 import GoogleMapReact from 'google-map-react'
-import { fitBounds, Bounds } from 'google-map-react'
 
 import Pin from '../pin'
 import './styles.css'
@@ -58,44 +57,6 @@ function Map() {
 		});
 		SELLER_POLE.setMap(map);
 	}
-
-	const test = (map, maps) => {
-		const CENTER_BOUND = { lat: -23.5564616232912, lng: -46.63087491974125 };
-
-		const SP_BOUBDS = {
-			north: -23.52186333280168,
-			south: -23.61217855556627,
-			west: -46.68992647193074,
-			east: -46.558090545138484,
-		}
-
-		const MAX_BOUNDS = new maps.LatLngBounds({
-			center: CENTER_BOUND,
-			restriction: {
-				latLngBounds: SP_BOUBDS,
-				strictBounds: false,
-			},
-		});
-		MAX_BOUNDS.setMap(map);
-	}
-
-	const bounds = {
-		ne: {
-			lat: 50.01038826014866,
-			lng: -118.6525866875
-		},
-		sw: {
-			lat: 32.698335045970396,
-			lng: -92.0217273125
-		}
-	};
-
-	const size = {
-		width: 640, // Map width in pixels
-		height: 380, // Map height in pixels
-	};
-
-	const { center, zoom } = fitBounds(bounds, size);
 
 
 	return (

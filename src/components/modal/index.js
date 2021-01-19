@@ -1,12 +1,9 @@
 import React from 'react'
 import { useClienteData } from '../../store/Clients'
-import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
-import ClientInfo from '../clientInfo'
 import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
-import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
+
 import { useStyles } from './styles'
 
 function Modal({children}) {

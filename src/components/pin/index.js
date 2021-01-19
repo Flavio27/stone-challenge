@@ -1,7 +1,6 @@
 import React from 'react'
 import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
-import ClientInfo from '../clientInfo'
-import Modal from '../modal'
+import CardInfo from '../cardInfo'
 import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -33,7 +32,7 @@ function Pin({ info, type }) {
         <IconButton aria-label="close" onClick={handleClose} className={classes.closeButton}>
           <CloseIcon />
         </IconButton>
-        <ClientInfo client={info} />
+        <CardInfo client={info} />
       </Dialog>
     </div>
   )

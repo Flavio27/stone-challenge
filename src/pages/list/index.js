@@ -1,6 +1,6 @@
 import React from 'react'
 import { useClienteData } from '../../store/Clients'
-import ClientInfo from '../../components/clientInfo'
+import CardInfo from '../../components/cardInfo'
 import SearchBar from '../../components/searchBar'
 import BottomAppBar from '../../components/bottomAppBar'
 import { useStyles } from './styles'
@@ -13,7 +13,7 @@ function List() {
     <div>
       <SearchBar />
       {clientsData.map((client, index) => (
-        <ClientInfo key={client.id} client={client} />
+        <CardInfo key={client.id} client={client} />
       ))}
       <div className={classes.topSpace}/>
       <BottomAppBar />

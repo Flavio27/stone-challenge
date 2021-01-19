@@ -11,13 +11,11 @@ import EventIcon from '@material-ui/icons/Event';
 import { Link } from 'react-router-dom'
 import { history } from '../../config/history'
 import { useStyles } from './styles'
-import { useLocation } from 'react-router-dom'
 
 
 export default function BottomAppBar() {
-  const { screen, dispatchScreen, localization, setLocalization } = useClienteData();
+  const { screen, dispatchScreen, setLocalization } = useClienteData();
   const classes = useStyles();
-  let location = useLocation();
 
   const goToFunnel = async () => {
     await dispatchScreen({
@@ -39,6 +37,8 @@ export default function BottomAppBar() {
 
   const goToScript = () => {
     history.push('/')
+    console.log(screen)
+    setLocalization(INITIAL_LOCATION)
   }
 
   return (
@@ -64,7 +64,7 @@ export default function BottomAppBar() {
               <Typography className={classes.info}>Mapa</Typography>
             </div>
           </Link>
-          <Link type="div" to={'./'} className={classes.item} onClick={goToMap}>
+          <Link type="div" to={'./'} className={classes.item} onClick={goToScript}>
             <EventIcon />
             <div className={classes.info}>
               <Typography className={classes.info}>Roteiro</Typography>

@@ -4,7 +4,6 @@ import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
 import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
-import AssistantIcon from '@material-ui/icons/Assistant';
 import Badge from '@material-ui/core/Badge';
 import { useStyles } from './styles'
 
