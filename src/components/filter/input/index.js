@@ -7,21 +7,27 @@ import StorefrontIcon from '@material-ui/icons/Storefront';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { useStyles } from './styles'
 
 function Input({ type }) {
+  let input = []
   const classes = useStyles();
-  const { clientsData, tendersData} = useClienteData()
+  const { clientsData, tendersData, filter, setFilter } = useClienteData()
+  const [open, setOpen] = useState(false);
   const [establishment, setestablishment] = useState([])
-  const [state, setState] = useState({});
+  const [age, setAge] = useState('');
 
   const handleChange = (event) => {
-    const name = event.target.name;
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
+    setAge(event.target.value);
+    let value = event.target.value
+    if (type === 'leads')
+    setFilter({...filter, lead: value })
+    if (type === 'segmento')
+    setFilter({...filter, establishment: value })
+    if (type === 'tpv')
+    setFilter({...filter, tpv: value })
   };
 
   const filterEstablishment = () => {
@@ -39,54 +45,53 @@ function Input({ type }) {
   }
 
   useEffect(() => {
-    
     type === 'segmento' && filterEstablishment()
-
   }, [clientsData, tendersData])
 
+  const handleClose = () => {
+    setOpen(false);
+  };
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
-return (
-  <ListItem button className={classes.main}>
-    <ListItemIcon>
-      {type === 'leads' && <HelpIcon />}
-      {type === 'segmento' && <StorefrontIcon />}
-      {type === 'tpv' && <TrendingUpIcon />}
-    </ListItemIcon>
-    <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="age-native-simple">{type}</InputLabel>
-      <Select
-        native
-        value={state.age}
-        onChange={handleChange}
-        inputProps={{
-          name: 'age',
-          id: 'age-native-simple',
-        }}
-      >
-        <option aria-label="None" value="" />
-        {type === 'leads' &&
-          <>
-            <option value={true}>proposta enviada</option>
-            <option value={false}>sem proposta</option>
-          </>}
-        {type === 'segmento' &&
-          establishment.length > 0 &&
-          establishment.map(est => (
-            <option key={est} value={est}>{est}</option>
-          ))
-        }
-        {type === 'tpv' &&
-          <>
-            <option value={10}>Menos de 10k</option>
-            <option value={20}>De 10k a 20k</option>
-            <option value={21}>Mais de 20k</option>
-          </>}
+  if (type === 'leads')
+    input = ['Com proposta', 'Sem proposta']
+  if (type === 'segmento')
+    input = establishment
+  if (type === 'tpv')
+    input = ['<10k', '10-20k', '>20k']
 
-      </Select>
-    </FormControl>
-  </ListItem>
-)
+  return (
+    <ListItem button className={classes.main}>
+      <ListItemIcon>
+        {type === 'leads' && <HelpIcon />}
+        {type === 'segmento' && <StorefrontIcon />}
+        {type === 'tpv' && <TrendingUpIcon />}
+      </ListItemIcon>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-controlled-open-select-label">{type}</InputLabel>
+        <Select
+          labelId="demo-controlled-open-select-label"
+          id="demo-controlled-open-select"
+          open={open}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          value={age}
+          onChange={handleChange}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          {input.map(test => (
+            <MenuItem key={test} value={test}>{test}</MenuItem>
+          ))}
+
+        </Select>
+      </FormControl>
+    </ListItem>
+  )
 }
 
 export default Input

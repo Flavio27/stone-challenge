@@ -66,6 +66,12 @@ const INITIAL_SCREENS = {
   }
 }
 
+const INITIAL_FILTER = [{
+  lead: '',
+  establishment: '',
+  tpv: ''
+}]
+
 export const INITIAL_LOCATION = {
   lat: -23.5564616232912,
   lng: -46.63087491974125,
@@ -77,7 +83,7 @@ export default function Clients({ children }) {
   const [clientsData, dispatch] = useReducer(clientReducer, CLIENTS_INITAL_STATE)
   const [tendersData, dispatchTender] = useReducer(tenderReducer, INITIAL_TENDERS)
   const [screen, dispatchScreen] = useReducer(screenReducer, INITIAL_SCREENS)
-  const [data, setData] = useState([])
+  const [filter, setFilter] = useState(INITIAL_FILTER)
 
   useEffect(async => {
     async function getClients() {
@@ -94,7 +100,7 @@ export default function Clients({ children }) {
   return (
     <dataContext.Provider
       value={{
-        data, setData,
+        filter, setFilter,
         localization, setLocalization,
         clientsData, dispatch,
         tendersData, dispatchTender,
@@ -109,11 +115,11 @@ export function useClienteData() {
   const clientContext = useContext(dataContext);
   if (!clientContext) throw new Error("useClienteData must be used within a Clients provider");
   const {
-    data, setData, clientsData, dispatch, screen,
+    filter, setFilter, clientsData, dispatch, screen,
     dispatchScreen, localization, setLocalization, tendersData, dispatchTender,
   } = clientContext;
   return {
-    data, setData, clientsData, dispatch, screen,
+    filter, setFilter, clientsData, dispatch, screen,
     dispatchScreen, localization, setLocalization, tendersData, dispatchTender,
   }
 }

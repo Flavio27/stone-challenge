@@ -13,28 +13,41 @@ import { useStyles } from './styles'
 
 export default function NestedList() {
   const classes = useStyles();
-  const { dispatchScreen, tendersData, clientsData } = useClienteData();
+  const { dispatchScreen, tendersData, clientsData, filter, setFilter } = useClienteData();
   const [checked, setChecked] = useState([0]);
+  const [visitsToday, setVisitsToday] = useState([]);
 
-  const applyFilter = async () =>{
+  const applyFilter = async () => {
+    
     await dispatchScreen({
       type: 'ACTIVE_FUNNEL',
       payload: false,
     })
+    console.log(filter)
+    console.log(visitsToday)
+    await setFilter([]);
   }
 
-  const filterVisitToday = () =>{
-    
+  const filterVisitToday = () => {
+    let clientsVisitToday = clientsData.filter((client) => {
+      return client.visit[0].visit_today
+    })
+    let leadsVisitToday = tendersData.filter((lead) => {
+      return lead.visit[0].visit_today
+    })
+    const allVisitsToday = [...clientsVisitToday, ...leadsVisitToday]
+    setVisitsToday(allVisitsToday)
   }
 
   const select = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
     if (currentIndex === -1) {
-      newChecked.push(value);    
-    } else {
-      newChecked.splice(currentIndex, 1);
+      newChecked.push(value);
       filterVisitToday()
+    } else {
+      setVisitsToday([])
+      newChecked.splice(currentIndex, 1);
     }
     setChecked(newChecked);
   };
