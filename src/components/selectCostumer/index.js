@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -38,9 +38,13 @@ function SelectCostumer({client, lead }) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  
+  useEffect(() => {
+    setValue(1)
+  }, [])
   const handleChangeIndex = (index) => {
     setValue(index);
+    
   };
 
   return (
@@ -53,8 +57,8 @@ function SelectCostumer({client, lead }) {
           indicatorColor="primary"
           aria-label="action tabs example"
         >
-          <Tab label="Clients" {...a11yProps(0)} className={classes.tab}/>
-          <Tab label="Leads" {...a11yProps(1)} className={classes.tab} />
+          <Tab label="Leads" {...a11yProps(0)} className={classes.tab}/>
+          <Tab label="Clientes" {...a11yProps(1)} className={classes.tab} />
         </Tabs>
       </div>
       <SwipeableViews
@@ -63,10 +67,10 @@ function SelectCostumer({client, lead }) {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          {client}
+          {lead}
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          {lead}
+          {client}
         </TabPanel>
       </SwipeableViews>
 

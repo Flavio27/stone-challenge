@@ -60,7 +60,7 @@ export default function BottomAppBar() {
               <Typography className={classes.info}>Mapa</Typography>
             </div>
           </Link>
-          <Link type="div" to={'./'} className={classes.item} onClick={goToScript}>
+          <Link type="div" to={'./roteiro'} className={classes.item} onClick={goToScript}>
             <EventIcon />
             <div className={classes.info}>
               <Typography className={classes.info}>Roteiro</Typography>
