@@ -72,6 +72,7 @@ export default function NestedList() {
             edge="start"
             tabIndex={-1}
             disableRipple
+            color="default"
           />
         </ListItemIcon>
         <ListItemText primary="Visita Hoje" />

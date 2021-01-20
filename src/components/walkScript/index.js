@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useClienteData } from '../../store/Clients'
 import { useStyles } from './styles';
 import Grid from '@material-ui/core/Grid';
@@ -24,13 +24,17 @@ function intersection(a, b) {
 
 export default function SelectCostumer() {
   const { clientsData, tendersData } = useClienteData();
-  const clientList = [clientsData.map(cliente =>(
-   cliente.commercial_name
-  ))]
-  console.log(clientList)
+  const clientList = clientsData.map(cliente => (
+    cliente.commercial_name
+  ))
+  
+  const leadList = tendersData.map(cliente => (
+    cliente.commercial_name
+  ))
+  
   const classes = useStyles();
   const [checked, setChecked] = React.useState([]);
-  const [left, setLeft] = useState(['asdasd','vvvvv','asdasd','ffgsd','fgggg']);
+  const [left, setLeft] = useState(clientList);
   const [right, setRight] = useState([]);
 
   const leftChecked = intersection(checked, left);
@@ -50,6 +54,7 @@ export default function SelectCostumer() {
   };
 
 
+  
   const handleCheckedRight = () => {
     setRight(right.concat(leftChecked));
     setLeft(not(left, leftChecked));
@@ -61,8 +66,6 @@ export default function SelectCostumer() {
     setRight(not(right, rightChecked));
     setChecked(not(checked, rightChecked));
   };
-
-
 
   const customList = (items) => (
     <Box className={classes.listItens}>
@@ -88,11 +91,17 @@ export default function SelectCostumer() {
       </List>
     </Box>
   );
+        
+  useEffect(() => {
+    console.log(right)
+    setLeft([...clientList, ...leadList])
+  }, [])
+
 
   return (
     <Grid className={classes.root}>
       <Typography className={classes.title}>
-         <h1>Roteiro</h1>
+        <h1>Roteiro</h1>
       </Typography>
       <Grid item className={classes.list}>
         {customList(left)}

@@ -6,7 +6,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import { useStyles } from './styles'
 
-function Modal({children}) {
+function Modal({children, type}) {
   const { screen, dispatchScreen, setFilter, filter } = useClienteData();
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -16,6 +16,7 @@ function Modal({children}) {
   };
   const handleClose = () => {
     setOpen(false);
+   type !== 'newLead' &&
     dispatchScreen({
       type: 'ACTIVE_FUNNEL',
       payload: screen.funnel ? false : true

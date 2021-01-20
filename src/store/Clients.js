@@ -27,7 +27,7 @@ const CLIENTS_INITAL_STATE = [{
   }],
 }]
 
-const INITIAL_TENDERS = {
+const INITIAL_TENDERS = [{
   id: 0,
   name: '',
   tpv: 0,
@@ -47,7 +47,7 @@ const INITIAL_TENDERS = {
     lng: 0,
     state: '',
   }]
-}
+}]
 const INITIAL_SCREENS = {
   funnel: false,
   list: false,
