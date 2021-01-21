@@ -1,6 +1,5 @@
 import React from 'react'
 import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
-import CardInfo from '../cardInfo'
 import ClientInfo from '../clientInfo'
 import LeadInfo from '../leadinfo'
 import NewLead from '../newLead'

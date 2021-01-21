@@ -2,6 +2,7 @@ import React from 'react';
 import { useClienteData } from '../../store/Clients'
 import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
 import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
+import AddLocationIcon from '@material-ui/icons/AddLocation';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
@@ -23,26 +24,38 @@ function PinFilterBar() {
       payload: screen.filter.tenders ? false : true
     });
   }
+  const newLead = () =>{
+    dispatchScreen({
+			type: 'PUSH_ADDRESS',
+			payload: ''
+		});
+    dispatchScreen({
+      type: 'ACTIVE_CLICK_ON', 
+      payload: true
+    });
+  }
+
+
 
   return (
     <div className={classes.main}>
       <div className={classes.grow}>
         <AppBar position="static" className={classes.bar}>
           <div className={classes.itens}>
+          <div className={classes.item} onClick={newLead}>
+              <Badge badgeContent={0} color="secondary">
+                <AddLocationIcon style={{color: '#757575'}}/>
+              </Badge>
+              <div className={classes.info}>
+                <Typography className={classes.info}>Novo Lead</Typography>
+              </div>
+            </div>
             <div className={classes.item} onClick={filterTenders}>
               <Badge badgeContent={tendersData.length} color="secondary">
                 <NotListedLocationIcon style={{color: '#c66b2f'}}/>
               </Badge>
               <div className={classes.info}>
                 <Typography className={classes.info}>Propostas</Typography>
-              </div>
-            </div>
-            <div className={classes.item}>
-              <Badge badgeContent={0} color="secondary">
-                <NotListedLocationIcon style={{color: '#757575'}}/>
-              </Badge>
-              <div className={classes.info}>
-                <Typography className={classes.info}>TPV</Typography>
               </div>
             </div>
             <div className={classes.item} onClick={filterClients}>

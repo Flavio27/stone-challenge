@@ -11,14 +11,13 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { useStyles } from './styles'
 
 
-export default function NestedList() {
+export default function Filter() {
   const classes = useStyles();
   const { dispatchScreen, tendersData, clientsData, filter, setFilter } = useClienteData();
   const [checked, setChecked] = useState([0]);
   const [visitsToday, setVisitsToday] = useState([]);
 
   const applyFilter = async () => {
-    
     await dispatchScreen({
       type: 'ACTIVE_FUNNEL',
       payload: false,

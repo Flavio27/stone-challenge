@@ -6,8 +6,8 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import { useStyles } from './styles'
 
-function Modal({children, type}) {
-  const { screen, dispatchScreen, setFilter, filter } = useClienteData();
+function Modal({ children, type }) {
+  const { screen, dispatchScreen, setFilter } = useClienteData();
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 
@@ -16,17 +16,25 @@ function Modal({children, type}) {
   };
   const handleClose = () => {
     setOpen(false);
-   type !== 'newLead' &&
-    dispatchScreen({
-      type: 'ACTIVE_FUNNEL',
-      payload: screen.funnel ? false : true
-    })
-    setFilter([]);
+    if (type === 'filter') {
+      dispatchScreen({
+        type: 'ACTIVE_FUNNEL',
+        payload: screen.funnel ? false : true
+      })
+      setFilter([]);
+    }
+
+    type === 'newLead' &&
+      dispatchScreen({
+        type: 'ADD_NEW_PIN',
+        payload: screen.newLead.screen ? false : true
+      });
+      
   };
 
   return (
     <div>
-      <div onClick={handleClickOpen} className={classes.divPin}>       
+      <div onClick={handleClickOpen} className={classes.divPin}>
       </div>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} className={classes.modalDiv}>
         <IconButton aria-label="close" onClick={handleClose} className={classes.closeButton}>
