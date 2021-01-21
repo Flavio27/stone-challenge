@@ -5,17 +5,12 @@ import {
   INITIAL_SCREENS,
   INITIAL_FILTER
 } from './initialState'
+import { INITIAL_LOCATION } from './initialState'
 import { clientReducer } from './reducers/clientReducer'
 import { tenderReducer } from './reducers/tenderReducer'
 import { screenReducer } from './reducers/screenReducer'
 
 const dataContext = createContext()
-
-export const INITIAL_LOCATION = {
-  lat: -23.5564616232912,
-  lng: -46.63087491974125,
-  zoom: 16
-}
 
 export default function Clients({ children }) {
   const [localization, setLocalization] = useState(INITIAL_LOCATION)

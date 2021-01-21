@@ -30,4 +30,18 @@ export const useStyles = makeStyles((theme) => ({
       width: '30%',
     },
   },
+  alert: {
+    background: '#00AB63',
+    fontWeight: 700,
+    color: '#FFFF',
+    fontSize: 17,
+    borderRadius: '5px',
+    display: 'flex',
+    alignItems: 'first baseline',
+    justifyContent: 'center',
+    textAlign: 'center',
+    position: 'center',
+    marginTop: 25,
+    padding: 5
+  },
 }));

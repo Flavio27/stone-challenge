@@ -1,5 +1,6 @@
 import React from 'react';
-import { useClienteData, INITIAL_LOCATION } from '../../store/Clients'
+import { useClienteData } from '../../store/Clients'
+import { INITIAL_LOCATION } from '../../store/initialState'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';

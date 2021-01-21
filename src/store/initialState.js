@@ -21,25 +21,39 @@ export const CLIENTS_INITAL_STATE = [{
 }]
 
 export const INITIAL_TENDERS = [{
-  id: 0,
-  name: '',
-  tpv: 0,
-  negotiation: [{
-    id: 0,
-    tenderId: 0,
-    status: '',
-    request: false,
-    observations: '',
-  }],
-  address: [{
-    id: 0,
-    tenderId: 0,
-    city: '',
-    street: '',
-    lat: 0,
-    lng: 0,
-    state: '',
-  }]
+  id: "",
+  commercial_name: "",
+  business_type: "",
+  tpv: "",
+  negotiation: [
+    {
+      id: "",
+      tenderId: "",
+      status: "",
+      request: false,
+      observations: ""
+    }
+  ],
+  address: [
+    {
+      id: "",
+      tenderId: "",
+      city: "São Paulo",
+      street: "",
+      lat: 0,
+      lng: 0,
+      state: "SP"
+    }
+  ],
+  visit: [
+    {
+      id: "",
+      tenderId: "",
+      visits_number: "",
+      last_visit: "",
+      visit_today: false
+    }
+  ]
 }]
 
 export const INITIAL_SCREENS = {
