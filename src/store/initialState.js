@@ -54,6 +54,7 @@ export const INITIAL_SCREENS = {
     position: { lat: '', lng: '' },
     clickOn: false,
   },
+  alert: false,
 }
 
 export const INITIAL_FILTER = [{

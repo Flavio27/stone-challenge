@@ -1,4 +1,5 @@
 import React from 'react'
+import Alert from '../../components/alert'
 import SearchBar from '../../components/searchBar'
 import BottomAppBar from '../../components/bottomAppBar'
 import PintFilterBar from '../../components/pinFilterBar'
@@ -14,6 +15,7 @@ function Home() {
     <div>
       <SearchBar/>
       <Map/>
+      {screen.alert && <Alert msg={'signUp'}/>}
       {screen.funnel && <Modal type={'filter'} children={<Filter/>}/>}
       {screen.newLead.screen && <Modal type={'newLead'} children={<NewLead/> }/>} 
       {!screen.newLead.clickOn && <PintFilterBar/>}

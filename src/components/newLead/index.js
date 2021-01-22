@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useClienteData } from '../../store/Clients'
+import { pushNewLead } from '../../services/api'
 import useFormik from './formik'
 import uniqid from 'uniqid'
-import { useClienteData } from '../../store/Clients'
+
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
@@ -64,23 +66,36 @@ function LeadInfo({ client }) {
   }
 
 
-
   const formik = useFormik({
     initialValues: INITIAL_LEADS,
     validate: function (values) {
       const errors = {};
 
       if (values.commercial_name.length < 5 || values.commercial_name.length > 20) {
-        errors.commercial_name = 'Nome deve ter entre 5 a 20 caracters'
+        errors.commercial_name = 'Nome deve ter entre 5 a 20 caracteres'
       }
 
       if (values.business_type.length < 2 || values.business_type.length > 15) {
-        errors.business_type = 'segmento deve ter entre 2 a 15 caracters'
+        errors.business_type = 'Segmento deve ter entre 2 a 15 caracteres'
       }
 
       return errors;
     }
   });
+
+
+  const onSubmitForm = () =>{
+    if (Object.keys(formik.errors).length === 0) {
+      setErrorSignup(false)
+      pushNewLead(formik.values)
+      dispatchScreen({
+        type: 'ACTIVE_ALERT',
+        payload: true
+      })
+    } else {
+      setErrorSignup(true)
+    }
+  }
 
   return (
 
@@ -88,13 +103,7 @@ function LeadInfo({ client }) {
       <Card className={classes.root}>
         <form onSubmit={(event) => {
           event.preventDefault();
-          if (Object.keys(formik.errors).length === 0) {
-            setErrorSignup(false)
-            pushNewLead(formik.values)
-            console.log(formik.values)
-          } else {
-            setErrorSignup(true)
-          }
+          onSubmitForm();
         }}
         >
           <div className={classes.firstComponent}>
@@ -105,9 +114,7 @@ function LeadInfo({ client }) {
             </div>
             {errorSignup &&
               <Typography className={classes.error}>
-                {formik.errors.commercial_name && 'Nome comerical*'}
-                <br />
-                {formik.errors.business_type && ' Segmento* '}
+                Verifique os campos abaixo
               </Typography>}
             <TextField
               error={formik.touched.commercial_name &&

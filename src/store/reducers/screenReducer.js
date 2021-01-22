@@ -27,6 +27,10 @@ export const screenReducer = (state, action) => {
       const activeFunnel = { ...state }
       activeFunnel.funnel = action.payload;
       return activeFunnel
+    case "ACTIVE_ALERT":
+      const activeAlert = { ...state }
+      activeAlert.alert = action.payload;
+      return activeAlert
     default:
       return state
   }

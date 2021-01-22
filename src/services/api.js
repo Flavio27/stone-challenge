@@ -1,7 +1,10 @@
-import axios from 'axios';
-
-const api = axios.create({
-  baseURL: 'http://localhost:8000',
-});
-
-export default api;
+export const pushNewLead = async (value) => {
+  const newLeadAdd = await fetch('http://localhost:3001/leads', {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(value)
+  })
+}
