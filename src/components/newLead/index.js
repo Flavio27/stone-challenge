@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useFormik from './formik'
 import uniqid from 'uniqid'
 import { useClienteData } from '../../store/Clients'
 import Card from '@material-ui/core/Card';
@@ -14,40 +15,10 @@ import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import { useStyles } from './styles'
 
 
-
-function useFormik({
-  initialValues,
-}) {
-  const [values, setValues] = useState(initialValues);
-
-  function handleChange(event) {
-    const fieldName = event.target.getAttribute('name');
-    const { value } = event.target;
-    fieldName === 'visit_today' ? setValues({
-      ...values,
-      [fieldName]: values.visit_today ? false : true
-    })
-      :
-      setValues({
-        ...values,
-        [fieldName]: value,
-      }); 
-  }
-
-  return {
-    values,
-    handleChange,
-  };
-}
-
-
-
 function LeadInfo({ client }) {
   const classes = useStyles();
-  const { screen, dispatchScreen, setFilter, leadsData, dispatchLead } = useClienteData();
-  let latitude = screen.newLead.position.lat
-  let longitude = screen.newLead.position.lng
-  let streetAddress = screen.newLead.address
+  const { screen, dispatchScreen, dispatchLead } = useClienteData();
+  const [errorSignup, setErrorSignup] = useState(false)
 
   let INITIAL_LEADS = {
     id: uniqid('lead-'),
@@ -55,9 +26,9 @@ function LeadInfo({ client }) {
     business_type: '',
     tpv: 0,
     address: {
-      street: streetAddress,
-      lat: latitude,
-      lng: longitude,
+      street: screen.newLead.address,
+      lat: screen.newLead.position.lat,
+      lng: screen.newLead.position.lng,
     },
     visit_numbers: 0,
     negotiation_status: '',
@@ -68,40 +39,11 @@ function LeadInfo({ client }) {
   }
 
 
-  const [addLead, setAddLead] = useState(INITIAL_LEADS)
-  const [errors, setErros] = useState({
-    leadName: null,
-    leadType: false,
-    leadAddres: false,
-    leadTpv: false,
-  })
-
-
-  const ERRORS = {
-    leadName: false,
-    leadType: false,
-    leadAddres: false,
-    leadTpv: false,
-  }
-
-  const check = () => {
-    if (addLead.commercial_name.length < 5 || addLead.commercial_name.length > 15) {
-      setErros({ ...errors, leadName: true })
-    } else {
-      setErros({ ...errors, leadName: false })
-    }
-
-  }
-
-
   const closeNewLead = () => {
     dispatchScreen({
       type: 'ADD_NEW_PIN',
       payload: false
     });
-  }
-  const addNewLead = async () => {
-    pushNewLead();
   }
 
   const pushNewLead = async (value) => {
@@ -121,20 +63,37 @@ function LeadInfo({ client }) {
     }
   }
 
+
+
   const formik = useFormik({
-    initialValues: INITIAL_LEADS
+    initialValues: INITIAL_LEADS,
+    validate: function (values) {
+      const errors = {};
+
+      if (values.commercial_name.length < 5 || values.commercial_name.length > 20) {
+        errors.commercial_name = 'Nome deve ter entre 5 a 20 caracters'
+      }
+
+      if (values.business_type.length < 2 || values.business_type.length > 15) {
+        errors.business_type = 'segmento deve ter entre 2 a 15 caracters'
+      }
+
+      return errors;
+    }
   });
 
   return (
 
     <div className={classes.main}>
-
       <Card className={classes.root}>
         <form onSubmit={(event) => {
           event.preventDefault();
-          console.log(formik.values);
-          pushNewLead(formik.values)
-          alert('Olha o console!');
+          if (Object.keys(formik.errors).length === 0) {
+            setErrorSignup(false)
+            pushNewLead(formik.values)
+          } else {
+            setErrorSignup(true)
+          }
         }}
         >
           <div className={classes.firstComponent}>
@@ -143,11 +102,25 @@ function LeadInfo({ client }) {
                 Novo Lead
           </Typography>
             </div>
+            {errorSignup &&
+              <Typography className={classes.error}>
+                {formik.errors.commercial_name && 'Nome comerical*'}
+                <br />
+                {formik.errors.business_type && ' Segmento* '}
+              </Typography>}
             <TextField
+              error={formik.touched.commercial_name &&
+                formik.errors.commercial_name && true}
               placeholder="Nome comercial"
               name="commercial_name"
+              id="commercial_name"
+              onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              helperText="nome do estabelecimento"
+              value={formik.values.commercial_name}
+              helperText={formik.touched.commercial_name &&
+                formik.errors.commercial_name ?
+                formik.errors.commercial_name :
+                'Nome do estabelecimento'}
               InputProps={{
                 startAdornment:
                   <InputAdornment position="start">
@@ -155,11 +128,19 @@ function LeadInfo({ client }) {
                   </InputAdornment>,
               }}
             />
+
             <TextField
+              error={formik.touched.business_type &&
+                formik.errors.business_type && true}
               placeholder="Segmento"
               name="business_type"
+              id="business_type"
+              onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              helperText="Ex: Restaurante"
+              helperText={formik.touched.business_type &&
+                formik.errors.business_type ?
+                formik.errors.business_type :
+                'Ex: Borracharia'}
               InputProps={{
                 startAdornment:
                   <InputAdornment position="start">
@@ -167,6 +148,7 @@ function LeadInfo({ client }) {
                   </InputAdornment>,
               }}
             />
+
             <TextField
               placeholder="Endereço"
               id="address"
@@ -225,7 +207,6 @@ function LeadInfo({ client }) {
           </div>
         </form>
       </Card>
-
     </div>
 
   );

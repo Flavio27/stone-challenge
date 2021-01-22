@@ -47,6 +47,11 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     width: '50%'
   },
+  error: {
+    color: 'red',
+    fontSize: 13,
+
+  },
   head: {
     display: 'flex',
     flexDirection: 'row',
