@@ -89,7 +89,7 @@ function LeadInfo({ client }) {
       setErrorSignup(false)
       pushNewLead(formik.values)
       dispatchScreen({
-        type: 'ACTIVE_ALERT',
+        type: 'ACTIVE_ALERT_SIGNUP',
         payload: true
       })
     } else {

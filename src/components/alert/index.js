@@ -7,25 +7,40 @@ import CloseIcon from '@material-ui/icons/Close';
 
 export default function Alert({msg}) {
   const { screen, dispatchScreen } = useClienteData();
-
+  let textMsg = ''
   const handleClose = () => {
     dispatchScreen({
-      type: 'ACTIVE_ALERT',
+      type: 'ACTIVE_ALERT_SIGNUP',
+      payload: false
+    })
+    dispatchScreen({
+      type: 'ACTIVE_ALERT_EDIT',
+      payload: false
+    })
+    dispatchScreen({
+      type: 'ACTIVE_ALERT_DELET',
       payload: false
     })
   };
 
+  if (msg === 'signUp')
+   textMsg = 'Cadastro Feito com sucesso!'
+  if (msg === 'edit')
+   textMsg = 'Editado com sucesso!'
+  if (msg === 'delet')
+   textMsg = 'Excluido com sucesso!'
+  
   return (
     <div>
       <Snackbar
         color="primary"
         anchorOrigin={{
-          vertical: 'top', horizontal: 'center'
+          vertical: 'bottom', horizontal: 'center'
         }}
         open={true}
-        autoHideDuration={4000}
+        autoHideDuration={3000}
         onClose={handleClose}
-        message={msg === 'signUp' && 'Cadastro Feito com sucesso'}
+        message={textMsg}
         action={
           <React.Fragment>
             <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>

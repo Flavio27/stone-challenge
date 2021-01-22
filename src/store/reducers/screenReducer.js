@@ -27,10 +27,18 @@ export const screenReducer = (state, action) => {
       const activeFunnel = { ...state }
       activeFunnel.funnel = action.payload;
       return activeFunnel
-    case "ACTIVE_ALERT":
-      const activeAlert = { ...state }
-      activeAlert.alert = action.payload;
-      return activeAlert
+    case "ACTIVE_ALERT_SIGNUP":
+      const activeAlertSignup = { ...state }
+      activeAlertSignup.alert.signup = action.payload;
+      return activeAlertSignup
+    case "ACTIVE_ALERT_EDIT":
+      const activeAlertEdit = { ...state }
+      activeAlertEdit.alert.edit = action.payload;
+      return activeAlertEdit
+    case "ACTIVE_ALERT_DELET":
+      const activeAlertDelet = { ...state }
+      activeAlertDelet.alert.delet = action.payload;
+      return activeAlertDelet
     default:
       return state
   }

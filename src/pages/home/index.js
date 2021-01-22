@@ -15,7 +15,8 @@ function Home() {
     <div>
       <SearchBar/>
       <Map/>
-      {screen.alert && <Alert msg={'signUp'}/>}
+      {screen.alert.signup && <Alert msg={'signUp'}/>}
+      {screen.alert.delet && <Alert msg={'delet'}/>}
       {screen.funnel && <Modal type={'filter'} children={<Filter/>}/>}
       {screen.newLead.screen && <Modal type={'newLead'} children={<NewLead/> }/>} 
       {!screen.newLead.clickOn && <PintFilterBar/>}
