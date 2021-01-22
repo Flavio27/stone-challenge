@@ -91,6 +91,7 @@ function LeadInfo({ client }) {
           if (Object.keys(formik.errors).length === 0) {
             setErrorSignup(false)
             pushNewLead(formik.values)
+            console.log(formik.values)
           } else {
             setErrorSignup(true)
           }

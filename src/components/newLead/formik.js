@@ -15,10 +15,18 @@ export default function useFormik({
   function handleChange(event) {
     const fieldName = event.target.getAttribute('name');
     const { value } = event.target;
-    setValues({
-      ...values,
-      [fieldName]: value,
-    });
+    if (fieldName === 'visit_today') {
+      setValues({
+        ...values,
+        [fieldName]: values.visit_today ? false : true
+      })
+    } else {
+      setValues({
+        ...values,
+        [fieldName]: value,
+      });
+    }
+
   }
 
   function handleBlur(event) {

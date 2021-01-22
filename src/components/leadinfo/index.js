@@ -60,8 +60,7 @@ function LeadInfo({ client }) {
               <CalendarTodayIcon className={classes.icons} />
               <strong>Visita hoje</strong>
               <br />
-              {client.visit &&
-                client.visit[0].visit_today ? 'Sim' : 'Não'
+              {client.visit_today ? 'Sim' : 'Não'
               }
             </>
           </Typography>
