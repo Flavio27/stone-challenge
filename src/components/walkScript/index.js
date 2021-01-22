@@ -23,12 +23,12 @@ function intersection(a, b) {
 }
 
 export default function SelectCostumer() {
-  const { clientsData, tendersData } = useClienteData();
+  const { clientsData, leadsData } = useClienteData();
   const clientList = clientsData.map(cliente => (
     cliente.commercial_name
   ))
   
-  const leadList = tendersData.map(cliente => (
+  const leadList = leadsData.map(cliente => (
     cliente.commercial_name
   ))
   

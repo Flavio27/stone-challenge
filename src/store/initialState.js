@@ -3,57 +3,33 @@ export const CLIENTS_INITAL_STATE = [{
   commercial_name: '',
   business_type: '',
   tpv: 0,
-  address: [{
-    id: 0,
-    clienteId: 0,
-    city: '',
+  address: {
     street: '',
     lat: 0,
-    lng: 0,
-    state: '',
-  }],
-  visits: [{
-    id: 0,
-    clienteId: 0,
-    visits_number: 0,
-    last_visit: '',
-  }],
+    lng: 0
+  },
+  satisfaction: 0,
+  last_visit: '',
+  visit_today: 0,
+  percentage_migration: 0
 }]
 
-export const INITIAL_TENDERS = [{
-  id: "",
-  commercial_name: "",
-  business_type: "",
-  tpv: "",
-  negotiation: [
-    {
-      id: "",
-      tenderId: "",
-      status: "",
-      request: false,
-      observations: ""
-    }
-  ],
-  address: [
-    {
-      id: "",
-      tenderId: "",
-      city: "São Paulo",
-      street: "",
-      lat: 0,
-      lng: 0,
-      state: "SP"
-    }
-  ],
-  visit: [
-    {
-      id: "",
-      tenderId: "",
-      visits_number: "",
-      last_visit: "",
-      visit_today: false
-    }
-  ]
+export const INITIAL_LEADS = [{
+  id: 1,
+  commercial_name: '',
+  business_type: '',
+  tpv: 0,
+  address: {
+    street: '',
+    lat: 0,
+    lng: 0
+  },
+  visit_numbers: 0,
+  negotiation_status: '',
+  last_visit: '',
+  visit_today: false,
+  send_proposal: false,
+  client_id: ''
 }]
 
 export const INITIAL_SCREENS = {
@@ -69,13 +45,13 @@ export const INITIAL_SCREENS = {
   more: false,
   filter: {
     clients: false,
-    tenders: false,
+    leads: false,
     qualifications: false,
   },
   newLead: {
     screen: false,
     address: '',
-    position: {lat: '', lng: ''},
+    position: { lat: '', lng: '' },
     clickOn: false,
   },
 }

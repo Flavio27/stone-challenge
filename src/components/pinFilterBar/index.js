@@ -9,7 +9,7 @@ import Badge from '@material-ui/core/Badge';
 import { useStyles } from './styles'
 
 function PinFilterBar() {
-  const { clientsData, tendersData, screen, dispatchScreen, localization, setLocalization } = useClienteData();
+  const { clientsData, leadsData, screen, dispatchScreen, localization, setLocalization } = useClienteData();
   const classes = useStyles();
 
   const filterClients = () => {
@@ -18,10 +18,10 @@ function PinFilterBar() {
       payload: screen.filter.clients ? false : true
     });
   }
-  const filterTenders = () => {
+  const filterLeads = () => {
     dispatchScreen({
-      type: 'ACTIVE_FILTER_PIN_TENDER',
-      payload: screen.filter.tenders ? false : true
+      type: 'ACTIVE_FILTER_PIN_LEAD',
+      payload: screen.filter.leads ? false : true
     });
   }
   const newLead = () => {
@@ -52,8 +52,8 @@ function PinFilterBar() {
                 <Typography className={classes.info}>Novo Lead</Typography>
               </div>
             </div>
-            <div className={classes.item} onClick={filterTenders}>
-              <Badge badgeContent={tendersData.length} color="secondary">
+            <div className={classes.item} onClick={filterLeads}>
+              <Badge badgeContent={leadsData.length} color="secondary">
                 <NotListedLocationIcon style={{ color: '#c66b2f' }} />
               </Badge>
               <div className={classes.info}>

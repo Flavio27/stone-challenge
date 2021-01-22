@@ -13,7 +13,7 @@ import { useStyles } from './styles'
 
 export default function Filter() {
   const classes = useStyles();
-  const { dispatchScreen, tendersData, clientsData, filter, setFilter } = useClienteData();
+  const { dispatchScreen, leadsData, clientsData, filter, setFilter } = useClienteData();
   const [checked, setChecked] = useState([0]);
   const [visitsToday, setVisitsToday] = useState([]);
 
@@ -29,10 +29,10 @@ export default function Filter() {
 
   const filterVisitToday = () => {
     let clientsVisitToday = clientsData.filter((client) => {
-      return client.visit[0].visit_today
+      return client.visit_today
     })
-    let leadsVisitToday = tendersData.filter((lead) => {
-      return lead.visit[0].visit_today
+    let leadsVisitToday = leadsData.filter((lead) => {
+      return lead.visit_today
     })
     const allVisitsToday = [...clientsVisitToday, ...leadsVisitToday]
     setVisitsToday(allVisitsToday)

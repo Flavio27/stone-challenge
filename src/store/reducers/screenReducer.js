@@ -2,19 +2,14 @@ export const screenReducer = (state, action) => {
   switch (action.type) {
     case "START":
       return action.payload
-    // case "CHANGE_TO_LIST":
-    //   const goToList = { ...state }
-    //   goToList.list = !!action.payload;
-    //   goToList.map.screen = action.payload;
-    //   return goToList
     case "ACTIVE_FILTER_PIN_CLIENT":
       const activeClientPin = { ...state }
       activeClientPin.filter.clients = action.payload;
       return activeClientPin
-    case "ACTIVE_FILTER_PIN_TENDER":
-      const activeTenderPin = { ...state }
-      activeTenderPin.filter.tenders = action.payload;
-      return activeTenderPin
+    case "ACTIVE_FILTER_PIN_LEAD":
+      const activeLeadPind = { ...state }
+      activeLeadPind.filter.leads = action.payload;
+      return activeLeadPind
     case "ACTIVE_CLICK_ON":
       const activeClickOn = { ...state }
       activeClickOn.newLead.clickOn = action.payload;

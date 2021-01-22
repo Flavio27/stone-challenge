@@ -58,7 +58,7 @@ export const useStyles = makeStyles((theme) => ({
   firstComponent:{
     margin: '1%',
     marginRight: '10%',
-    maxWidth: '50%',
+    maxWidth: '49%',
     [theme.breakpoints.up('xs')]: {
       maxWidth: '155px',
     },
@@ -72,7 +72,7 @@ export const useStyles = makeStyles((theme) => ({
   ,
   secondComponent: {
     margin: '1% 1%',
-    maxWidth: '49%',
+    maxWidth: '20%',
     fontSize: '100%',
   },
   pos: {

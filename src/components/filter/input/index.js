@@ -14,7 +14,7 @@ import { useStyles } from './styles'
 function Input({ type }) {
   let input = []
   const classes = useStyles();
-  const { clientsData, tendersData, filter, setFilter } = useClienteData()
+  const { clientsData, leadsData, filter, setFilter } = useClienteData()
   const [open, setOpen] = useState(false);
   const [establishment, setestablishment] = useState([])
   const [age, setAge] = useState('');
@@ -34,7 +34,7 @@ function Input({ type }) {
     let clientsEstablishments = clientsData.map((est) => {
       return (est.business_type)
     })
-    let leadsEstablishments = tendersData.map((est) => {
+    let leadsEstablishments = leadsData.map((est) => {
       return (est.business_type)
     })
     const allEstablishments = [...clientsEstablishments, ...leadsEstablishments]
@@ -46,7 +46,7 @@ function Input({ type }) {
 
   useEffect(() => {
     type === 'segmento' && filterEstablishment()
-  }, [clientsData, tendersData])
+  }, [clientsData, leadsData])
 
   const handleClose = () => {
     setOpen(false);
@@ -84,8 +84,8 @@ function Input({ type }) {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          {input.map(test => (
-            <MenuItem key={test} value={test}>{test}</MenuItem>
+          {input.map(item => (
+            <MenuItem key={item} value={item}>{item}</MenuItem>
           ))}
 
         </Select>

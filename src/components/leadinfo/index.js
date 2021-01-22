@@ -16,9 +16,9 @@ function LeadInfo({ client }) {
   const classes = useStyles();
 
   const goToCordenates = () => {
-    setLocalization({ ...localization, lat: client.address[0].lat, lng: client.address[0].lng, zoom: 20 })
+    setLocalization({ ...localization, lat: client.address.lat, lng: client.address.lng, zoom: 20 })
     dispatchScreen({
-      type: 'ACTIVE_FILTER_PIN_TENDER',
+      type: 'ACTIVE_FILTER_PIN_LEAD',
       payload: true
     });
   }
@@ -41,43 +41,42 @@ function LeadInfo({ client }) {
           <Typography className={classes.pos}>
             <strong>({client.business_type})</strong>
             <br />
-            {client.address && client.address[0].street}
+            {client.address && client.address.street}
           </Typography>
           <Typography className={classes.status}>
             <CachedIcon className={classes.icons} />
             <strong>Status da negociação</strong>
             <br />
-            {client.negotiation && client.negotiation[0].status}
+            {client.negotiation_status ? client.negotiation_status : '-'}
           </Typography >
           <Typography className={classes.status}>
             <CalendarTodayIcon className={classes.icons} />
             <strong>Ultima visita</strong>
             <br />
-            {client.visit && client.visit[0].last_visit}
+            {client.last_visit ? client.last_visit : '-'}
           </Typography >
-            <Typography className={classes.status}>
-              <>
-                <CalendarTodayIcon className={classes.icons} />
-                <strong>Visita hoje</strong>
-                <br />
-                {client.visit &&
-                  client.visit[0].visit_today ? 'Sim' : 'Não'
-                }
-              </>
-            </Typography>
+          <Typography className={classes.status}>
+            <>
+              <CalendarTodayIcon className={classes.icons} />
+              <strong>Visita hoje</strong>
+              <br />
+              {client.visit &&
+                client.visit[0].visit_today ? 'Sim' : 'Não'
+              }
+            </>
+          </Typography>
         </div>
         <div className={classes.secondComponent}>
-          <Typography className={classes.pos}>
-            <AttachMoneyIcon className={classes.icons} />
-            {client.tpv / 1000}k
-            <br />
+        <Typography className={classes.status}>
             <TrendingUpIcon className={classes.icons} />
-            {(client.tpv * (2.5 / 100))}
-          </Typography>
-          <Typography className={classes.status}>
-            <strong>Quantidade de visitas</strong>
+            <strong>TPV</strong>
             <br />
-            {client.visit && client.visit[0].visits_number}
+            {client.tpv ? client.tpv : '-'}
+          </Typography >
+          <Typography className={classes.status}>
+            <strong>Qtd. visitas</strong>
+            <br />
+            {client.visit_numbers ? client.visit_numbers : '-'}
           </Typography >
         </div>
         <div className={classes.buttons}>

@@ -11,7 +11,7 @@ const GET_ADDRES_API = 'https://maps.googleapis.com/maps/api/geocode/json?latlng
 
 
 function Map() {
-	const { localization, clientsData, tendersData, screen, dispatchScreen } = useClienteData();
+	const { localization, clientsData, leadsData, screen, dispatchScreen } = useClienteData();
 	const [markers, setMarkers] = useState([])
 
 	const handleApiLoaded = (map, maps) => {
@@ -50,7 +50,6 @@ function Map() {
 			}
 			setMarkers([...markers, { lat: lt, lng: lg, location: info }])
 			console.log(markers)
-
 			dispatchScreen({
 				type: 'PUSH_ADDRESS',
 				payload: info
@@ -63,6 +62,8 @@ function Map() {
 				type: 'ACTIVE_CLICK_ON',
 				payload: false
 			});
+			// console.log(screen.newLead.position)
+			// console.log(screen.newLead.address)
 		}
 	};
 
@@ -86,17 +87,17 @@ function Map() {
 					<Pin
 						key={clientPin.id}
 						type={'client'}
-						lat={clientPin.address[0].lat}
-						lng={clientPin.address[0].lng}
+						lat={clientPin.address.lat}
+						lng={clientPin.address.lng}
 						info={clientPin}
 					/>
 				)}
-				{screen.filter.tenders && tendersData.map(clientPin =>
+				{screen.filter.leads && leadsData.map(clientPin =>
 					<Pin
 						key={clientPin.id}
-						type={'tender'}
-						lat={clientPin.address[0].lat}
-						lng={clientPin.address[0].lng}
+						type={'lead'}
+						lat={clientPin.address.lat}
+						lng={clientPin.address.lng}
 						info={clientPin}
 					/>
 				)}

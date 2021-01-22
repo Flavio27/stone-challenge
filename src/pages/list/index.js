@@ -10,7 +10,7 @@ import { useStyles } from './styles'
 
 function List() {
   const classes = useStyles();
-  const { clientsData, tendersData } = useClienteData();
+  const { clientsData, leadsData } = useClienteData();
 
   // const clientOrLead = (whoRender) => {
   //   const render = whoRender.length > 0 &&
@@ -28,8 +28,8 @@ function List() {
     return render
   }
   const leadRender = () => {
-    const render = tendersData.length > 0 &&
-    tendersData.map((client, index) => (
+    const render = leadsData.length > 0 &&
+    leadsData.map((client, index) => (
         <LeadInfo key={client.id} client={client} />
       ))
     return render

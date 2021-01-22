@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import uniqid from 'uniqid'
 import { useClienteData } from '../../store/Clients'
-import { INITIAL_TENDERS } from '../../store/initialState'
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
@@ -13,144 +13,219 @@ import PinDropIcon from '@material-ui/icons/PinDrop';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import { useStyles } from './styles'
 
-const ERROS = {
-  
+
+
+function useFormik({
+  initialValues,
+}) {
+  const [values, setValues] = useState(initialValues);
+
+  function handleChange(event) {
+    const fieldName = event.target.getAttribute('name');
+    const { value } = event.target;
+    fieldName === 'visit_today' ? setValues({
+      ...values,
+      [fieldName]: values.visit_today ? false : true
+    })
+      :
+      setValues({
+        ...values,
+        [fieldName]: value,
+      }); 
+  }
+
+  return {
+    values,
+    handleChange,
+  };
 }
+
+
 
 function LeadInfo({ client }) {
   const classes = useStyles();
-  const [newLead, setNewLead] = useState(INITIAL_TENDERS)
-  const { screen, dispatchScreen, setFilter, tendersData, dispatchTender } = useClienteData();
-  let newId = tendersData.length + 1
+  const { screen, dispatchScreen, setFilter, leadsData, dispatchLead } = useClienteData();
+  let latitude = screen.newLead.position.lat
+  let longitude = screen.newLead.position.lng
+  let streetAddress = screen.newLead.address
 
-  const cancelNewLead = () => {
+  let INITIAL_LEADS = {
+    id: uniqid('lead-'),
+    commercial_name: '',
+    business_type: '',
+    tpv: 0,
+    address: {
+      street: streetAddress,
+      lat: latitude,
+      lng: longitude,
+    },
+    visit_numbers: 0,
+    negotiation_status: '',
+    last_visit: '',
+    visit_today: false,
+    send_proposal: false,
+    client_id: ''
+  }
+
+
+  const [addLead, setAddLead] = useState(INITIAL_LEADS)
+  const [errors, setErros] = useState({
+    leadName: null,
+    leadType: false,
+    leadAddres: false,
+    leadTpv: false,
+  })
+
+
+  const ERRORS = {
+    leadName: false,
+    leadType: false,
+    leadAddres: false,
+    leadTpv: false,
+  }
+
+  const check = () => {
+    if (addLead.commercial_name.length < 5 || addLead.commercial_name.length > 15) {
+      setErros({ ...errors, leadName: true })
+    } else {
+      setErros({ ...errors, leadName: false })
+    }
+
+  }
+
+
+  const closeNewLead = () => {
     dispatchScreen({
       type: 'ADD_NEW_PIN',
       payload: false
     });
   }
-
-  const addNewLead = () => {
-    setNewLead([...newLead], newLead[0].id = newId)
-    setNewLead([...newLead], newLead[0].address[0].street = screen.newLead.address)
-    setNewLead([...newLead], newLead[0].address[0].lat = screen.newLead.position.lat)
-    setNewLead([...newLead], newLead[0].address[0].lng = screen.newLead.position.lng)
-    console.log(newLead)
+  const addNewLead = async () => {
     pushNewLead();
-
-    dispatchScreen({
-      type: 'ADD_NEW_PIN',
-      payload: false
-    });
   }
 
-  const pushNewLead = async () => {
-    const options = {
+  const pushNewLead = async (value) => {
+    const newLeadAdd = await fetch('http://localhost:3001/leads', {
       method: 'post',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(newLead[0])
+      body: JSON.stringify(value)
+    })
+    if (newLeadAdd.ok) {
+      closeNewLead();
+      const responseLeads = await fetch('http://localhost:3001/leads')
+      const dataLead = await responseLeads.json();
+      dispatchLead({ type: 'ADD_LEAD', payload: dataLead })
     }
-    const newLeadAdd = await fetch('http://localhost:3001/tenders',
-      options)
-
-      const responseTenders = await fetch('http://localhost:3001/tenders')
-      const dataTender = await responseTenders.json();
-      dispatchTender({ type: 'ADD_TENDER', payload: dataTender })
-
   }
 
-
+  const formik = useFormik({
+    initialValues: INITIAL_LEADS
+  });
 
   return (
-    <div className={classes.main}>
-      <Card className={classes.root}>
-        <div className={classes.head}>
-          <Typography className={classes.title}>
-            Novo Lead
-          </Typography>
-        </div>
-        <div className={classes.firstComponent}>
 
-          <TextField
-            placeholder="Nome comercial"
-            id="commercial_name"
-            onChange={e => setNewLead([...newLead], newLead[0].commercial_name = e.target.value)}
-            helperText="nome do estabelecimento"
-            InputProps={{
-              startAdornment:
-                <InputAdornment position="start">
-                  <StoreIcon className={classes.icons} />
-                </InputAdornment>,
-            }}
-          />
-          <TextField
-            placeholder="Segmento"
-            id="business_type"
-            onChange={e => setNewLead([...newLead], newLead[0].business_type = e.target.value)}
-            helperText="Ex: Restaurante"
-            InputProps={{
-              startAdornment:
-                <InputAdornment position="start">
-                  <StorefrontIcon className={classes.icons} />
-                </InputAdornment>,
-            }}
-          />
-          <TextField
-            placeholder="Endereço"
-            id="address"
-            disabled
-            onChange={e => setNewLead([...newLead], newLead[0].address[0].street = e.target.value)}
-            value={screen && screen.newLead.address}
-            helperText="Endereço definido ao clicar"
-            InputProps={{
-              startAdornment:
-                <InputAdornment position="start">
-                  <PinDropIcon className={classes.icons} />
-                </InputAdornment>,
-            }}
-          />
-          <TextField
-            placeholder="TPV Potencial"
-            type="number"
-            onChange={e => setNewLead([...newLead], newLead[0].tpv = e.target.value)}
-            id="tpv"
-            helperText="transações no cartão p/ mês"
-            InputProps={{
-              startAdornment:
-                <InputAdornment position="start">
-                  <TrendingUpIcon className={classes.icons} />
-                </InputAdornment>,
-            }}
-          />
-          <br />
-          <Checkbox
-            color="default"
-            onChange={e => setNewLead([...newLead], newLead[0].visit[0].visit_today = true)}
-            inputProps={{ 'aria-label': 'checkbox with default color' }}
-            label="Gilad Gray"
-          />
-          <strong>Visitar hoje</strong>
-        </div>
-        <div className={classes.buttons}>
-          <Fab
-            className={classes.delet}
-            variant="extended"
-            onClick={cancelNewLead}
-          >
-            Cancelar
+    <div className={classes.main}>
+
+      <Card className={classes.root}>
+        <form onSubmit={(event) => {
+          event.preventDefault();
+          console.log(formik.values);
+          pushNewLead(formik.values)
+          alert('Olha o console!');
+        }}
+        >
+          <div className={classes.firstComponent}>
+            <div className={classes.head}>
+              <Typography className={classes.title}>
+                Novo Lead
+          </Typography>
+            </div>
+            <TextField
+              placeholder="Nome comercial"
+              name="commercial_name"
+              onChange={formik.handleChange}
+              helperText="nome do estabelecimento"
+              InputProps={{
+                startAdornment:
+                  <InputAdornment position="start">
+                    <StoreIcon className={classes.icons} />
+                  </InputAdornment>,
+              }}
+            />
+            <TextField
+              placeholder="Segmento"
+              name="business_type"
+              onChange={formik.handleChange}
+              helperText="Ex: Restaurante"
+              InputProps={{
+                startAdornment:
+                  <InputAdornment position="start">
+                    <StorefrontIcon className={classes.icons} />
+                  </InputAdornment>,
+              }}
+            />
+            <TextField
+              placeholder="Endereço"
+              id="address"
+              disabled
+              value={screen && screen.newLead.address}
+              helperText="Endereço pré definido ao clicar"
+              InputProps={{
+                startAdornment:
+                  <InputAdornment position="start">
+                    <PinDropIcon className={classes.icons} />
+                  </InputAdornment>,
+              }}
+            />
+            <TextField
+              placeholder="TPV Potencial"
+              type="number"
+              name="tpv"
+              onChange={formik.handleChange}
+              id="tpv"
+              helperText="transações no cartão p/ mês"
+              InputProps={{
+                startAdornment:
+                  <InputAdornment position="start">
+                    <TrendingUpIcon className={classes.icons} />
+                  </InputAdornment>,
+              }}
+            />
+            <br />
+            <Checkbox
+              color="default"
+              name="visit_today"
+              onChange={formik.handleChange}
+              inputProps={{ 'aria-label': 'checkbox with default color' }}
+            />
+            <strong>Visitar hoje</strong>
+
+          </div>
+          <div className={classes.buttons}>
+            <Fab
+              className={classes.delet}
+              variant="extended"
+              onClick={closeNewLead}
+            >
+              Cancelar
           </Fab>
-          <Fab
-            className={classes.newTask}
-            variant="extended"
-            onClick={addNewLead}
-          >
-            Cadastrar
+            <Fab
+              className={classes.newTask}
+              variant="extended"
+              type="submit"
+              name="id"
+              onSubmit={formik.handleChange}
+            >
+              Cadastrar
           </Fab>
-        </div>
+
+          </div>
+        </form>
       </Card>
+
     </div>
 
   );

@@ -28,7 +28,7 @@ function Pin({ info, type }) {
         <Typography className={classes.name}>
           {info && info.commercial_name}
         </Typography>
-        {type === 'tender' && <NotListedLocationIcon fontSize="large" style={{ color: '#c66b2f' }} />}
+        {type === 'lead' && <NotListedLocationIcon fontSize="large" style={{ color: '#c66b2f' }} />}
         {type === 'client' && <PersonPinCircleIcon fontSize="large" style={{ color: '#38bc72' }} />}
         {type === 'newLead' && <EditLocationIcon fontSize="large" style={{ color: '#757575' }} />}
       </div>
@@ -38,7 +38,7 @@ function Pin({ info, type }) {
         </IconButton>
         {type === 'newLead' && <NewLead client={info}/>}
         {type === 'client' && <ClientInfo client={info} />}
-        {type === 'tender' && <LeadInfo client={info}/>}
+        {type === 'lead' && <LeadInfo client={info}/>}
       </Dialog>
     </div>
   )
