@@ -31,11 +31,11 @@ export default function Alert({msg}) {
    textMsg = 'Excluido com sucesso!'
   
   return (
-    <div>
+
       <Snackbar
         color="primary"
         anchorOrigin={{
-          vertical: 'bottom', horizontal: 'center'
+          vertical: 'top', horizontal: 'center'
         }}
         open={true}
         autoHideDuration={3000}
@@ -49,6 +49,6 @@ export default function Alert({msg}) {
           </React.Fragment>
         }
       />
-    </div>
+
   );
 }

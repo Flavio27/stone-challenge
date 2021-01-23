@@ -14,13 +14,12 @@ import { useStyles } from './styles'
 
 function LeadInfo({ client }) {
   const classes = useStyles();
-  const { localization, setLocalization, dispatchScreen, screen } = useClienteData();
+  const { localization, setLocalization, dispatchScreen, screen, dispatchLead } = useClienteData();
   const [editLead, setEditLead] = useState(false)
 
   const verifyCancel = () => {
     editLead && setEditLead(false)
   }
-
 
   const goToCordenates = () => {
     setLocalization({ ...localization, lat: client.address.lat, lng: client.address.lng, zoom: 20 })
@@ -30,14 +29,26 @@ function LeadInfo({ client }) {
     });
   }
 
-  const sendPoposal = () => {
-    
+  const sendPoposal = async (type) => {
+    const newLeadAdd = await fetch(`http://localhost:3001/leads/${client.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ send_proposal: type })
+    })
+    if (newLeadAdd.ok) {
+      const responseLeads = await fetch('http://localhost:3001/leads')
+      const dataLead = await responseLeads.json();
+      dispatchLead({ type: 'ADD_LEAD', payload: dataLead })
+    }
   }
 
   return (
     <>
-    {screen.alert.edit && <Alert msg={'edit'}/>}
-    {screen.alert.delet && <Alert msg={'delet'}/>}
+      {screen.alert.edit && <Alert msg={'edit'} />}
+      {screen.alert.delet && <Alert msg={'delet'} />}
       {!editLead ?
         <div className={classes.main}>
           <Card className={classes.root}>
@@ -75,8 +86,7 @@ function LeadInfo({ client }) {
                   <CalendarTodayIcon className={classes.icons} />
                   <strong>Visita hoje</strong>
                   <br />
-                  {client.visit_today ? 'Sim' : 'Não'
-                  }
+                  {client.visit_today ? 'Sim' : 'Não'}
                 </>
               </Typography>
             </div>
@@ -101,15 +111,26 @@ function LeadInfo({ client }) {
               >
                 Editar
           </Fab>
-              <Fab
-                className={classes.newTask}
+              {!client.send_proposal ?
+                <Fab
+                  className={classes.newTask}
+                  variant="extended"
+                  onClick={() => {sendPoposal(true)}}>
+                  Enviar Proposta
+                </Fab>
+                :
+                <>
+                
+                <Fab
+                className={classes.cancelTask}
                 variant="extended"
-                onClick={() => alert('add task')}>
-                Enviar Proposta
-          </Fab>
+                onClick={() => {sendPoposal(false)}}>
+                Retirar Proposta
+              </Fab>
+              </>
+          }
             </div>
           </Card>
-
         </div>
         :
         <EditLead info={client} back={verifyCancel} />

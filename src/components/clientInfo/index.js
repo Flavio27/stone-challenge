@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useClienteData } from '../../store/Clients'
+import EditClient from './editClient'
+import Alert from '../alert'
 import Card from '@material-ui/core/Card';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
@@ -14,8 +16,14 @@ import { Link } from 'react-router-dom';
 import { useStyles } from './styles'
 
 function ClientInfo({ client }) {
-  const { localization, setLocalization, dispatchScreen } = useClienteData();
+  const { localization, setLocalization, dispatchScreen, screen } = useClienteData();
+  const [editClient, setEditClient] = useState(false)
   const classes = useStyles();
+
+  const verifyCancel = () => {
+    editClient && setEditClient(false)
+  }
+
   let satisfaction = {
     emote: null,
     border: null,
@@ -40,65 +48,79 @@ function ClientInfo({ client }) {
   }
 
   return (
-    <div className={classes.main}>
-      <Card className={classes.root} style={{ borderLeft: satisfaction.border }}>
-        <div className={classes.head}>
-          <Typography className={classes.title}>
-            {client.commercial_name}
-          </Typography>
-          <Link to={'./'}>
-            <Fab className={classes.pin}
-              onClick={goToCordenates}>
-              <RoomIcon />
-            </Fab>
-          </Link>
-        </div>
-        <div className={classes.firstComponent}>
-          <Typography className={classes.pos}>
-            <strong>({client.business_type})</strong>
-            <br />
-            {client.address && client.address.street}
-          </Typography>
-          <Typography className={classes.status}>
-            <CalendarTodayIcon className={classes.icons} />
-            <strong>Ultima visita</strong>
-            <br />
-            {client.last_visit && client.last_visit}
-          </Typography >
+    <>
+          {screen.alert.edit && <Alert msg={'edit'} />}
+      {screen.alert.delet && <Alert msg={'delet'} />}
+      {!editClient ?
+        <div className={classes.main}>
+          <Card className={classes.root} style={{ borderLeft: satisfaction.border }}>
+            
+            <div className={classes.head}>
+              <Typography className={classes.title}>
+                {client.commercial_name}
+              </Typography>
+              <Link to={'./'}>
+                <Fab className={classes.pin}
+                  onClick={goToCordenates}>
+                  <RoomIcon />
+                </Fab>
+              </Link>
+            </div>
+            <div className={classes.firstComponent}>
+              <Typography className={classes.pos}>
+                <strong>({client.business_type})</strong>
+                <br />
+                {client.address && client.address.street}
+              </Typography>
+              <Typography className={classes.status}>
+                <CalendarTodayIcon className={classes.icons} />
+                <strong>Ultima visita</strong>
+                <br />
+                {client.last_visit && client.last_visit}
+              </Typography >
 
-          <Typography className={classes.status}>
-            <>
-              <CalendarTodayIcon className={classes.icons} />
-              <strong>Visita hoje</strong>
-              <br />
-              { client.visit_today ? 'Sim' : 'Não'}
-            </>
-          </Typography>
+              <Typography className={classes.status}>
+                <>
+                  <CalendarTodayIcon className={classes.icons} />
+                  <strong>Visita hoje</strong>
+                  <br />
+                  {client.visit_today ? 'Sim' : 'Não'}
+                </>
+              </Typography>
+            </div>
+            <div className={classes.secondComponent}>
+              <Typography className={classes.status}>
+                {satisfaction.emote}
+                <strong>Satisfação</strong>
+                <br />
+                {client.satisfaction}%
+          </Typography >
+              <Typography className={classes.status}>
+                <AttachMoneyIcon className={classes.icons} />
+                <strong>Migração</strong>
+                <br />
+                {client.percentage_migration}%
+          </Typography >
+              <Typography className={classes.status}>
+                <TrendingUpIcon className={classes.icons} />
+                <strong>TPV</strong>
+                <br />
+                {client.tpv}
+              </Typography >
+            </div>
+            <Fab
+              className={classes.edit}
+              variant="extended"
+              onClick={() => { setEditClient(true) }}
+            >
+              Editar
+        </Fab>
+          </Card>
         </div>
-        <div className={classes.secondComponent}>
-        <Typography className={classes.status}>
-        {satisfaction.emote}
-            <strong>Satisfação</strong>
-            <br />
-            {client.satisfaction}% 
-          </Typography >
-        <Typography className={classes.status}>
-        <AttachMoneyIcon className={classes.icons}/>
-            <strong>Migração</strong>
-            <br />
-            {client.percentage_migration}%
-          </Typography >
-        <Typography className={classes.status}>
-        <TrendingUpIcon className={classes.icons}/>
-            <strong>TPV</strong>
-            <br />
-            {client.tpv}
-          </Typography >
-        </div>
-
-      </Card>
-    </div>
-
+        :
+        <EditClient info={client} back={verifyCancel} />
+      }
+    </>
   );
 }
 

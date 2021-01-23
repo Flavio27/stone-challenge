@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useClienteData } from '../../../store/Clients'
 import useFormik from './formik'
-import uniqid from 'uniqid'
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
@@ -9,21 +8,20 @@ import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import StoreIcon from '@material-ui/icons/Store';
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import SwapHorizontalCircleIcon from '@material-ui/icons/SwapHorizontalCircle';
 import StorefrontIcon from '@material-ui/icons/Storefront';
-import CachedIcon from '@material-ui/icons/Cached';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import { useStyles } from './styles'
 
 
-function EditLead({ info, back }) {
+function EditClient({ info, back }) {
   const classes = useStyles();
-  const { dispatchScreen, dispatchLead } = useClienteData();
+  const { dispatchScreen, dispatch } = useClienteData();
   const [errorSignup, setErrorSignup] = useState(false)
   const [confirmDelet, setconfirmDelet] = useState(false)
 
-  const closeNewLead = () => {
+  const closeClient = () => {
     dispatchScreen({
       type: 'ADD_NEW_PIN',
       payload: false
@@ -31,8 +29,8 @@ function EditLead({ info, back }) {
   }
 
 
-  const editLead = async (value) => {
-    const newLeadAdd = await fetch(`http://localhost:3001/leads/${info.id}`, {
+  const editLeadInfo = async (value) => {
+    const newInfo = await fetch(`http://localhost:3001/clients/${info.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -40,16 +38,16 @@ function EditLead({ info, back }) {
       },
       body: JSON.stringify(value)
     })
-    if (newLeadAdd.ok) {
-      closeNewLead();
-      const responseLeads = await fetch('http://localhost:3001/leads')
-      const dataLead = await responseLeads.json();
-      dispatchLead({ type: 'ADD_LEAD', payload: dataLead })
+    if (newInfo.ok) {
+      closeClient();
+      const responseClients = await fetch('http://localhost:3001/clients')
+      const dataClient = await responseClients.json();
+      dispatch({ type: 'ADD_CLIENT', payload: dataClient })
     }
   }
 
   const deletLead = async (value) => {
-    const newLeadAdd = await fetch(`http://localhost:3001/leads/${info.id}`, {
+    const dellClient = await fetch(`http://localhost:3001/clients/${info.id}`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
@@ -60,15 +58,15 @@ function EditLead({ info, back }) {
         'mode': 'cors',
       },
     })
-    if (newLeadAdd.ok) {
-      closeNewLead();
+    if (dellClient.ok) {
+      closeClient();
       dispatchScreen({
         type: 'ACTIVE_ALERT_DELET',
         payload: true
       })
-      const responseLeads = await fetch('http://localhost:3001/leads')
-      const dataLead = await responseLeads.json();
-      dispatchLead({ type: 'ADD_LEAD', payload: dataLead })
+      const responseClients = await fetch('http://localhost:3001/clients')
+      const dataClient = await responseClients.json();
+      dispatch({ type: 'ADD_CLIENT', payload: dataClient })
     }
   }
 
@@ -79,11 +77,15 @@ function EditLead({ info, back }) {
       const errors = {};
 
       if (values.commercial_name.length < 5 || values.commercial_name.length > 20) {
-        errors.commercial_name = 'Nome deve ter entre 5 a 20 caracteres'
+        errors.commercial_name = 'Nome deve ter entre 5 a 20 caracteres!'
       }
 
       if (values.business_type.length < 2 || values.business_type.length > 15) {
-        errors.business_type = 'Segmento deve ter entre 2 a 15 caracteres'
+        errors.business_type = 'Segmento deve ter entre 2 a 15 caracteres!'
+      }
+
+      if (values.percentage_migration > 100 || values.percentage_migration < 1) {
+        errors.percentage_migration = 'Portentagem minima de 1 e maxima de 100!'
       }
 
       return errors;
@@ -94,7 +96,7 @@ function EditLead({ info, back }) {
   const onSubmitForm = () => {
     if (Object.keys(formik.errors).length === 0) {
       setErrorSignup(false)
-      editLead(formik.values)
+      editLeadInfo(formik.values)
       dispatchScreen({
         type: 'ACTIVE_ALERT_EDIT',
         payload: true
@@ -181,17 +183,24 @@ function EditLead({ info, back }) {
                   }}
                 />
                 <TextField
-                  placeholder="Status da Negociação"
-                  name="negotiation_status"
+                  error={formik.touched.percentage_migration &&
+                    formik.errors.percentage_migration && true}
+                  type="number"
+                  placeholder="% de migração"
+                  name="percentage_migration"
+                  onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
-                  id="negotiation_status"
-                  value={formik.values.negotiation_status}
-                  helperText="Ex: fria, quente, obs..."
+                  id="percentage_migration"
+                  value={formik.values.percentage_migration}
+                  helperText={formik.touched.percentage_migration &&
+                    formik.errors.percentage_migration ?
+                    formik.errors.percentage_migration :
+                    'Ex: % de migração em relação ao TPV'}
                   InputProps={{
                     startAdornment:
                       <InputAdornment position="start">
-                        <CachedIcon className={classes.icons} />
-                      </InputAdornment>,
+                        <SwapHorizIcon className={classes.icons} />
+                      </InputAdornment>
                   }}
                 />
                 <br />
@@ -223,22 +232,13 @@ function EditLead({ info, back }) {
                 </Fab>
               </div>
               <Typography
-                className={classes.aprove}
-                variant="extended"
-                name="id"
-                onClick={() => setconfirmDelet(true)}
-              >
-                 <SwapHorizontalCircleIcon className={classes.aproveIcon} />
-                Converter Lead para Cliente
-              </Typography>
-              <Typography
                 className={classes.delet}
                 variant="extended"
                 name="id"
                 onClick={() => setconfirmDelet(true)}
               >
                 <DeleteForeverIcon className={classes.deletIcon} />
-              Excluir Lead
+              Excluir Cliente
           </Typography>
             </form>
           </Card>
@@ -246,7 +246,8 @@ function EditLead({ info, back }) {
         <div className={classes.main}>
           <Card className={classes.root}>
             <Typography className={classes.title}>
-              Deseja mesmo excluir:
+            <DeleteForeverIcon className={classes.icons} />
+              Quer mesmo excluir:
                     <br />
               {info.commercial_name} ?
             </Typography>
@@ -278,4 +279,4 @@ function EditLead({ info, back }) {
   );
 }
 
-export default EditLead
+export default EditClient

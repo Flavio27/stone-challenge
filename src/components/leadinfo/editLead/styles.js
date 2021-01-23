@@ -72,6 +72,11 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: '100',
     color: '#757575'
   },
+  aproveIcon: {
+    marginRight: '2px',
+    fontWeight: '100',
+    color: 'green'
+  },
   deletIcon: {
     marginRight: '2px',
     fontWeight: '100',
@@ -113,12 +118,26 @@ export const useStyles = makeStyles((theme) => ({
       background: '#00ad82',
     },
   },
+  aprove: {
+    margin: '1%',
+    marginTop: '5%',
+    maxHeight: '40px',
+    fontWeight: '600',
+    color: 'green',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    '&:hover': {
+      color: '#00AB63',
+    },
+  },
   delet: {
     margin: '1%',
+    marginTop: '5%',
     maxHeight: '40px',
     fontWeight: '600',
     color: 'red',
-    textAlign: 'center',
+    cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
     '&:hover': {

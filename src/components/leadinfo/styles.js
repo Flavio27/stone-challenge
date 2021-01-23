@@ -117,6 +117,18 @@ export const useStyles = makeStyles((theme) => ({
       background: '#00ad82',
     },
   },
+  cancelTask: {
+    margin: '3%',
+    position: 'center',
+    maxHeight: '40px',
+    fontSize: '80%',
+    fontWeight: '600',
+    color: '#757575',
+    background: '#d6d6d6',
+    '&:hover': {
+      background: '#f0f0f0',
+    },
+  },
   delet: {
     margin: '3%',
     position: 'center',

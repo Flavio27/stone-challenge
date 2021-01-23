@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     textAlign: 'left',
     color: '#757575',
-    maxWidth: '445px',
+    maxWidth: '435px',
     width: '445px',
     margin: '2% 1%',
     padding: '1%',
@@ -37,11 +37,21 @@ export const useStyles = makeStyles((theme) => ({
       background: '#f0f0f0',
     },
   },
-  main: {
+  main:{
     textAlign: 'center',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  title: {
+    fontSize: 15,
+    fontWeight: 700,
+    width: '100%'
+  },
+  error: {
+    color: 'red',
+    fontSize: 13,
+
   },
   head: {
     display: 'flex',
@@ -51,67 +61,36 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '100%',
     fontWeight: '600',
   },
-  firstComponent: {
+  firstComponent:{
     margin: '1%',
     marginRight: '10%',
-    width: '49%',
-    [theme.breakpoints.up('xs')]: {
-      maxWidth: '155px',
-    },
-    [theme.breakpoints.up('sm')]: {
-      maxWidth: '180px',
-    },
-    [theme.breakpoints.up('md', 'lg')]: {
-      maxWidth: '200px',
-    },
+    width: '100%',
   }
   ,
-  secondComponent: {
-    margin: '1%',
-    maxWidth: '49%',
-    fontSize: '100%',
-  },
-  title: {
-    fontWeight: 700,
-    width: '50%'
-  },
-  pos: {
-    marginBottom: 15,
-    fontSize: '80%',
-    fontWeight: '100',
-  },
-  status: {
-    marginBottom: 15,
-    fontSize: '80%',
-    fontWeight: '100',
-    textAlign: 'left',
-  },
-  result: {
-    marginBottom: 15,
-    fontSize: '80%',
-    fontWeight: '100',
-    textAlign: 'left',
-    display: 'flex',
-    alignItems: 'center',
-  },
   icons: {
     marginRight: '2px',
     fontWeight: '100',
-    fontSize: 'medium'
+    color: '#757575'
   },
-  newTask: {
-    marginBottom: '3%',
-    maxHeight: '40px',
-    fontSize: '80%',
-    fontWeight: '600',
-    color: '#757575',
-    background: '#fff',
-    [theme.breakpoints.only('xs')]: {
-      maxWidth: 120,
-    },
+  deletIcon: {
+    marginRight: '2px',
+    fontWeight: '100',
+    color: 'red'
   },
-  edit: {
-    margin: '3%',
+  buttons: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'end',
+    borderRadius: '50%'
+  },
+  end: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'end',
+    borderRadius: '50%'
+  },
+  back: {
+    margin: '1%',
     position: 'center',
     maxHeight: '40px',
     fontSize: '80%',
@@ -120,6 +99,31 @@ export const useStyles = makeStyles((theme) => ({
     background: '#808080',
     '&:hover': {
       background: '#b8b8b8',
+    },
+  },
+  edit: {
+    margin: '1% 10%',
+    position: 'center',
+    maxHeight: '40px',
+    fontSize: '80%',
+    fontWeight: '600',
+    color: '#FFFF',
+    background: '#00AB63',
+    '&:hover': {
+      background: '#00ad82',
+    },
+  },
+  delet: {
+    margin: '1%',
+    marginTop: '5%',
+    maxHeight: '40px',
+    fontWeight: '600',
+    color: 'red',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    '&:hover': {
+      color: '#fb7070',
     },
   },
   pin: {
