@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useClienteData } from '../../store/Clients'
-import { useStyles } from './styles';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Paper';
-
+import React, { useState, useEffect } from "react";
+import { useClienteData } from "../../store/Clients";
+import { useStyles } from "./styles";
+import Grid from "@material-ui/core/Grid";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import Checkbox from "@material-ui/core/Checkbox";
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Paper";
 
 function not(a, b) {
   return a.filter((value) => b.indexOf(value) === -1);
@@ -24,14 +23,10 @@ function intersection(a, b) {
 
 export default function SelectCostumer() {
   const { clientsData, leadsData } = useClienteData();
-  const clientList = clientsData.map(cliente => (
-    cliente.commercial_name
-  ))
-  
-  const leadList = leadsData.map(cliente => (
-    cliente.commercial_name
-  ))
-  
+  const clientList = clientsData.map((cliente) => cliente.commercial_name);
+
+  const leadList = leadsData.map((cliente) => cliente.commercial_name);
+
   const classes = useStyles();
   const [checked, setChecked] = React.useState([]);
   const [left, setLeft] = useState(clientList);
@@ -53,8 +48,6 @@ export default function SelectCostumer() {
     setChecked(newChecked);
   };
 
-
-  
   const handleCheckedRight = () => {
     setRight(right.concat(leftChecked));
     setLeft(not(left, leftChecked));
@@ -74,13 +67,18 @@ export default function SelectCostumer() {
           const labelId = `transfer-list-item-${value}-label`;
 
           return (
-            <ListItem key={value} role="listitem" button onClick={handleToggle(value)}>
+            <ListItem
+              key={value}
+              role="listitem"
+              button
+              onClick={handleToggle(value)}
+            >
               <ListItemIcon>
                 <Checkbox
                   checked={checked.indexOf(value) !== -1}
                   tabIndex={-1}
                   disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
+                  inputProps={{ "aria-labelledby": labelId }}
                 />
               </ListItemIcon>
               <ListItemText id={labelId} primary={value} />
@@ -91,12 +89,11 @@ export default function SelectCostumer() {
       </List>
     </Box>
   );
-        
-  useEffect(() => {
-    console.log(right)
-    setLeft([...clientList, ...leadList])
-  }, [])
 
+  useEffect(() => {
+    console.log(right);
+    setLeft([...clientList, ...leadList]);
+  }, []);
 
   return (
     <Grid className={classes.root}>
@@ -107,7 +104,7 @@ export default function SelectCostumer() {
         {customList(left)}
       </Grid>
       <Grid item className={classes.buttons}>
-        <Grid >
+        <Grid>
           <Button
             size="large"
             className={classes.button}

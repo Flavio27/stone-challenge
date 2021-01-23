@@ -1,10 +1,10 @@
 export const clientReducer = (state, action) => {
   switch (action.type) {
     case "ADD_CLIENT":
-      let newClients = {...state}
+      let newClients = { ...state };
       newClients = action.payload;
-      return newClients
+      return newClients;
     default:
-      return state
-  } 
-}
+      return state;
+  }
+};

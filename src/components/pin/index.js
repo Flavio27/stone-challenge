@@ -1,21 +1,24 @@
-import React from 'react'
-import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
-import ClientInfo from '../clientInfo'
-import LeadInfo from '../leadinfo'
-import NewLead from '../newLead'
-import Dialog from '@material-ui/core/Dialog';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
-import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
-import EditLocationIcon from '@material-ui/icons/EditLocation';
-import { useStyles } from './styles'
+import React, { useState } from "react";
+import { useClienteData } from "../../store/Clients";
+import PersonPinCircleIcon from "@material-ui/icons/PersonPinCircle";
+import ClientInfo from "../clientInfo";
+import LeadInfo from "../leadinfo";
+import NewLead from "../newLead";
+import Dialog from "@material-ui/core/Dialog";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import Typography from "@material-ui/core/Typography";
+import NotListedLocationIcon from "@material-ui/icons/NotListedLocation";
+import EditLocationIcon from "@material-ui/icons/EditLocation";
+import { useStyles } from "./styles";
 
 function Pin({ info, type }) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const { screen } = useClienteData();
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
+    if(!screen.newLead.clickOn)
     setOpen(true);
   };
   const handleClose = () => {
@@ -28,20 +31,38 @@ function Pin({ info, type }) {
         <Typography className={classes.name}>
           {info && info.commercial_name}
         </Typography>
-        {type === 'lead' && <NotListedLocationIcon fontSize="large" style={{ color: '#c66b2f' }} />}
-        {type === 'client' && <PersonPinCircleIcon fontSize="large" style={{ color: '#38bc72' }} />}
-        {type === 'newLead' && <EditLocationIcon fontSize="large" style={{ color: '#757575' }} />}
+        {type === "lead" && (
+          <NotListedLocationIcon
+            fontSize="large"
+            style={{ color: "#c66b2f" }}
+          />
+        )}
+        {type === "client" && (
+          <PersonPinCircleIcon fontSize="large" style={{ color: "#38bc72" }} />
+        )}
+        {type === "newLead" && (
+          <EditLocationIcon fontSize="large" style={{ color: "#757575" }} />
+        )}
       </div>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} className={classes.modalDiv}>
-        <IconButton aria-label="close" onClick={handleClose} className={classes.closeButton}>
+      <Dialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+        className={classes.modalDiv}
+      >
+        <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          className={classes.closeButton}
+        >
           <CloseIcon />
         </IconButton>
-        {type === 'newLead' && <NewLead client={info}/>}
-        {type === 'client' && <ClientInfo client={info} />}
-        {type === 'lead' && <LeadInfo client={info}/>}
+        {type === "newLead" && <NewLead client={info} />}
+        {type === "client" && <ClientInfo client={info} />}
+        {type === "lead" && <LeadInfo client={info} />}
       </Dialog>
     </div>
-  )
+  );
 }
 
-export default Pin
+export default Pin;

@@ -1,45 +1,49 @@
 export const screenReducer = (state, action) => {
   switch (action.type) {
     case "START":
-      return action.payload
+      return action.payload;
     case "ACTIVE_FILTER_PIN_CLIENT":
-      const activeClientPin = { ...state }
+      const activeClientPin = { ...state };
       activeClientPin.filter.clients = action.payload;
-      return activeClientPin
+      return activeClientPin;
     case "ACTIVE_FILTER_PIN_LEAD":
-      const activeLeadPind = { ...state }
+      const activeLeadPind = { ...state };
       activeLeadPind.filter.leads = action.payload;
-      return activeLeadPind
+      return activeLeadPind;
     case "ACTIVE_CLICK_ON":
-      const activeClickOn = { ...state }
+      const activeClickOn = { ...state };
       activeClickOn.newLead.clickOn = action.payload;
-      return activeClickOn
+      return activeClickOn;
+    case "ACTIVE_CLICK_OUT":
+      const activeClickOu = { ...state };
+      activeClickOu.newLead.clickOut = action.payload;
+      return activeClickOu;
     case "ADD_NEW_PIN":
-      const addNewpint = { ...state }
+      const addNewpint = { ...state };
       addNewpint.newLead.screen = action.payload;
-      return addNewpint
+      return addNewpint;
     case "PUSH_ADDRESS":
-      const pushAddres = { ...state }
+      const pushAddres = { ...state };
       pushAddres.newLead.address = action.payload.address;
       pushAddres.newLead.position = action.payload.position;
-      return pushAddres
+      return pushAddres;
     case "ACTIVE_FUNNEL":
-      const activeFunnel = { ...state }
+      const activeFunnel = { ...state };
       activeFunnel.funnel = action.payload;
-      return activeFunnel
+      return activeFunnel;
     case "ACTIVE_ALERT_SIGNUP":
-      const activeAlertSignup = { ...state }
+      const activeAlertSignup = { ...state };
       activeAlertSignup.alert.signup = action.payload;
-      return activeAlertSignup
+      return activeAlertSignup;
     case "ACTIVE_ALERT_EDIT":
-      const activeAlertEdit = { ...state }
+      const activeAlertEdit = { ...state };
       activeAlertEdit.alert.edit = action.payload;
-      return activeAlertEdit
+      return activeAlertEdit;
     case "ACTIVE_ALERT_DELET":
-      const activeAlertDelet = { ...state }
+      const activeAlertDelet = { ...state };
       activeAlertDelet.alert.delet = action.payload;
-      return activeAlertDelet
+      return activeAlertDelet;
     default:
-      return state
+      return state;
   }
-}
+};

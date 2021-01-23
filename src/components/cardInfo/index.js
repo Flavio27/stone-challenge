@@ -1,18 +1,17 @@
-import React from 'react'
-import ClientInfo from '../clientInfo'
-import LeadInfo from '../leadinfo'
+import React from "react";
+import ClientInfo from "../clientInfo";
+import LeadInfo from "../leadinfo";
 
 function CardInfo({ client }) {
-
   return (
     <>
-      {
-        client.negotiation ?
-          <LeadInfo client={client} /> :
-          <ClientInfo client={client} />
-      }
+      {client.negotiation ? (
+        <LeadInfo client={client} />
+      ) : (
+        <ClientInfo client={client} />
+      )}
     </>
-  )
+  );
 }
 
-export default CardInfo
+export default CardInfo;

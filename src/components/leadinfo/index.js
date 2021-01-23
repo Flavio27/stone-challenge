@@ -1,64 +1,74 @@
-import React, { useState } from 'react';
-import { useClienteData } from '../../store/Clients'
-import EditLead from './editLead'
-import Alert from '../alert'
-import Card from '@material-ui/core/Card';
-import CachedIcon from '@material-ui/icons/Cached';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import Typography from '@material-ui/core/Typography';
-import RoomIcon from '@material-ui/icons/Room';
-import Fab from '@material-ui/core/Fab';
-import { Link } from 'react-router-dom';
-import { useStyles } from './styles'
+import React, { useState } from "react";
+import { useClienteData } from "../../store/Clients";
+import EditLead from "./editLead";
+import Alert from "../alert";
+import Card from "@material-ui/core/Card";
+import CachedIcon from "@material-ui/icons/Cached";
+import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import Typography from "@material-ui/core/Typography";
+import RoomIcon from "@material-ui/icons/Room";
+import Fab from "@material-ui/core/Fab";
+import { Link } from "react-router-dom";
+import { useStyles } from "./styles";
 
 function LeadInfo({ client }) {
   const classes = useStyles();
-  const { localization, setLocalization, dispatchScreen, screen, dispatchLead } = useClienteData();
-  const [editLead, setEditLead] = useState(false)
+  const {
+    localization,
+    setLocalization,
+    dispatchScreen,
+    screen,
+    dispatchLead,
+  } = useClienteData();
+  const [editLead, setEditLead] = useState(false);
 
   const verifyCancel = () => {
-    editLead && setEditLead(false)
-  }
+    editLead && setEditLead(false);
+  };
 
   const goToCordenates = () => {
-    setLocalization({ ...localization, lat: client.address.lat, lng: client.address.lng, zoom: 20 })
-    dispatchScreen({
-      type: 'ACTIVE_FILTER_PIN_LEAD',
-      payload: true
+    setLocalization({
+      ...localization,
+      lat: client.address.lat,
+      lng: client.address.lng,
+      zoom: 20,
     });
-  }
+    dispatchScreen({
+      type: "ACTIVE_FILTER_PIN_LEAD",
+      payload: true,
+    });
+  };
 
   const sendPoposal = async (type) => {
     const newLeadAdd = await fetch(`http://localhost:3001/leads/${client.id}`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ send_proposal: type })
-    })
+      body: JSON.stringify({ send_proposal: type }),
+    });
     if (newLeadAdd.ok) {
-      const responseLeads = await fetch('http://localhost:3001/leads')
+      const responseLeads = await fetch("http://localhost:3001/leads");
       const dataLead = await responseLeads.json();
-      dispatchLead({ type: 'ADD_LEAD', payload: dataLead })
+      dispatchLead({ type: "ADD_LEAD", payload: dataLead });
     }
-  }
+  };
 
   return (
     <>
-      {screen.alert.edit && <Alert msg={'edit'} />}
-      {screen.alert.delet && <Alert msg={'delet'} />}
-      {!editLead ?
+      {screen.alert.edit && <Alert msg={"edit"} />}
+      {screen.alert.delet && <Alert msg={"delet"} />}
+      {!editLead ? (
         <div className={classes.main}>
           <Card className={classes.root}>
             <div className={classes.head}>
               <Typography className={classes.title}>
                 {client.commercial_name}
               </Typography>
-              <Link to={'./'}>
-                <Fab className={classes.pin}
-                  onClick={goToCordenates}>
+              <Link to={"./"}>
+                <Fab className={classes.pin} onClick={goToCordenates}>
                   <RoomIcon />
                 </Fab>
               </Link>
@@ -73,20 +83,20 @@ function LeadInfo({ client }) {
                 <CachedIcon className={classes.icons} />
                 <strong>Status da negociação</strong>
                 <br />
-                {client.negotiation_status ? client.negotiation_status : '-'}
-              </Typography >
+                {client.negotiation_status ? client.negotiation_status : "-"}
+              </Typography>
               <Typography className={classes.status}>
                 <CalendarTodayIcon className={classes.icons} />
                 <strong>Ultima visita</strong>
                 <br />
-                {client.last_visit ? client.last_visit : '-'}
-              </Typography >
+                {client.last_visit ? client.last_visit : "-"}
+              </Typography>
               <Typography className={classes.status}>
                 <>
                   <CalendarTodayIcon className={classes.icons} />
                   <strong>Visita hoje</strong>
                   <br />
-                  {client.visit_today ? 'Sim' : 'Não'}
+                  {client.visit_today ? "Sim" : "Não"}
                 </>
               </Typography>
             </div>
@@ -95,13 +105,13 @@ function LeadInfo({ client }) {
                 <TrendingUpIcon className={classes.icons} />
                 <strong>TPV</strong>
                 <br />
-                {client.tpv ? client.tpv : '-'}
-              </Typography >
+                {client.tpv ? client.tpv : "-"}
+              </Typography>
               <Typography className={classes.status}>
                 <strong>Qtd. visitas</strong>
                 <br />
-                {client.visit_numbers ? client.visit_numbers : '-'}
-              </Typography >
+                {client.visit_numbers ? client.visit_numbers : "-"}
+              </Typography>
             </div>
             <div className={classes.buttons}>
               <Fab
@@ -110,34 +120,38 @@ function LeadInfo({ client }) {
                 onClick={() => setEditLead(true)}
               >
                 Editar
-          </Fab>
-              {!client.send_proposal ?
+              </Fab>
+              {!client.send_proposal ? (
                 <Fab
                   className={classes.newTask}
                   variant="extended"
-                  onClick={() => {sendPoposal(true)}}>
+                  onClick={() => {
+                    sendPoposal(true);
+                  }}
+                >
                   Enviar Proposta
                 </Fab>
-                :
+              ) : (
                 <>
-                
-                <Fab
-                className={classes.cancelTask}
-                variant="extended"
-                onClick={() => {sendPoposal(false)}}>
-                Retirar Proposta
-              </Fab>
-              </>
-          }
+                  <Fab
+                    className={classes.cancelTask}
+                    variant="extended"
+                    onClick={() => {
+                      sendPoposal(false);
+                    }}
+                  >
+                    Retirar Proposta
+                  </Fab>
+                </>
+              )}
             </div>
           </Card>
         </div>
-        :
+      ) : (
         <EditLead info={client} back={verifyCancel} />
-      }
+      )}
     </>
   );
-
 }
 
-export default LeadInfo
+export default LeadInfo;

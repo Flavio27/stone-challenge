@@ -1,8 +1,8 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
@@ -11,12 +11,12 @@ export const useStyles = makeStyles((theme) => ({
     minWidth: 120,
   },
   header: {
-    fontSize: '20px',
-    marginBottom: -20
+    fontSize: "20px",
+    marginBottom: -20,
   },
   filterButton: {
-  color: '#757575',
-  left: '70%',
-  fontWeight: 700,
+    color: "#757575",
+    left: "70%",
+    fontWeight: 700,
   },
 }));

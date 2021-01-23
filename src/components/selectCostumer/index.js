@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
-import SwipeableViews from 'react-swipeable-views';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import { useTheme } from '@material-ui/core/styles';
-import { useStyles } from './styles';
+import React, { useEffect } from "react";
+import SwipeableViews from "react-swipeable-views";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import { useTheme } from "@material-ui/core/styles";
+import { useStyles } from "./styles";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -26,11 +26,11 @@ function TabPanel(props) {
 function a11yProps(index) {
   return {
     id: `action-tab-${index}`,
-    'aria-controls': `action-tabpanel-${index}`,
+    "aria-controls": `action-tabpanel-${index}`,
   };
 }
 
-function SelectCostumer({client, lead }) {
+function SelectCostumer({ client, lead }) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -38,13 +38,12 @@ function SelectCostumer({client, lead }) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  
+
   useEffect(() => {
-    setValue(1)
-  }, [])
+    setValue(1);
+  }, []);
   const handleChangeIndex = (index) => {
     setValue(index);
-    
   };
 
   return (
@@ -52,17 +51,16 @@ function SelectCostumer({client, lead }) {
       <div position="static" color="default" className={classes.appBar}>
         <Tabs
           value={value}
- 
           onChange={handleChange}
           indicatorColor="primary"
           aria-label="action tabs example"
         >
-          <Tab label="Leads" {...a11yProps(0)} className={classes.tab}/>
+          <Tab label="Leads" {...a11yProps(0)} className={classes.tab} />
           <Tab label="Clientes" {...a11yProps(1)} className={classes.tab} />
         </Tabs>
       </div>
       <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}
         onChangeIndex={handleChangeIndex}
       >
@@ -73,9 +71,8 @@ function SelectCostumer({client, lead }) {
           {client}
         </TabPanel>
       </SwipeableViews>
-
     </div>
   );
 }
 
-export default SelectCostumer
+export default SelectCostumer;

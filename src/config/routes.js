@@ -1,9 +1,9 @@
-import React from 'react'
-import { Switch, Route } from 'react-router-dom'
-import Home from '../pages/home'
-import List from '../pages/list'
-import Script from '../pages/script'
-import NotFound from '../pages/notFound'
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import Home from "../pages/home";
+import List from "../pages/list";
+import Script from "../pages/script";
+import NotFound from "../pages/notFound";
 
 export const Routes = () => {
   return (
@@ -14,6 +14,5 @@ export const Routes = () => {
       <Route path="/list" component={Script} />
       <Route component={NotFound} />
     </Switch>
-  )
-}
-
+  );
+};
