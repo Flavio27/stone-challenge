@@ -22,6 +22,7 @@ function EditLead({ info, back }) {
   const { dispatchScreen, dispatchLead } = useClienteData();
   const [errorSignup, setErrorSignup] = useState(false)
   const [confirmDelet, setconfirmDelet] = useState(false)
+  const [convert, setConvert] = useState(false)
 
   const closeNewLead = () => {
     dispatchScreen({
@@ -30,6 +31,17 @@ function EditLead({ info, back }) {
     });
   }
 
+  let CONVERT_LEAD_INITIAL = {
+    id: info.id,
+    commercial_name: info.commercial_name,
+    business_type: info.business_type,
+    tpv: info.tpv,
+    address: info.address,
+    last_visit: info.last_visit,
+    visit_today: info.visit_today,
+    satisfaction: 0,
+    percentage_migration: 0,
+  }
 
   const editLead = async (value) => {
     const newLeadAdd = await fetch(`http://localhost:3001/leads/${info.id}`, {
@@ -48,7 +60,7 @@ function EditLead({ info, back }) {
     }
   }
 
-  const deletLead = async (value) => {
+  const deletLead = async (type) => {
     const newLeadAdd = await fetch(`http://localhost:3001/leads/${info.id}`, {
       method: 'DELETE',
       headers: {
@@ -61,14 +73,41 @@ function EditLead({ info, back }) {
       },
     })
     if (newLeadAdd.ok) {
+      if (type === 'convert'){
+        dispatchScreen({
+          type: 'ACTIVE_ALERT_EDIT',
+          payload: true
+        })
+      }else{
+              dispatchScreen({
+          type: 'ACTIVE_ALERT_DELET',
+          payload: true
+        })  
+      }
+      
       closeNewLead();
-      dispatchScreen({
-        type: 'ACTIVE_ALERT_DELET',
-        payload: true
-      })
       const responseLeads = await fetch('http://localhost:3001/leads')
       const dataLead = await responseLeads.json();
       dispatchLead({ type: 'ADD_LEAD', payload: dataLead })
+    }
+  }
+
+  const convertLeadToClient = async () => {
+    setConvert(true)
+    const newClient = await fetch('http://localhost:3001/clients', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(CONVERT_LEAD_INITIAL)
+    })
+    if (newClient.ok) {
+      closeNewLead();
+      deletLead('convert');
+      const responseClients = await fetch('http://localhost:3001/clients')
+      const dataClient = await responseClients.json();
+      dispatchLead({ type: 'ADD_CLIENT', payload: dataClient })
     }
   }
 
@@ -226,9 +265,9 @@ function EditLead({ info, back }) {
                 className={classes.aprove}
                 variant="extended"
                 name="id"
-                onClick={() => setconfirmDelet(true)}
+                onClick={() => convertLeadToClient()}
               >
-                 <SwapHorizontalCircleIcon className={classes.aproveIcon} />
+                <SwapHorizontalCircleIcon className={classes.aproveIcon} />
                 Converter Lead para Cliente
               </Typography>
               <Typography

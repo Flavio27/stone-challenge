@@ -17,6 +17,7 @@ function Home() {
       <SearchBar/>
       <Map/>
       {screen.alert.signup && <Alert msg={'signUp'}/>}
+      {screen.alert.edit && <Alert msg={'edit'}/>}
       {screen.alert.delet && <Alert msg={'delet'} />}
       {screen.funnel && <Modal type={'filter'} children={<Filter/>}/>}
       {screen.newLead.screen && <Modal type={'newLead'} children={<NewLead/> }/>} 
