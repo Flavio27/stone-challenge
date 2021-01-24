@@ -87,7 +87,7 @@ function Map() {
       draggableCursor: screen.newLead.clickOn && "crosshair",
       fullscreenControl: false,
       zoomControlOptions: { position: 8 },
-      minZoom: 16,
+      minZoom: 15,
     };
   };
 

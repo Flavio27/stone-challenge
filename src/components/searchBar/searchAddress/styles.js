@@ -18,7 +18,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   suggestionDiv:{
     marginTop: 10,
-    minHeight: 50,
+
   },
   suggestionActive: {
     backgroundColor: "#00AB63",

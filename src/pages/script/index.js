@@ -1,21 +1,29 @@
-import React from 'react'
-import BottomAppBar from '../../components/bottomAppBar'
-import WalkScript from '../../components/walkScript'
+import React from "react";
+import BottomAppBar from "../../components/bottomAppBar";
+import WalkScript from "../../components/walkScript";
+import SearchBar from "../../components/searchBar";
 
 function Script() {
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      alignContent: 'center',
-      justifyContent: 'center',
-    }}>
-      
-      <WalkScript />
+    <div>
+      <SearchBar />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          flexWrap: 'wrap',
+          alignContent: "center",
+          justifyContent: "center",
+          marginTop: 50,
+          marginBottom: 100,
+        }}
+      >
+        <WalkScript />
+      </div>
+
       <BottomAppBar />
     </div>
-  )
+  );
 }
 
-export default Script
+export default Script;
