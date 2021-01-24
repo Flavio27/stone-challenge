@@ -15,10 +15,8 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     overflowY: "scroll",
   },
-  space: {
-
-  },
   card: {
+    marginLeft: 12,
     marginTop: 10,
     width: "100%",
     "&:hover": {

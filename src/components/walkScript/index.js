@@ -23,10 +23,8 @@ export default function SelectCostumer() {
   }, [clientsData, leadsData]);
 
   const mainMenu = (type) => {
-    if (type === "clients") 
-    setMenu({ clients: true, list: false})
-    if (type === "list")
-    setMenu({ clients: false, list: true})
+    if (type === "clients") setMenu({ clients: true, list: false });
+    if (type === "list") setMenu({ clients: false, list: true });
   };
 
   const removeOutList = (e) => {
@@ -56,11 +54,13 @@ export default function SelectCostumer() {
           Clientes
         </Button>
         <Divider orientation="vertical" flexItem />
-        <Button 
-        onClick={() => {
-          mainMenu("list");
-        }}
-        size="large" style={{ marginLeft: 50 }}>
+        <Button
+          onClick={() => {
+            mainMenu("list");
+          }}
+          size="large"
+          style={{ marginLeft: 50 }}
+        >
           Roteiro
         </Button>
       </div>
@@ -68,7 +68,7 @@ export default function SelectCostumer() {
         <div className={classes.main}>
           <List className={classes.root}>
             {outList.map((client) => (
-              <Paper elevation={1} className={classes.card}>
+              <Paper key={client.id} elevation={1} className={classes.card}>
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar>
@@ -98,7 +98,7 @@ export default function SelectCostumer() {
         <div className={classes.main}>
           <List className={classes.root}>
             {IntList.map((client) => (
-              <Paper elevation={1} className={classes.card}>
+              <Paper key={client.id} elevation={1} className={classes.card}>
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar>

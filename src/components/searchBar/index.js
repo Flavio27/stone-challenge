@@ -17,6 +17,9 @@ function SearchBarApp() {
   const onChangeValue = (value) => {
     location.pathname === "/list" &&
       dispatchScreen({ type: "SEARCH_VALUE_LIST", payload: value });
+    location.pathname === "/roteiro" &&
+      dispatchScreen({ type: "SEARCH_VALUE_SCRIPT", payload: value });
+      console.log(screen.searchBar.script.value)
   };
   const searchOnBlur = () => {
     console.log("search desativada");

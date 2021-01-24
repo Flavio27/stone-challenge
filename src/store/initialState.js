@@ -70,6 +70,10 @@ export const INITIAL_SCREENS = {
       value: false,
       filtredList: false,
     },
+    script: {
+      value: false,
+      filtredList: false,
+    },
     map: {
       filtredList: false,
     },

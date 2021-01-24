@@ -55,11 +55,16 @@ export const screenReducer = (state, action) => {
       const activeSearch = { ...state };
       activeSearch.searchBar.active = action.payload;
       return activeSearch;
-     // Pass value of search from list
+     // Pass value of searchbar from /list
     case "SEARCH_VALUE_LIST":
       const searchValueList = { ...state };
       searchValueList.searchBar.list.value = action.payload;
       return searchValueList;
+     // Pass value of searchbar from /roteiro
+    case "SEARCH_VALUE_SCRIPT":
+      const searchValueScript = { ...state };
+      searchValueScript.searchBar.script.value = action.payload;
+      return searchValueScript;
     default:
       return state;
   }
