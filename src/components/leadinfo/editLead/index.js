@@ -18,7 +18,7 @@ import { useStyles } from "./styles";
 
 function EditLead({ info, back }) {
   const classes = useStyles();
-  const { dispatchScreen, dispatchLead } = useClienteData();
+  const { dispatchScreen, dispatchLead, dispatch, screen } = useClienteData();
   const [errorSignup, setErrorSignup] = useState(false);
   const [confirmDelet, setconfirmDelet] = useState(false);
   const [convert, setConvert] = useState(false);
@@ -31,7 +31,6 @@ function EditLead({ info, back }) {
   };
 
   let CONVERT_LEAD_INITIAL = {
-    id: info.id,
     commercial_name: info.commercial_name,
     business_type: info.business_type,
     tpv: info.tpv,
@@ -40,6 +39,18 @@ function EditLead({ info, back }) {
     last_visit: info.last_visit,
     visit_today: info.visit_today,
     percentage_migration: 0,
+  };
+
+  const reloadLeads = async () => {
+    const responseLeads = await fetch("http://localhost:3001/leads");
+    const dataLead = await responseLeads.json();
+    dispatchLead({ type: "ADD_LEAD", payload: dataLead });
+  };
+
+  const reloadClients = async () => {
+    const responseClients = await fetch("http://localhost:3001/clients");
+    const dataClient = await responseClients.json();
+    dispatch({ type: "ADD_CLIENT", payload: dataClient });
   };
 
   const editLead = async (value) => {
@@ -53,13 +64,11 @@ function EditLead({ info, back }) {
     });
     if (newLeadAdd.ok) {
       closeNewLead();
-      const responseLeads = await fetch("http://localhost:3001/leads");
-      const dataLead = await responseLeads.json();
-      dispatchLead({ type: "ADD_LEAD", payload: dataLead });
+      reloadLeads();
     }
   };
 
-  const deletLead = async (type) => {
+  const deletLead = async () => {
     const newLeadAdd = await fetch(`http://localhost:3001/leads/${info.id}`, {
       method: "DELETE",
       headers: {
@@ -73,22 +82,25 @@ function EditLead({ info, back }) {
       },
     });
     if (newLeadAdd.ok) {
-      if (type === "convert") {
-        dispatchScreen({
-          type: "ACTIVE_ALERT_EDIT",
-          payload: true,
-        });
-      } else {
-        dispatchScreen({
-          type: "ACTIVE_ALERT_DELET",
-          payload: true,
-        });
-      }
-
+      dispatchScreen({ type: "ACTIVE_ALERT_DELET", payload: true });
       closeNewLead();
-      const responseLeads = await fetch("http://localhost:3001/leads");
-      const dataLead = await responseLeads.json();
-      dispatchLead({ type: "ADD_LEAD", payload: dataLead });
+      reloadLeads();
+    }
+  };
+
+  const addClientIdToLead = async (clientId) => {
+    const newClient = await fetch(`http://localhost:3001/leads/${info.id}`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ client_id: clientId }),
+    });
+    if (newClient.ok) {
+      reloadLeads();
+      reloadClients();
+      dispatchScreen({ type: "ACTIVE_ALERT_EDIT", payload: true });
     }
   };
 
@@ -103,11 +115,15 @@ function EditLead({ info, back }) {
       body: JSON.stringify(CONVERT_LEAD_INITIAL),
     });
     if (newClient.ok) {
+      const newClientResponse = await newClient.json();
+      addClientIdToLead(newClientResponse.id);
       closeNewLead();
-      deletLead("convert");
-      const responseClients = await fetch("http://localhost:3001/clients");
-      const dataClient = await responseClients.json();
-      dispatchLead({ type: "ADD_CLIENT", payload: dataClient });
+      reloadClients();
+      reloadLeads();
+      dispatchScreen({
+        type: "ACTIVE_FILTER_PIN_CLIENT",
+        payload: true,
+      });
     }
   };
 

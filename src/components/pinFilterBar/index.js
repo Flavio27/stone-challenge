@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useClienteData } from "../../store/Clients";
 import NotListedLocationIcon from "@material-ui/icons/NotListedLocation";
 import PersonPinCircleIcon from "@material-ui/icons/PersonPinCircle";
@@ -17,6 +17,7 @@ function PinFilterBar() {
     localization,
     setLocalization,
   } = useClienteData();
+  const [activeLeads, setActiveLeads] = useState(0);
   const classes = useStyles();
 
   const filterClients = () => {
@@ -41,11 +42,7 @@ function PinFilterBar() {
       type: "ACTIVE_CLICK_ON",
       payload: true,
     });
-    dispatchScreen({
-      type: "ACTIVE_CLICK_OUT",
-      payload: false,
-    });
-  
+    setLocalization({ ...localization, zoom: 17 });
   };
 
   return (

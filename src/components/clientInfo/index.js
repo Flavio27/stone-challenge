@@ -60,8 +60,6 @@ function ClientInfo({ client }) {
 
   return (
     <>
-      {screen.alert.edit && <Alert msg={"edit"} />}
-      {screen.alert.delet && <Alert msg={"delet"} />}
       {!editClient ? (
         <div className={classes.main}>
           <Card className={classes.root}>

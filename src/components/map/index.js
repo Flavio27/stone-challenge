@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { SP_POLYNE, SELLER_POLO } from "./polynes";
 import { useClienteData } from "../../store/Clients";
 import GoogleMapReact from "google-map-react";
-import { fitBounds } from "google-map-react";
 import Pin from "../pin";
 import "./styles.css";
 
@@ -20,49 +19,6 @@ function Map() {
     dispatchScreen,
   } = useClienteData();
   const [markers, setMarkers] = useState([]);
-  const mapBounds = {
-    nw: {
-      lat: -23.54874523475127,
-      lng: -46.63620102673337,
-    },
-    se: {
-      lat: -23.56137320976895,
-      lng: -46.62590134411618,
-    },
-  };
-
-  const size = {
-    width: 640, // Map width in pixels
-    height: 380, // Map height in pixels
-  };
-
-  const { center, zoom } = fitBounds(mapBounds, size);
-
-  const apiIsLoaded = (map, maps) => {
-    const directionsService = new maps.DirectionsService();
-    const directionsDisplay = new maps.DirectionsRenderer();
-    directionsService.route(
-      {
-        origin:
-          "Av 565 145, San Juan de Aragón II Secc, 07969 Ciudad de México, CDMX, Mexico",
-        destination:
-          "Piña MZ3 LT8, Ampliacion Lopez Portillo, 13400 Ciudad de México, CDMX, Mexico",
-        travelMode: "DRIVING",
-      },
-      (response, status) => {
-        if (status === "OK") {
-          directionsDisplay.setDirections(response);
-          console.log(response.routes[0].overview_path, "Ruta");
-          const routePolyline = new maps.Polyline({
-            path: response.routes[0].overview_path,
-          });
-          routePolyline.setMap(map);
-        } else {
-          window.alert("Directions request failed due to " + status);
-        }
-      }
-    );
-  };
 
   const handleApiLoaded = (map, maps) => {
     const SELLER_POLE = new maps.Polygon({
@@ -72,6 +28,7 @@ function Map() {
       strokeWeight: 10,
       fillColor: "#757575",
       fillOpacity: 0.5,
+      cursor: "",
     });
     SELLER_POLE.setMap(map);
 
@@ -80,6 +37,7 @@ function Map() {
         type: "ACTIVE_CLICK_OUT",
         payload: true,
       });
+      SELLER_POLE.cursor = "not-allowed";
     });
     SELLER_POLE.addListener("mouseout", (event) => {
       dispatchScreen({
@@ -121,15 +79,15 @@ function Map() {
           payload: false,
         });
       }
-      // console.log(screen.newLead.position)
-      // console.log(screen.newLead.address)
     }
   };
 
   const mapOptions = () => {
     return {
       draggableCursor: screen.newLead.clickOn && "crosshair",
-      bounds: mapBounds,
+      fullscreenControl: false,
+      zoomControlOptions: { position: 8 },
+      minZoom: 16,
     };
   };
 
@@ -144,8 +102,6 @@ function Map() {
     >
       <GoogleMapReact
         options={mapOptions}
-        bounds={mapBounds}
-        margin={SP_POLYNE}
         bootstrapURLKeys={{ key: KEY }}
         center={{
           lat: localization.lat,
@@ -170,15 +126,18 @@ function Map() {
             />
           ))}
         {screen.filter.leads &&
-          leadsData.map((clientPin) => (
-            <Pin
-              key={clientPin.id}
-              type={"lead"}
-              lat={clientPin.address.lat}
-              lng={clientPin.address.lng}
-              info={clientPin}
-            />
-          ))}
+          leadsData.map(
+            (clientPin) =>
+              clientPin.client_id === "" && (
+                <Pin
+                  key={clientPin.id}
+                  type={"lead"}
+                  lat={clientPin.address.lat}
+                  lng={clientPin.address.lng}
+                  info={clientPin}
+                />
+              )
+          )}
       </GoogleMapReact>
     </div>
   );

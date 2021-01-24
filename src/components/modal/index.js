@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useClienteData } from "../../store/Clients";
 import Dialog from "@material-ui/core/Dialog";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,7 +9,7 @@ import { useStyles } from "./styles";
 function Modal({ children, type }) {
   const { screen, dispatchScreen, setFilter } = useClienteData();
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -23,7 +23,6 @@ function Modal({ children, type }) {
       });
       setFilter([]);
     }
-
     type === "newLead" &&
       dispatchScreen({
         type: "ADD_NEW_PIN",

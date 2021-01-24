@@ -64,6 +64,16 @@ export const INITIAL_SCREENS = {
     edit: false,
     signup: false,
   },
+  searchBar: {
+    active: false,
+    list: {
+      value: false,
+      filtredList: false,
+    },
+    map: {
+      filtredList: false,
+    },
+  },
 };
 
 export const INITIAL_FILTER = [
@@ -75,7 +85,7 @@ export const INITIAL_FILTER = [
 ];
 
 export const INITIAL_LOCATION = {
-  lat: -23.5564616232912,
-  lng: -46.63087491974125,
+  lat: -23.55613567876933,
+  lng: -46.63043991337303,
   zoom: 16,
 };

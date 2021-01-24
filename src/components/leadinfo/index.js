@@ -55,12 +55,11 @@ function LeadInfo({ client }) {
       dispatchLead({ type: "ADD_LEAD", payload: dataLead });
     }
   };
-
+  
   return (
     <>
-      {screen.alert.edit && <Alert msg={"edit"} />}
-      {screen.alert.delet && <Alert msg={"delet"} />}
-      {!editLead ? (
+    {client.client_id === "" ? 
+      !editLead ? (
         <div className={classes.main}>
           <Card className={classes.root}>
             <div className={classes.head}>
@@ -149,9 +148,11 @@ function LeadInfo({ client }) {
         </div>
       ) : (
         <EditLead info={client} back={verifyCancel} />
-      )}
+      ) : ''}
+      
     </>
-  );
+  )
+
 }
 
 export default LeadInfo;

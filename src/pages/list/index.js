@@ -10,10 +10,7 @@ import { useStyles } from "./styles";
 function List() {
   const classes = useStyles();
   const { clientsData, leadsData, screen } = useClienteData();
-  let verify = false;
-  if (screen.alert.edit) verify = true;
-  if (screen.alert.delet) verify = true;
-
+  let search = screen.searchBar.list.value;
   const clientRender = () => {
     const render =
       clientsData.length > 0 &&
@@ -23,17 +20,31 @@ function List() {
     return render;
   };
   const leadRender = () => {
-    const render =
-      leadsData.length > 0 &&
-      leadsData.map((client, index) => (
-        <LeadInfo key={client.id} client={client} />
-      ));
+    const render = !search
+      ? leadsData.map((client, index) => (
+          <LeadInfo key={client.id} client={client} />
+        ))
+      : leadsData
+          .filter((client) => {
+            if (search === "") {
+              return client;
+            } else if (
+              client.commercial_name
+                .toLowerCase()
+                .includes(search.toLowerCase())
+            ) {
+              return client;
+            }
+          })
+          .map((client, key) => {
+            return <LeadInfo key={client.id} client={client} />;
+          });
     return render;
   };
 
   return (
     <div>
-      {!verify && <SearchBar />}
+      <SearchBar />
       <SelectCostumer client={clientRender} lead={leadRender} />
       <div className={classes.topSpace} />
       <BottomAppBar />

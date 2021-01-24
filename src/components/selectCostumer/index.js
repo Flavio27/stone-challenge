@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useClienteData } from "../../store/Clients";
+import Alert from "../alert";
 import SwipeableViews from "react-swipeable-views";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -9,6 +11,7 @@ import { useStyles } from "./styles";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+
   return (
     <Typography
       component="div"
@@ -33,7 +36,8 @@ function a11yProps(index) {
 function SelectCostumer({ client, lead }) {
   const classes = useStyles();
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const { screen } = useClienteData();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -59,6 +63,8 @@ function SelectCostumer({ client, lead }) {
           <Tab label="Clientes" {...a11yProps(1)} className={classes.tab} />
         </Tabs>
       </div>
+      {screen.alert.edit && <Alert msg={"edit"} />}
+      {screen.alert.delet && <Alert msg={"delet"} />}
       <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}

@@ -22,7 +22,7 @@ function LeadInfo({ client }) {
   const [errorSignup, setErrorSignup] = useState(false);
 
   let INITIAL_LEADS = {
-    id: uniqid("lead-"),
+    id: uniqid(),
     commercial_name: "",
     business_type: "",
     tpv: 0,
@@ -60,6 +60,7 @@ function LeadInfo({ client }) {
       const responseLeads = await fetch("http://localhost:3001/leads");
       const dataLead = await responseLeads.json();
       dispatchLead({ type: "ADD_LEAD", payload: dataLead });
+      dispatchScreen({ type: "ACTIVE_FILTER_PIN_LEAD", payload: true });
     }
   };
 
