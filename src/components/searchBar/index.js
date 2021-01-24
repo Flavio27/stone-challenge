@@ -3,18 +3,16 @@ import { useClienteData } from "../../store/Clients";
 import { useLocation } from "react-router-dom";
 import { useStyles } from "./styles";
 import SearchBar from "material-ui-search-bar";
-import Typography from "@material-ui/core/Typography";
+import SearchBarAddres from './searchAddress'
 
 function SearchBarApp() {
   let location = useLocation();
   const classes = useStyles();
   const { screen, dispatchScreen } = useClienteData();
 
-
   const searchOnFocus = () => {
     console.log("search ativada");
     dispatchScreen({ type: "ACTIVE_SEARCH", payload: true });
-
   };
   const onChangeValue = (value) => {
     location.pathname === "/list" &&
@@ -27,24 +25,27 @@ function SearchBarApp() {
 
   const clearValue = () => {
     dispatchScreen({ type: "SEARCH_VALUE_LIST", payload: false });
-  }
-
+  };
 
   return (
     <div className={classes.main}>
       <div className={classes.bar}>
-        <SearchBar
-          placeholder="Nome, stone code ou endereço"
-          onChange={(newValue) => onChangeValue(newValue)}
-          onFocus={() => {
-            searchOnFocus();
-          }}
-          onBlur={() => {
-            searchOnBlur();
-          }}
-          onCancelSearch={() => clearValue()}
-          // onRequestSearch={() => doSomethingWith(this.state.value)}
-        />
+        {location.pathname === "/" ? (
+          <SearchBarAddres/>
+        ) : (
+          <SearchBar
+            placeholder="Nome do estabelecimento"
+            onChange={(newValue) => onChangeValue(newValue)}
+            onFocus={() => {
+              searchOnFocus();
+            }}
+            onBlur={() => {
+              searchOnBlur();
+            }}
+            onCancelSearch={() => clearValue()}
+            // onRequestSearch={() => doSomethingWith(this.state.value)}
+          />
+        )}
         {screen.newLead.clickOn && location.pathname === "/" && (
           <div variant="filled" className={classes.alert}>
             Escolha o local do novo lead dentro do polo

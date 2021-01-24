@@ -11,28 +11,28 @@ function List() {
   const classes = useStyles();
   const { clientsData, leadsData, screen } = useClienteData();
   let search = screen.searchBar.list.value;
+
   const clientRender = () => {
     const render = !search
-? clientsData.map((client, index) => (
-    <ClientInfo key={client.id} client={client} />
-  ))
-: clientsData
-    .filter((client) => {
-      if (search === "") {
-        return client;
-      } else if (
-        client.commercial_name
-          .toLowerCase()
-          .includes(search.toLowerCase())
-      ) {
-        return client;
-      }
-    })
-    .map((client, key) => {
-      return <ClientInfo key={client.id} client={client} />;
-    });
+      ? clientsData.map((client, index) => (
+          <ClientInfo key={client.id} client={client} />
+        ))
+      : clientsData
+          .filter((client) => {
+            if (
+              client.commercial_name
+                .toLowerCase()
+                .includes(search.toLowerCase())
+            ) {
+              return client;
+            }
+          })
+          .map((client, key) => {
+            return <ClientInfo key={client.id} client={client} />;
+          });
     return render;
   };
+
   const leadRender = () => {
     const render = !search
       ? leadsData.map((client, index) => (
@@ -40,9 +40,7 @@ function List() {
         ))
       : leadsData
           .filter((client) => {
-            if (search === "") {
-              return client;
-            } else if (
+            if (
               client.commercial_name
                 .toLowerCase()
                 .includes(search.toLowerCase())
