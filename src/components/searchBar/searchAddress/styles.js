@@ -7,9 +7,14 @@ export const useStyles = makeStyles((theme) => ({
     width: "100%",
     background: "#FFFF",
   },
-  icon: {
-    position: "end",
-    color: "red",
+  input: {
+    display: "flex",
+    height: "50px",
+    width: "90%",
+    background: "#FFFF",
+  },
+  clearIcon: {
+    
   },
   suggestionDiv:{
     marginTop: 10,
@@ -35,39 +40,5 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     marginBottom: 50,
   },
-  bar: {
-    top: 5,
-    zIndex: 1,
-    position: "fixed",
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-    width: "50%",
-    [theme.breakpoints.up("xs")]: {
-      width: "90%",
-    },
-    [theme.breakpoints.up("sm")]: {
-      width: "50%",
-    },
-    [theme.breakpoints.up("md")]: {
-      width: "50%",
-    },
-    [theme.breakpoints.up("lg")]: {
-      width: "30%",
-    },
-  },
-  alert: {
-    background: "#00AB63",
-    fontWeight: 700,
-    color: "#FFFF",
-    fontSize: 17,
-    borderRadius: "5px",
-    display: "flex",
-    alignItems: "first baseline",
-    justifyContent: "center",
-    textAlign: "center",
-    position: "center",
-    marginTop: 25,
-    padding: 5,
-  },
+  
 }));

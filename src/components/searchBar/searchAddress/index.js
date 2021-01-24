@@ -4,17 +4,20 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 import { useClienteData } from "../../../store/Clients";
+import { InitialLo } from "../../../store/Clients";
 import { useLocation } from "react-router-dom";
 import { useStyles } from "./styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
+import CloseIcon from '@material-ui/icons/Close';
 
-function SearchBarAddres() {
+
+function SearchBarAddress() {
   let location = useLocation();
   const classes = useStyles();
-  const { screen, dispatchScreen } = useClienteData();
+  const { screen, dispatchScreen, setLocalization } = useClienteData();
   const [address, setAddress] = React.useState("");
   const [coordinates, setCoordinates] = React.useState({
     lat: null,
@@ -26,6 +29,7 @@ function SearchBarAddres() {
     const latLng = await getLatLng(results[0]);
     setAddress(value);
     setCoordinates(latLng);
+    setLocalization({ lat: latLng.lat, lng: latLng.lng, zoom: 20 });
   };
 
   return (
@@ -37,15 +41,18 @@ function SearchBarAddres() {
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div>
           <Paper component="form" className={classes.root}>
-            <IconButton className={classes.iconButton} aria-label="menu">
+            <IconButton className={classes.iconButton} >
               <SearchIcon />
             </IconButton>
             <InputBase
               {...getInputProps()}
               className={classes.input}
-              placeholder="Endereço"
+              placeholder="Procurar endereço"
               inputProps={{ "aria-label": "search google maps" }}
             />
+            <IconButton className={classes.clearIcon}>
+              <CloseIcon onClick={() => {setAddress('')}} />
+            </IconButton>
           </Paper>
           <div className={classes.suggestionDiv}>
             {loading ? <div>Carregando...</div> : null}
@@ -66,12 +73,10 @@ function SearchBarAddres() {
               );
             })}
           </div>
-          <p>Latitude: {coordinates.lat}</p>
-          <p>Longitude: {coordinates.lng}</p>
         </div>
       )}
     </PlacesAutocomplete>
   );
 }
 
-export default SearchBarAddres;
+export default SearchBarAddress;
