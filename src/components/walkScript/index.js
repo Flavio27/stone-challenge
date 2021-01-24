@@ -13,14 +13,18 @@ import Divider from "@material-ui/core/Divider";
 
 export default function SelectCostumer() {
   const classes = useStyles();
-  const { clientsData, leadsData } = useClienteData();
+  const { clientsData, leadsData, screen, dispatchScreen } = useClienteData();
   const leadList = leadsData.filter((cliente) => cliente.client_id === "");
   const [outList, setOutList] = useState([]);
   const [IntList, setInList] = useState([]);
   const [menu, setMenu] = useState({ clients: true, list: false });
+  let search = screen.searchBar.script.value;
+
   useEffect(() => {
     setOutList([...leadList, ...clientsData]);
   }, [clientsData, leadsData]);
+
+
 
   const mainMenu = (type) => {
     if (type === "clients") setMenu({ clients: true, list: false });
@@ -41,6 +45,74 @@ export default function SelectCostumer() {
     console.log(IntList);
   };
 
+  useEffect(() => {
+    dispatchScreen({
+      type: 'SCRIPT_LIST',
+      payload: IntList,
+    })
+    
+  }, [IntList])
+
+  console.log(screen.script.filtredList)
+
+  const renderList = (type) => {
+    let render = !search ? type.map((client) => renderContent(client, type)) :
+    type.filter((client) => {
+      if (
+        client.commercial_name
+          .toLowerCase()
+          .includes(search.toLowerCase())
+      ) {
+        return client;
+      }
+    })
+    .map((client, key) => {
+      return renderContent(client, type);
+    });
+    return render;
+  };
+
+  const renderContent = (client, type) => {
+    return (
+      <>
+        <Paper key={client.id} elevation={1} className={classes.card}>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <StoreIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary={client.commercial_name}
+              secondary={client.address.street}
+            />
+            {type === outList ? (
+              <Button
+                onClick={() => {
+                  removeOutList(client);
+                }}
+                size="small"
+                className={classes.buttonAdd}
+              >
+                ADD
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  removeIntList(client);
+                }}
+                size="small"
+                className={classes.buttonRemove}
+              >
+                Remover
+              </Button>
+            )}
+          </ListItem>
+        </Paper>
+      </>
+    );
+  };
+
   return (
     <>
       <div className={classes.buttons}>
@@ -51,7 +123,7 @@ export default function SelectCostumer() {
           size="large"
           style={{ marginRight: 50 }}
         >
-          Clientes
+          Todos
         </Button>
         <Divider orientation="vertical" flexItem />
         <Button
@@ -66,62 +138,12 @@ export default function SelectCostumer() {
       </div>
       {menu.clients && (
         <div className={classes.main}>
-          <List className={classes.root}>
-            {outList.map((client) => (
-              <Paper key={client.id} elevation={1} className={classes.card}>
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <StoreIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={client.commercial_name}
-                    secondary={client.address.street}
-                  />
-                  <Button
-                    onClick={() => {
-                      removeOutList(client);
-                    }}
-                    size="small"
-                    className={classes.buttonAdd}
-                  >
-                    ADD
-                  </Button>
-                </ListItem>
-              </Paper>
-            ))}
-          </List>
+          <List className={classes.root}>{renderList(outList)}</List>
         </div>
       )}
       {menu.list && (
         <div className={classes.main}>
-          <List className={classes.root}>
-            {IntList.map((client) => (
-              <Paper key={client.id} elevation={1} className={classes.card}>
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <StoreIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={client.commercial_name}
-                    secondary={client.address.street}
-                  />
-                  <Button
-                    onClick={() => {
-                      removeIntList(client);
-                    }}
-                    size="small"
-                    className={classes.buttonRemove}
-                  >
-                    Remover
-                  </Button>
-                </ListItem>
-              </Paper>
-            ))}
-          </List>
+          <List className={classes.root}>{renderList(IntList)}</List>
         </div>
       )}
     </>

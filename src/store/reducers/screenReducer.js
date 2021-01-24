@@ -65,6 +65,11 @@ export const screenReducer = (state, action) => {
       const searchValueScript = { ...state };
       searchValueScript.searchBar.script.value = action.payload;
       return searchValueScript;
+     // Array of clients of scriptWalk
+    case "SCRIPT_LIST":
+      const scriptList = { ...state };
+      scriptList.script.filtredList = action.payload;
+      return scriptList;
     default:
       return state;
   }

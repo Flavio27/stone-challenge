@@ -45,7 +45,9 @@ export const INITIAL_SCREENS = {
     filterBar: true,
     clientPin: false,
   },
-  script: false,
+  script: {
+    filtredList: [],
+  },
   more: false,
   filter: {
     clients: false,
@@ -72,7 +74,7 @@ export const INITIAL_SCREENS = {
     },
     script: {
       value: false,
-      filtredList: false,
+      filtredList: [],
     },
     map: {
       filtredList: false,

@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme) => ({
     width: "90%",
     alignContent: "center",
     justifyContent: "center",
-    overflowY: "scroll",
+   
   },
   card: {
     marginLeft: 12,
