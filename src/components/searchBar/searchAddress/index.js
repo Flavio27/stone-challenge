@@ -1,23 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
 import { useClienteData } from "../../../store/Clients";
-import { InitialLo } from "../../../store/Clients";
 import { useLocation } from "react-router-dom";
 import { useStyles } from "./styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import CloseIcon from '@material-ui/icons/Close';
-
+import CloseIcon from "@material-ui/icons/Close";
 
 function SearchBarAddress() {
   let location = useLocation();
   const classes = useStyles();
-  const { screen, dispatchScreen, setLocalization } = useClienteData();
+  const { setLocalization } = useClienteData();
   const [address, setAddress] = React.useState("");
   const [coordinates, setCoordinates] = React.useState({
     lat: null,
@@ -41,7 +39,7 @@ function SearchBarAddress() {
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div>
           <Paper component="form" className={classes.root}>
-            <IconButton className={classes.iconButton} >
+            <IconButton className={classes.iconButton}>
               <SearchIcon />
             </IconButton>
             <InputBase
@@ -51,7 +49,11 @@ function SearchBarAddress() {
               inputProps={{ "aria-label": "search google maps" }}
             />
             <IconButton className={classes.clearIcon}>
-              <CloseIcon onClick={() => {setAddress('')}} />
+              <CloseIcon
+                onClick={() => {
+                  setAddress("");
+                }}
+              />
             </IconButton>
           </Paper>
           <div className={classes.suggestionDiv}>

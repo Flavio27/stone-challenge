@@ -142,7 +142,7 @@ function Map() {
         {screen.filter.script &&
           walkScriptData[0].allScript.map(
             (clientPin, index) =>
-              clientPin.client_id === "" && (
+              
                 <Pin
                   key={clientPin.id}
                   type={"script"}
@@ -151,7 +151,7 @@ function Map() {
                   lng={clientPin.address.lng}
                   info={clientPin}
                 />
-              )
+              
           )}
       </GoogleMapReact>
     </div>

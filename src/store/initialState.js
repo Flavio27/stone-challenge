@@ -69,9 +69,11 @@ export const INITIAL_SCREENS = {
     clickOut: false,
   },
   alert: {
+    status: false,
     delet: false,
     edit: false,
     signup: false,
+    script: false,
   },
   searchBar: {
     active: false,

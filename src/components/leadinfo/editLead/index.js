@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useClienteData } from "../../../store/Clients";
 import useFormik from "./formik";
-import uniqid from "uniqid";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import Fab from "@material-ui/core/Fab";

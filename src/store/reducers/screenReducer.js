@@ -41,19 +41,27 @@ export const screenReducer = (state, action) => {
       const activeFunnel = { ...state };
       activeFunnel.funnel = action.payload;
       return activeFunnel;
-    // Alerts for register, edit or delet
+    // Alerts for register, edit, delet or save
     case "ACTIVE_ALERT_SIGNUP":
       const activeAlertSignup = { ...state };
       activeAlertSignup.alert.signup = action.payload;
+      activeAlertSignup.alert.status = action.payload;
       return activeAlertSignup;
     case "ACTIVE_ALERT_EDIT":
       const activeAlertEdit = { ...state };
       activeAlertEdit.alert.edit = action.payload;
+      activeAlertEdit.alert.status = action.payload;
       return activeAlertEdit;
     case "ACTIVE_ALERT_DELET":
       const activeAlertDelet = { ...state };
       activeAlertDelet.alert.delet = action.payload;
+      activeAlertDelet.alert.status = action.payload;
       return activeAlertDelet;
+    case "ACTIVE_ALERT_SAVE":
+      const activeAlertSave = { ...state };
+      activeAlertSave.alert.script = action.payload;
+      activeAlertSave.alert.status = action.payload;
+      return activeAlertSave;
     // When focus/blur a search bar
     case "ACTIVE_SEARCH":
       const activeSearch = { ...state };

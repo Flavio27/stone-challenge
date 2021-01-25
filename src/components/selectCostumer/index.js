@@ -63,8 +63,7 @@ function SelectCostumer({ client, lead }) {
           <Tab label="Clientes" {...a11yProps(1)} className={classes.tab} />
         </Tabs>
       </div>
-      {screen.alert.edit && <Alert msg={"edit"} />}
-      {screen.alert.delet && <Alert msg={"delet"} />}
+      {screen.alert.status && <Alert/>}
       <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}

@@ -11,21 +11,29 @@ import StoreIcon from "@material-ui/icons/Store";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
 import SaveIcon from "@material-ui/icons/Save";
-import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
-import ListIcon from '@material-ui/icons/List';
+import DirectionsWalkIcon from "@material-ui/icons/DirectionsWalk";
+import ListIcon from "@material-ui/icons/List";
 
 export default function SelectCostumer() {
   const classes = useStyles();
-  const { clientsData, leadsData, screen, dispatchScreen, walkScriptData, setWalScript} = useClienteData();
+  const {
+    clientsData,
+    leadsData,
+    screen,
+    dispatchScreen,
+    walkScriptData,
+    setWalScript,
+  } = useClienteData();
   const leadList = leadsData.filter((cliente) => cliente.client_id === "");
   const [outList, setOutList] = useState([]);
-  const [IntList, setInList] = useState(walkScriptData[0].allScript);
+  const [IntList, setInList] = useState([]);
   const [menu, setMenu] = useState({ clients: true, list: false });
   let search = screen.searchBar.script.value;
 
   useEffect(() => {
     setOutList([...leadList, ...clientsData]);
-  }, [clientsData, leadsData]);
+    setInList(walkScriptData[0].allScript);
+  }, [walkScriptData, clientsData]);
 
   const mainMenu = (type) => {
     if (type === "clients") setMenu({ clients: true, list: false });
@@ -66,24 +74,29 @@ export default function SelectCostumer() {
         "Access-Control-Allow-Methods": "PATCH",
         mode: "cors",
       },
-      body: JSON.stringify({allScript: IntList}),
+      body: JSON.stringify({ allScript: IntList }),
     });
-    if (newScript.ok){
+    if (newScript.ok) {
       const responseScript = await fetch("http://localhost:3001/script");
       const dataScript = await responseScript.json();
       setWalScript(dataScript);
-      console.log(walkScriptData[0].allScript)
+      dispatchScreen({
+        type: "ACTIVE_ALERT_SAVE",
+        payload: true,
+      });
     }
   };
 
-
   const saveScript = () => {
-    newScript()
-  }
+    newScript();
+  };
 
   const renderList = (type) => {
     let render = !search
-      ? type.map((client) => renderContent(client, type))
+      ? type.map(
+          (client) =>
+            client.commercial_name !== "" && renderContent(client, type)
+        )
       : type
           .filter((client) => {
             if (

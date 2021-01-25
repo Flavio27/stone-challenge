@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState }  from 'react'
 import Alert from '../../components/alert'
 import SearchBar from '../../components/searchBar'
 import BottomAppBar from '../../components/bottomAppBar'
@@ -12,13 +12,12 @@ import { useClienteData} from '../../store/Clients'
 function Home() {
   const { screen } = useClienteData();
 
+
   return (
     <div>
       <SearchBar/>
       <Map/>
-      {screen.alert.signup && <Alert msg={'signUp'}/>}
-      {screen.alert.edit && <Alert msg={'edit'}/>}
-      {screen.alert.delet && <Alert msg={'delet'} />}
+      {screen.alert.status && <Alert/>}
       {screen.funnel && <Modal type={'filter'} children={<Filter/>}/>}
       {screen.newLead.screen && <Modal type={'newLead'} children={<NewLead/> }/>} 
       {!screen.newLead.clickOn && <PintFilterBar/>}

@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useClienteData } from "../../store/Clients";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 
-export default function Alert({ msg }) {
-  const { screen, dispatchScreen } = useClienteData();
-  let textMsg = "";
+export default function Alert() {
+  const { dispatchScreen, screen } = useClienteData();
+
   const handleClose = () => {
     dispatchScreen({
       type: "ACTIVE_ALERT_SIGNUP",
@@ -20,11 +20,11 @@ export default function Alert({ msg }) {
       type: "ACTIVE_ALERT_DELET",
       payload: false,
     });
+    dispatchScreen({
+      type: "ACTIVE_ALERT_SAVE",
+      payload: false,
+    });
   };
-
-  if (msg === "signUp") textMsg = "Cadastro Feito com sucesso!";
-  if (msg === "edit") textMsg = "Editado com sucesso!";
-  if (msg === "delet") textMsg = "Excluido com sucesso!";
 
   return (
     <Snackbar
@@ -36,7 +36,12 @@ export default function Alert({ msg }) {
       open={true}
       autoHideDuration={3000}
       onClose={handleClose}
-      message={textMsg}
+      message={
+        (screen.alert.signup && "Cadastro Feito com sucesso!") ||
+        (screen.alert.edit && "Alterado com sucesso!") ||
+        (screen.alert.delet && "Excluido com sucesso!") ||
+        (screen.alert.script && "Roteiro salvo com sucesso!")
+      }
       action={
         <React.Fragment>
           <IconButton
