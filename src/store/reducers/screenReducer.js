@@ -3,14 +3,18 @@ export const screenReducer = (state, action) => {
     case "START":
       return action.payload;
     //FilterPinBar
+    case "ACTIVE_FILTER_PIN_SCRIPT":
+      const activeScriptPin = { ...state };
+      activeScriptPin.filter.script = action.payload;
+      return activeScriptPin;
+    case "ACTIVE_FILTER_PIN_LEAD":
+      const activeLeadPin = { ...state };
+      activeLeadPin.filter.leads = action.payload;
+      return activeLeadPin;
     case "ACTIVE_FILTER_PIN_CLIENT":
       const activeClientPin = { ...state };
       activeClientPin.filter.clients = action.payload;
       return activeClientPin;
-    case "ACTIVE_FILTER_PIN_LEAD":
-      const activeLeadPind = { ...state };
-      activeLeadPind.filter.leads = action.payload;
-      return activeLeadPind;
     // At click to add a new lead
     case "ACTIVE_CLICK_ON":
       const activeClickOn = { ...state };

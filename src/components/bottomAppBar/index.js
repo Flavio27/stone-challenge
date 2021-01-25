@@ -9,6 +9,7 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import MapIcon from "@material-ui/icons/Map";
 import EventIcon from "@material-ui/icons/Event";
+import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import { Link } from "react-router-dom";
 import { history } from "../../config/history";
 import { useStyles } from "./styles";
@@ -76,7 +77,7 @@ export default function BottomAppBar() {
             className={classes.item}
             onClick={goToScript}
           >
-            <EventIcon />
+            <DirectionsWalkIcon />
             <div className={classes.info}>
               <Typography className={classes.info}>Roteiro</Typography>
             </div>

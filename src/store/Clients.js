@@ -10,6 +10,7 @@ import {
   INITIAL_LEADS,
   INITIAL_SCREENS,
   INITIAL_FILTER,
+  INITIAL_SCRIPT,
 } from "./initialState";
 import { INITIAL_LOCATION } from "./initialState";
 import { clientReducer } from "./reducers/clientReducer";
@@ -27,9 +28,10 @@ export default function Clients({ children }) {
   const [leadsData, dispatchLead] = useReducer(leadReducer, INITIAL_LEADS);
   const [screen, dispatchScreen] = useReducer(screenReducer, INITIAL_SCREENS);
   const [filter, setFilter] = useState(INITIAL_FILTER);
+  const [walkScriptData, setWalScript] = useState(INITIAL_SCRIPT);
 
   useEffect((async) => {
-    async function getClients() {
+    async function getFistInformation() {
       const responseClients = await fetch("http://localhost:3001/clients");
       const dataClient = await responseClients.json();
       dispatch({ type: "ADD_CLIENT", payload: dataClient });
@@ -37,8 +39,12 @@ export default function Clients({ children }) {
       const responseLeads = await fetch("http://localhost:3001/leads");
       const dataLead = await responseLeads.json();
       dispatchLead({ type: "ADD_LEAD", payload: dataLead });
+
+      const responseScript = await fetch("http://localhost:3001/script");
+      const dataScript = await responseScript.json();
+      setWalScript(dataScript);
     }
-    getClients();
+    getFistInformation();
   }, []);
 
   return (
@@ -54,6 +60,8 @@ export default function Clients({ children }) {
         dispatchLead,
         screen,
         dispatchScreen,
+        walkScriptData,
+        setWalScript,
       }}
     >
       {children}
@@ -76,6 +84,8 @@ export function useClienteData() {
     setLocalization,
     leadsData,
     dispatchLead,
+    walkScriptData,
+    setWalScript,
   } = clientContext;
   return {
     filter,
@@ -88,5 +98,7 @@ export function useClienteData() {
     setLocalization,
     leadsData,
     dispatchLead,
+    walkScriptData,
+    setWalScript,
   };
 }

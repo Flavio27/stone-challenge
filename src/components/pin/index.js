@@ -9,17 +9,17 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import NotListedLocationIcon from "@material-ui/icons/NotListedLocation";
+import DirectionsWalkIcon from "@material-ui/icons/DirectionsWalk";
 import EditLocationIcon from "@material-ui/icons/EditLocation";
 import { useStyles } from "./styles";
 
-function Pin({ info, type }) {
+function Pin({ info, type, number }) {
   const classes = useStyles();
   const { screen } = useClienteData();
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
-    if(!screen.newLead.clickOn)
-    setOpen(true);
+    if (!screen.newLead.clickOn) setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
@@ -29,7 +29,7 @@ function Pin({ info, type }) {
     <div>
       <div onClick={handleClickOpen} className={classes.divPin}>
         <Typography className={classes.name}>
-          {info && info.commercial_name}
+          {info && type !== "script" && info.commercial_name}
         </Typography>
         {type === "lead" && (
           <NotListedLocationIcon
@@ -42,6 +42,18 @@ function Pin({ info, type }) {
         )}
         {type === "newLead" && (
           <EditLocationIcon fontSize="large" style={{ color: "#757575" }} />
+        )}
+        {type === "script" && (
+          <>
+          <DirectionsWalkIcon style={{ color: "#013a83" }}/>
+          <div fontSize="large" className={classes.scriptDiv}>
+            <h2>{number+1}º</h2>
+          </div>
+          <Typography>
+            {info.commercial_name}
+          </Typography>
+          
+          </>
         )}
       </div>
       <Dialog

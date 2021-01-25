@@ -36,6 +36,13 @@ export const INITIAL_LEADS = [
   },
 ];
 
+export const INITIAL_SCRIPT = [
+  {
+    id: "scripts",
+    allScript:[]
+  },
+];
+
 export const INITIAL_SCREENS = {
   funnel: false,
   list: false,
@@ -50,9 +57,9 @@ export const INITIAL_SCREENS = {
   },
   more: false,
   filter: {
-    clients: false,
+    script: false,
     leads: false,
-    qualifications: false,
+    clients: false,
   },
   newLead: {
     screen: false,

@@ -10,21 +10,22 @@ import Paper from "@material-ui/core/Paper";
 import StoreIcon from "@material-ui/icons/Store";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
+import SaveIcon from "@material-ui/icons/Save";
+import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
+import ListIcon from '@material-ui/icons/List';
 
 export default function SelectCostumer() {
   const classes = useStyles();
-  const { clientsData, leadsData, screen, dispatchScreen } = useClienteData();
+  const { clientsData, leadsData, screen, dispatchScreen, walkScriptData, setWalScript} = useClienteData();
   const leadList = leadsData.filter((cliente) => cliente.client_id === "");
   const [outList, setOutList] = useState([]);
-  const [IntList, setInList] = useState([]);
+  const [IntList, setInList] = useState(walkScriptData[0].allScript);
   const [menu, setMenu] = useState({ clients: true, list: false });
   let search = screen.searchBar.script.value;
 
   useEffect(() => {
     setOutList([...leadList, ...clientsData]);
   }, [clientsData, leadsData]);
-
-
 
   const mainMenu = (type) => {
     if (type === "clients") setMenu({ clients: true, list: false });
@@ -47,28 +48,55 @@ export default function SelectCostumer() {
 
   useEffect(() => {
     dispatchScreen({
-      type: 'SCRIPT_LIST',
+      type: "SCRIPT_LIST",
       payload: IntList,
-    })
-    
-  }, [IntList])
+    });
+    // newScript();
+  }, [IntList]);
 
-  console.log(screen.script.filtredList)
+  const newScript = async () => {
+    const newScript = await fetch("http://localhost:3001/script/scripts", {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers":
+          "Origin, X-Requested-With, Content-Type, Accept",
+        "Access-Control-Allow-Methods": "PATCH",
+        mode: "cors",
+      },
+      body: JSON.stringify({allScript: IntList}),
+    });
+    if (newScript.ok){
+      const responseScript = await fetch("http://localhost:3001/script");
+      const dataScript = await responseScript.json();
+      setWalScript(dataScript);
+      console.log(walkScriptData[0].allScript)
+    }
+  };
+
+
+  const saveScript = () => {
+    newScript()
+  }
 
   const renderList = (type) => {
-    let render = !search ? type.map((client) => renderContent(client, type)) :
-    type.filter((client) => {
-      if (
-        client.commercial_name
-          .toLowerCase()
-          .includes(search.toLowerCase())
-      ) {
-        return client;
-      }
-    })
-    .map((client, key) => {
-      return renderContent(client, type);
-    });
+    let render = !search
+      ? type.map((client) => renderContent(client, type))
+      : type
+          .filter((client) => {
+            if (
+              client.commercial_name
+                .toLowerCase()
+                .includes(search.toLowerCase())
+            ) {
+              return client;
+            }
+          })
+          .map((client, key) => {
+            return renderContent(client, type);
+          });
     return render;
   };
 
@@ -117,21 +145,25 @@ export default function SelectCostumer() {
     <>
       <div className={classes.buttons}>
         <Button
+          size="large"
+          style={{ marginRight: 20 }}
+          className={classes.selectButton}
+          startIcon={<ListIcon />}
           onClick={() => {
             mainMenu("clients");
           }}
-          size="large"
-          style={{ marginRight: 50 }}
         >
           Todos
         </Button>
         <Divider orientation="vertical" flexItem />
         <Button
+          size="large"
+          style={{ marginLeft: 20 }}
+          className={classes.selectButton}
+          startIcon={<DirectionsWalkIcon />}
           onClick={() => {
             mainMenu("list");
           }}
-          size="large"
-          style={{ marginLeft: 50 }}
         >
           Roteiro
         </Button>
@@ -143,6 +175,18 @@ export default function SelectCostumer() {
       )}
       {menu.list && (
         <div className={classes.main}>
+          <Button
+            variant="contained"
+            color="none"
+            size="large"
+            className={classes.buttonSave}
+            startIcon={<SaveIcon />}
+            onClick={() => {
+              saveScript();
+            }}
+          >
+            Salvar Roteiro
+          </Button>
           <List className={classes.root}>{renderList(IntList)}</List>
         </div>
       )}

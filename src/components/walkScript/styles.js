@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme) => ({
   main: {
     height: "30%",
+    textAlign: 'center',
   },
   root: {
     display: "flex",
@@ -51,6 +52,24 @@ export const useStyles = makeStyles((theme) => ({
     color: "#757575",
     fontWeight: 700,
   },
+  selectButton: {
+    alignContent: "center",
+    justifyContent: "center",
+    display: "flex",
+    borderRadius: "10px",
+    width: 120,
+    height: 50,
+    size: 'large',
+    margin: "1%",
+    
+    color: "#FFFF",
+    background: "#00AB63",
+    fontWeight: 700,
+    "&:hover": {
+      color: "#ffff",
+      background: "#007a47",
+    },
+  },
   buttonAdd: {
     borderRadius: "10px",
     height: "10%",
@@ -73,6 +92,19 @@ export const useStyles = makeStyles((theme) => ({
     "&:hover": {
       color: "#ffff",
       background: "#b8b8b8",
+    },
+  },
+  buttonSave: {
+    borderRadius: "10px",
+    height: "10%",
+    margin: "0% 3%",
+    marginTop: 50,
+    color: "#757575",
+    fontWeight: 700,
+    background: "#FFFF",
+    "&:hover": {
+      color: "#ffff",
+      background: "#c9c9c9",
     },
   },
 }));

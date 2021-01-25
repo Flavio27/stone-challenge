@@ -17,6 +17,7 @@ function Map() {
     leadsData,
     screen,
     dispatchScreen,
+    walkScriptData
   } = useClienteData();
   const [markers, setMarkers] = useState([]);
 
@@ -132,6 +133,20 @@ function Map() {
                 <Pin
                   key={clientPin.id}
                   type={"lead"}
+                  lat={clientPin.address.lat}
+                  lng={clientPin.address.lng}
+                  info={clientPin}
+                />
+              )
+          )}
+        {screen.filter.script &&
+          walkScriptData[0].allScript.map(
+            (clientPin, index) =>
+              clientPin.client_id === "" && (
+                <Pin
+                  key={clientPin.id}
+                  type={"script"}
+                  number={index}
                   lat={clientPin.address.lat}
                   lng={clientPin.address.lng}
                   info={clientPin}
