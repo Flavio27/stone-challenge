@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { useClienteData } from "../../store/Clients";
 import EditClient from "./editClient";
 import Alert from "../alert";
@@ -133,4 +133,4 @@ function ClientInfo({ client }) {
   );
 }
 
-export default ClientInfo;
+export default memo(ClientInfo);

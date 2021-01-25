@@ -25,15 +25,18 @@ export default function SelectCostumer() {
     setWalScript,
   } = useClienteData();
   const leadList = leadsData.filter((cliente) => cliente.client_id === "");
+  const [listLeads, setListLeads] = useState(leadsData.filter((cliente) => cliente.client_id === ""))
   const [outList, setOutList] = useState([]);
-  const [IntList, setInList] = useState([]);
+  const [IntList, setInList] = useState(walkScriptData[0].allScript);
   const [menu, setMenu] = useState({ clients: true, list: false });
   let search = screen.searchBar.script.value;
 
   useEffect(() => {
-    setOutList([...leadList, ...clientsData]);
     setInList(walkScriptData[0].allScript);
-  }, [walkScriptData, clientsData]);
+
+    setOutList([...leadList, ...clientsData]);
+    console.log(outList)
+  }, [walkScriptData, clientsData, leadsData]);
 
   const mainMenu = (type) => {
     if (type === "clients") setMenu({ clients: true, list: false });
@@ -54,13 +57,7 @@ export default function SelectCostumer() {
     console.log(IntList);
   };
 
-  useEffect(() => {
-    dispatchScreen({
-      type: "SCRIPT_LIST",
-      payload: IntList,
-    });
-    // newScript();
-  }, [IntList]);
+  
 
   const newScript = async () => {
     const newScript = await fetch("http://localhost:3001/script/scripts", {

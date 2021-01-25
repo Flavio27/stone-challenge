@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { useClienteData } from "../../store/Clients";
 import EditLead from "./editLead";
 import Alert from "../alert";
@@ -55,104 +55,105 @@ function LeadInfo({ client }) {
       dispatchLead({ type: "ADD_LEAD", payload: dataLead });
     }
   };
-  
+
   return (
     <>
-    {client.client_id === "" ? 
-      !editLead ? (
-        <div className={classes.main}>
-          <Card className={classes.root}>
-            <div className={classes.head}>
-              <Typography className={classes.title}>
-                {client.commercial_name}
-              </Typography>
-              <Link to={"./"}>
-                <Fab className={classes.pin} onClick={goToCordenates}>
-                  <RoomIcon />
-                </Fab>
-              </Link>
-            </div>
-            <div className={classes.firstComponent}>
-              <Typography className={classes.pos}>
-                <strong>({client.business_type})</strong>
-                <br />
-                {client.address && client.address.street}
-              </Typography>
-              <Typography className={classes.status}>
-                <CachedIcon className={classes.icons} />
-                <strong>Status da negociação</strong>
-                <br />
-                {client.negotiation_status ? client.negotiation_status : "-"}
-              </Typography>
-              <Typography className={classes.status}>
-                <CalendarTodayIcon className={classes.icons} />
-                <strong>Ultima visita</strong>
-                <br />
-                {client.last_visit ? client.last_visit : "-"}
-              </Typography>
-              <Typography className={classes.status}>
-                <>
-                  <CalendarTodayIcon className={classes.icons} />
-                  <strong>Visita hoje</strong>
+      {client.client_id === "" ? (
+        !editLead ? (
+          <div className={classes.main}>
+            <Card className={classes.root}>
+              <div className={classes.head}>
+                <Typography className={classes.title}>
+                  {client.commercial_name}
+                </Typography>
+                <Link to={"./"}>
+                  <Fab className={classes.pin} onClick={goToCordenates}>
+                    <RoomIcon />
+                  </Fab>
+                </Link>
+              </div>
+              <div className={classes.firstComponent}>
+                <Typography className={classes.pos}>
+                  <strong>({client.business_type})</strong>
                   <br />
-                  {client.visit_today ? "Sim" : "Não"}
-                </>
-              </Typography>
-            </div>
-            <div className={classes.secondComponent}>
-              <Typography className={classes.status}>
-                <TrendingUpIcon className={classes.icons} />
-                <strong>TPV</strong>
-                <br />
-                {client.tpv ? client.tpv : "-"}
-              </Typography>
-              <Typography className={classes.status}>
-                <strong>Qtd. visitas</strong>
-                <br />
-                {client.visit_numbers ? client.visit_numbers : "-"}
-              </Typography>
-            </div>
-            <div className={classes.buttons}>
-              <Fab
-                className={classes.delet}
-                variant="extended"
-                onClick={() => setEditLead(true)}
-              >
-                Editar
-              </Fab>
-              {!client.send_proposal ? (
+                  {client.address && client.address.street}
+                </Typography>
+                <Typography className={classes.status}>
+                  <CachedIcon className={classes.icons} />
+                  <strong>Status da negociação</strong>
+                  <br />
+                  {client.negotiation_status ? client.negotiation_status : "-"}
+                </Typography>
+                <Typography className={classes.status}>
+                  <CalendarTodayIcon className={classes.icons} />
+                  <strong>Ultima visita</strong>
+                  <br />
+                  {client.last_visit ? client.last_visit : "-"}
+                </Typography>
+                <Typography className={classes.status}>
+                  <>
+                    <CalendarTodayIcon className={classes.icons} />
+                    <strong>Visita hoje</strong>
+                    <br />
+                    {client.visit_today ? "Sim" : "Não"}
+                  </>
+                </Typography>
+              </div>
+              <div className={classes.secondComponent}>
+                <Typography className={classes.status}>
+                  <TrendingUpIcon className={classes.icons} />
+                  <strong>TPV</strong>
+                  <br />
+                  {client.tpv ? client.tpv : "-"}
+                </Typography>
+                <Typography className={classes.status}>
+                  <strong>Qtd. visitas</strong>
+                  <br />
+                  {client.visit_numbers ? client.visit_numbers : "-"}
+                </Typography>
+              </div>
+              <div className={classes.buttons}>
                 <Fab
-                  className={classes.newTask}
+                  className={classes.delet}
                   variant="extended"
-                  onClick={() => {
-                    sendPoposal(true);
-                  }}
+                  onClick={() => setEditLead(true)}
                 >
-                  Enviar Proposta
+                  Editar
                 </Fab>
-              ) : (
-                <>
+                {!client.send_proposal ? (
                   <Fab
-                    className={classes.cancelTask}
+                    className={classes.newTask}
                     variant="extended"
                     onClick={() => {
-                      sendPoposal(false);
+                      sendPoposal(true);
                     }}
                   >
-                    Retirar Proposta
+                    Enviar Proposta
                   </Fab>
-                </>
-              )}
-            </div>
-          </Card>
-        </div>
+                ) : (
+                  <>
+                    <Fab
+                      className={classes.cancelTask}
+                      variant="extended"
+                      onClick={() => {
+                        sendPoposal(false);
+                      }}
+                    >
+                      Retirar Proposta
+                    </Fab>
+                  </>
+                )}
+              </div>
+            </Card>
+          </div>
+        ) : (
+          <EditLead info={client} back={verifyCancel} />
+        )
       ) : (
-        <EditLead info={client} back={verifyCancel} />
-      ) : ''}
-      
+        ""
+      )}
     </>
-  )
-
+  );
 }
 
-export default LeadInfo;
+export default memo(LeadInfo);

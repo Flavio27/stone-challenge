@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-export default function useFormik({
-  initialValues,
-  validate
-}) {
+export default function useFormik({ initialValues, validate }) {
   const [touched, setTouchedFields] = useState({});
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialValues);
@@ -13,28 +10,41 @@ export default function useFormik({
   }, [values]);
 
   function handleChange(event) {
-    const fieldName = event.target.getAttribute('name');
+    const fieldName = event.target.getAttribute("name");
     const { value } = event.target;
-    if (fieldName === 'visit_today') {
+    setValues({
+      ...values,
+      [fieldName]: value,
+    });
+
+    if (fieldName === "visit_today") {
       setValues({
         ...values,
-        [fieldName]: values.visit_today ? false : true
-      })
-    } else {
-      setValues({
-        ...values,
-        [fieldName]: value,
+        [fieldName]: values.visit_today ? false : true,
       });
     }
 
+    if (fieldName === "tpv") {
+      setValues({
+        ...values,
+        [fieldName]: parseFloat(value),
+      });
+    }
+
+    if (fieldName === "business_type") {
+      setValues({
+        ...values,
+        [fieldName]: value.toLowerCase(),
+      });
+    }
   }
 
   function handleBlur(event) {
-    const fieldName = event.target.getAttribute('name');
+    const fieldName = event.target.getAttribute("name");
     setTouchedFields({
       ...touched,
       [fieldName]: true,
-    })
+    });
   }
 
   function validateValues(values) {

@@ -93,9 +93,9 @@ export const INITIAL_SCREENS = {
 
 export const INITIAL_FILTER = [
   {
-    lead: "",
-    establishment: "",
-    tpv: "",
+    lead: false,
+    establishment: false,
+    tpv: false,
   },
 ];
 

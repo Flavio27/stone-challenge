@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo} from "react";
 import { useClienteData } from "../../store/Clients";
 import { useLocation } from "react-router-dom";
 import { useStyles } from "./styles";
@@ -59,4 +59,4 @@ function SearchBarApp() {
   );
 }
 
-export default SearchBarApp;
+export default memo(SearchBarApp);

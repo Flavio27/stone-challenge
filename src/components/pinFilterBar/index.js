@@ -21,7 +21,8 @@ function PinFilterBar() {
   } = useClienteData();
   const [activeLeads, setActiveLeads] = useState(0);
   const classes = useStyles();
-
+  let numberLeads = leadsData.filter(e => e.client_id === "" )
+  
   const newLead = () => {
     dispatchScreen({
       type: "PUSH_ADDRESS",
@@ -74,6 +75,7 @@ function PinFilterBar() {
     
   };
 
+  
 
 
   return (
@@ -98,7 +100,7 @@ function PinFilterBar() {
               </div>
             </div>
             <div className={classes.item} onClick={filterLeads}>
-              <Badge badgeContent={leadsData.length} color="secondary">
+              <Badge badgeContent={numberLeads.length} color="secondary">
                 <NotListedLocationIcon style={{ color: "#c66b2f" }} />
               </Badge>
               <div className={classes.info}>

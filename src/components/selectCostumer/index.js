@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useClienteData } from "../../store/Clients";
+import { useLocation } from "react-router-dom";
 import Alert from "../alert";
 import SwipeableViews from "react-swipeable-views";
 import Tabs from "@material-ui/core/Tabs";
@@ -38,6 +39,8 @@ function SelectCostumer({ client, lead }) {
   const theme = useTheme();
   const [value, setValue] = useState(0);
   const { screen } = useClienteData();
+  let location = useLocation();
+  
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -69,6 +72,7 @@ function SelectCostumer({ client, lead }) {
         index={value}
         onChangeIndex={handleChangeIndex}
       >
+        
         <TabPanel value={value} index={0} dir={theme.direction}>
           {lead}
         </TabPanel>

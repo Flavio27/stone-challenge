@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SP_POLYNE, SELLER_POLO } from "./polynes";
+import { WORLD_POLYNE, SELLER_POLO } from "./polynes";
 import { useClienteData } from "../../store/Clients";
 import GoogleMapReact from "google-map-react";
 import Pin from "../pin";
@@ -23,7 +23,7 @@ function Map() {
 
   const handleApiLoaded = (map, maps) => {
     const SELLER_POLE = new maps.Polygon({
-      paths: [SELLER_POLO, SP_POLYNE],
+      paths: [SELLER_POLO, WORLD_POLYNE],
       strokeColor: "#C5E8C5",
       strokeOpacity: 1,
       strokeWeight: 10,

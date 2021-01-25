@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import { useClienteData } from "../../store/Clients";
 import { INITIAL_LOCATION } from "../../store/initialState";
 import AppBar from "@material-ui/core/AppBar";
@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import { history } from "../../config/history";
 import { useStyles } from "./styles";
 
-export default function BottomAppBar() {
+ function BottomAppBar() {
   const { screen, dispatchScreen, setLocalization } = useClienteData();
   const classes = useStyles();
 
@@ -93,3 +93,5 @@ export default function BottomAppBar() {
     </React.Fragment>
   );
 }
+
+export default memo(BottomAppBar)

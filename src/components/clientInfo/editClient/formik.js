@@ -12,15 +12,35 @@ export default function useFormik({ initialValues, validate }) {
   function handleChange(event) {
     const fieldName = event.target.getAttribute("name");
     const { value } = event.target;
+    setValues({
+      ...values,
+      [fieldName]: value,
+    });
+
     if (fieldName === "visit_today") {
       setValues({
         ...values,
         [fieldName]: values.visit_today ? false : true,
       });
-    } else {
+    }
+
+    if (fieldName === "tpv") {
       setValues({
         ...values,
-        [fieldName]: value,
+        [fieldName]: parseFloat(value),
+      });
+    }
+    if (fieldName === "percentage_migration") {
+      setValues({
+        ...values,
+        [fieldName]: parseFloat(value),
+      });
+    }
+
+    if (fieldName === "business_type") {
+      setValues({
+        ...values,
+        [fieldName]: value.toLowerCase(),
       });
     }
   }
