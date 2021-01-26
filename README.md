@@ -20,11 +20,8 @@
 * Abra o browser no endereco: http://localhost:3001
 
 * Caso haja algum problema verifique se o arquivo package.json contem o script:
-<br />
 "start": "json-server --watch stonedata.json --port 3001"
-
-
-
+<br />
 Endpoints da API: 
 <br />
 http://localhost:3001/clients
