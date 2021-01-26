@@ -15,6 +15,10 @@ export const screenReducer = (state, action) => {
       const activeClientPin = { ...state };
       activeClientPin.filter.clients = action.payload;
       return activeClientPin;
+    case "ACTIVE_FILTER_PIN_FILTRED":
+      const activeFiltredPin = { ...state };
+      activeFiltredPin.filter.filtred = action.payload;
+      return activeFiltredPin;
     // At click to add a new lead
     case "ACTIVE_CLICK_ON":
       const activeClickOn = { ...state };
@@ -41,6 +45,29 @@ export const screenReducer = (state, action) => {
       const activeFunnel = { ...state };
       activeFunnel.funnel = action.payload;
       return activeFunnel;
+    // Result of filter of funnel of leads
+    case "FUNNEL_FILTRED_LIST_LEAD":
+      const funnelFiltredListLead = { ...state };
+      funnelFiltredListLead.funeListLead = action.payload;
+      return funnelFiltredListLead;
+    // Result of filter of funnel of clients
+    case "FUNNEL_FILTRED_LIST_CLIENT":
+      const funnelFiltredListClient = { ...state };
+      funnelFiltredListClient.funeListClient = action.payload;
+      return funnelFiltredListClient;
+    // Result of filter of funnel of clients and leads
+    case "FUNNEL_FILTRED_ALL":
+      const funnelFiltredAll = { ...state };
+      if (action.payload === "reset") {
+        funnelFiltredAll.AllFiltred = [];
+      } else {
+        funnelFiltredAll.AllFiltred = [
+          ...funnelFiltredAll.AllFiltred,
+          ...action.payload,
+        ];
+      }
+
+      return funnelFiltredAll;
     // Alerts for register, edit, delet or save
     case "ACTIVE_ALERT_SIGNUP":
       const activeAlertSignup = { ...state };
@@ -62,22 +89,27 @@ export const screenReducer = (state, action) => {
       activeAlertSave.alert.script = action.payload;
       activeAlertSave.alert.status = action.payload;
       return activeAlertSave;
+    case "ACTIVE_ALERT_FILTER":
+      const activeAlertFilter = { ...state };
+      activeAlertFilter.alert.filter = action.payload;
+      activeAlertFilter.alert.status = action.payload;
+      return activeAlertFilter;
     // When focus/blur a search bar
     case "ACTIVE_SEARCH":
       const activeSearch = { ...state };
       activeSearch.searchBar.active = action.payload;
       return activeSearch;
-     // Pass value of searchbar from /list
+    // Pass value of searchbar from /list
     case "SEARCH_VALUE_LIST":
       const searchValueList = { ...state };
       searchValueList.searchBar.list.value = action.payload;
       return searchValueList;
-     // Pass value of searchbar from /roteiro
+    // Pass value of searchbar from /roteiro
     case "SEARCH_VALUE_SCRIPT":
       const searchValueScript = { ...state };
       searchValueScript.searchBar.script.value = action.payload;
       return searchValueScript;
-     // Array of clients of scriptWalk
+    // Array of clients of scriptWalk
     case "SCRIPT_LIST":
       const scriptList = { ...state };
       scriptList.script.filtredList = action.payload;

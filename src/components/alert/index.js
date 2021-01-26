@@ -24,6 +24,10 @@ export default function Alert() {
       type: "ACTIVE_ALERT_SAVE",
       payload: false,
     });
+    dispatchScreen({
+      type: "ACTIVE_ALERT_FILTER",
+      payload: false,
+    });
   };
 
   return (
@@ -40,7 +44,11 @@ export default function Alert() {
         (screen.alert.signup && "Cadastro Feito com sucesso!") ||
         (screen.alert.edit && "Alterado com sucesso!") ||
         (screen.alert.delet && "Excluido com sucesso!") ||
-        (screen.alert.script && "Roteiro salvo com sucesso!")
+        (screen.alert.script && "Roteiro salvo com sucesso!") ||
+        (screen.alert.filter &&
+          `${screen.AllFiltred.length} itens ${
+            screen.AllFiltred.length > 1 ? "Encontrados..." : "Encontrado..."
+          }`)
       }
       action={
         <React.Fragment>

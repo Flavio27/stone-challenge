@@ -17,7 +17,7 @@ function Map() {
     leadsData,
     screen,
     dispatchScreen,
-    walkScriptData
+    walkScriptData,
   } = useClienteData();
   const [markers, setMarkers] = useState([]);
 
@@ -91,6 +91,7 @@ function Map() {
       minZoom: 15,
     };
   };
+  let FiltredList = [];
 
   return (
     <div
@@ -140,19 +141,19 @@ function Map() {
               )
           )}
         {screen.filter.script &&
-          walkScriptData[0].allScript.map(
-            (clientPin, index) =>
-              
-                <Pin
-                  key={clientPin.id}
-                  type={"script"}
-                  number={index}
-                  lat={clientPin.address.lat}
-                  lng={clientPin.address.lng}
-                  info={clientPin}
-                />
-              
-          )}
+          walkScriptData[0].allScript.map((clientPin, index) => (
+            <Pin
+              key={clientPin.id}
+              type={"script"}
+              number={index}
+              lat={clientPin.address.lat}
+              lng={clientPin.address.lng}
+              info={clientPin}
+            />
+          ))}
+        {FiltredList.map((clientPin, index) => (
+          <div style={{ width: 50, background: "red" }} />
+        ))}
       </GoogleMapReact>
     </div>
   );

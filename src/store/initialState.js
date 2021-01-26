@@ -45,6 +45,9 @@ export const INITIAL_SCRIPT = [
 
 export const INITIAL_SCREENS = {
   funnel: false,
+  funeListLead: [],
+  funeListClient: [],
+  AllFiltred: [],
   list: false,
   map: {
     searchBar: true,
@@ -60,6 +63,7 @@ export const INITIAL_SCREENS = {
     script: false,
     leads: false,
     clients: false,
+    filtred: false
   },
   newLead: {
     screen: false,
@@ -74,6 +78,7 @@ export const INITIAL_SCREENS = {
     edit: false,
     signup: false,
     script: false,
+    filter: false,
   },
   searchBar: {
     active: false,

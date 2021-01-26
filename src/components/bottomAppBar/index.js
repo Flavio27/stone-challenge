@@ -1,4 +1,4 @@
-import React, {memo} from "react";
+import React, { memo } from "react";
 import { useClienteData } from "../../store/Clients";
 import { INITIAL_LOCATION } from "../../store/initialState";
 import AppBar from "@material-ui/core/AppBar";
@@ -9,12 +9,12 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import MapIcon from "@material-ui/icons/Map";
 import EventIcon from "@material-ui/icons/Event";
-import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
+import DirectionsWalkIcon from "@material-ui/icons/DirectionsWalk";
 import { Link } from "react-router-dom";
 import { history } from "../../config/history";
 import { useStyles } from "./styles";
 
- function BottomAppBar() {
+function BottomAppBar() {
   const { screen, dispatchScreen, setLocalization } = useClienteData();
   const classes = useStyles();
 
@@ -23,6 +23,12 @@ import { useStyles } from "./styles";
       type: "ACTIVE_FUNNEL",
       payload: screen.funnel ? false : true,
     });
+    await dispatchScreen({
+      type: "ACTIVE_ALERT_FILTER",
+      payload: false,
+    });
+
+
   };
   const goToList = () => {
     history.push("/list");
@@ -82,7 +88,12 @@ import { useStyles } from "./styles";
               <Typography className={classes.info}>Roteiro</Typography>
             </div>
           </Link>
-          <div className={classes.item}>
+          <div
+            className={classes.item}
+            onClick={() => {
+              console.log(screen.AllFiltred);
+            }}
+          >
             <MoreIcon />
             <div className={classes.info}>
               <Typography className={classes.info}>Mais</Typography>
@@ -94,4 +105,4 @@ import { useStyles } from "./styles";
   );
 }
 
-export default memo(BottomAppBar)
+export default memo(BottomAppBar);
