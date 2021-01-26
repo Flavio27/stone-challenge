@@ -4,11 +4,10 @@ export const useStyles = makeStyles((theme) => ({
   divPin: {
     cursor: "pointer",
     textALign: "center",
-    transition: 'all .2s ease-in-out',
+    transition: "all .2s ease-in-out",
     "&:hover": {
-      transform: 'scale(1.4)'
+      transform: "scale(1.4)",
     },
-    
   },
   name: {
     color: "#757575",
@@ -28,8 +27,8 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.grey[500],
   },
   scriptDiv: {
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
     background: "rgba(1, 58, 131, 0.60)",
     borderRadius: "50%",
     width: 25,
@@ -37,6 +36,5 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     color: "#FFFF",
     alignItems: "center",
-  }
-
+  },
 }));

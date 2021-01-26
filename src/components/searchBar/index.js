@@ -1,9 +1,9 @@
-import React, { useState, memo} from "react";
+import React, { useState, memo } from "react";
 import { useClienteData } from "../../store/Clients";
 import { useLocation } from "react-router-dom";
 import { useStyles } from "./styles";
 import SearchBar from "material-ui-search-bar";
-import SearchBarAddres from './searchAddress'
+import SearchBarAddres from "./searchAddress";
 
 function SearchBarApp() {
   let location = useLocation();
@@ -18,7 +18,6 @@ function SearchBarApp() {
       dispatchScreen({ type: "SEARCH_VALUE_LIST", payload: value });
     location.pathname === "/roteiro" &&
       dispatchScreen({ type: "SEARCH_VALUE_SCRIPT", payload: value });
-      
   };
   const searchOnBlur = () => {
     dispatchScreen({ type: "ACTIVE_SEARCH", payload: false });
@@ -32,7 +31,7 @@ function SearchBarApp() {
     <div className={classes.main}>
       <div className={classes.bar}>
         {location.pathname === "/" ? (
-          <SearchBarAddres/>
+          <SearchBarAddres />
         ) : (
           <SearchBar
             placeholder="Nome do estabelecimento"

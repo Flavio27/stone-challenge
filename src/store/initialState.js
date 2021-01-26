@@ -39,7 +39,7 @@ export const INITIAL_LEADS = [
 export const INITIAL_SCRIPT = [
   {
     id: "scripts",
-    allScript:[]
+    allScript: [],
   },
 ];
 
@@ -63,7 +63,7 @@ export const INITIAL_SCREENS = {
     script: false,
     leads: false,
     clients: false,
-    filtred: false
+    filtred: false,
   },
   newLead: {
     screen: false,

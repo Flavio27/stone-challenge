@@ -52,7 +52,7 @@ function PinFilterBar() {
     });
     dispatchScreen({
       type: "ACTIVE_FILTER_PIN_FILTRED",
-      payload: false
+      payload: false,
     });
   };
 
@@ -68,7 +68,7 @@ function PinFilterBar() {
     });
     dispatchScreen({
       type: "ACTIVE_FILTER_PIN_FILTRED",
-      payload: false
+      payload: false,
     });
   };
 
@@ -83,14 +83,14 @@ function PinFilterBar() {
     });
     dispatchScreen({
       type: "ACTIVE_FILTER_PIN_FILTRED",
-      payload: false
+      payload: false,
     });
   };
 
   const funnelFiltred = () => {
     dispatchScreen({
       type: "ACTIVE_FILTER_PIN_FILTRED",
-      payload: screen.filter.filtred ? false : true
+      payload: screen.filter.filtred ? false : true,
     });
     dispatchScreen({
       type: "ACTIVE_FILTER_PIN_SCRIPT",

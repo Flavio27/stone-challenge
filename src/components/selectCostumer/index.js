@@ -40,7 +40,6 @@ function SelectCostumer({ client, lead }) {
   const [value, setValue] = useState(0);
   const { screen } = useClienteData();
   let location = useLocation();
-  
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -66,13 +65,12 @@ function SelectCostumer({ client, lead }) {
           <Tab label="Clientes" {...a11yProps(1)} className={classes.tab} />
         </Tabs>
       </div>
-      {screen.alert.status && <Alert/>}
+      {screen.alert.status && <Alert />}
       <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}
         onChangeIndex={handleChangeIndex}
       >
-        
         <TabPanel value={value} index={0} dir={theme.direction}>
           {lead}
         </TabPanel>

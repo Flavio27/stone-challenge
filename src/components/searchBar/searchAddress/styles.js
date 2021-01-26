@@ -13,24 +13,19 @@ export const useStyles = makeStyles((theme) => ({
     width: "90%",
     background: "#FFFF",
   },
-  clearIcon: {
-    
-  },
-  suggestionDiv:{
+  clearIcon: {},
+  suggestionDiv: {
     marginTop: 10,
-
   },
   suggestionActive: {
     backgroundColor: "#00AB63",
-    color: '#FFFF',
+    color: "#FFFF",
     fontWeight: 600,
-    
   },
   suggestionNormal: {
     backgroundColor: "#FFFF",
-    color: '#757575',
+    color: "#757575",
     fontWeight: 600,
-
   },
   main: {
     top: 25,
@@ -40,5 +35,4 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     marginBottom: 50,
   },
-  
 }));

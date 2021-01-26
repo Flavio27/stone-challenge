@@ -160,7 +160,6 @@ function Map() {
               info={clientPin}
             />
           ))}
-     
       </GoogleMapReact>
     </div>
   );

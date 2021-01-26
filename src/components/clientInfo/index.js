@@ -15,11 +15,7 @@ import { Link } from "react-router-dom";
 import { useStyles } from "./styles";
 
 function ClientInfo({ client }) {
-  const {
-    localization,
-    setLocalization,
-    dispatchScreen,
-  } = useClienteData();
+  const { localization, setLocalization, dispatchScreen } = useClienteData();
   const [editClient, setEditClient] = useState(false);
   const classes = useStyles();
 
