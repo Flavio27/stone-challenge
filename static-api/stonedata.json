@@ -1,0 +1,127 @@
+{
+  "clients": [
+    {
+      "commercial_name": "Santo Pão",
+      "business_type": "padaria",
+      "tpv": 18000,
+      "address": {
+        "street": "Praça Almeida Júnior, 19 - Liberdade",
+        "lat": -23.5560374,
+        "lng": -46.6339956
+      },
+      "satisfaction": 95,
+      "last_visit": "05/01/2021",
+      "visit_today": true,
+      "percentage_migration": 4,
+      "id": 1
+    },
+    {
+      "commercial_name": "Mercado SP",
+      "business_type": "marcado",
+      "tpv": 95000,
+      "address": {
+        "street": "R. Mituto Mizumoto, 196 - Sé",
+        "lat": -23.5585502,
+        "lng": -46.6320225
+      },
+      "satisfaction": 45,
+      "last_visit": "19/01/2021",
+      "visit_today": false,
+      "percentage_migration": 3,
+      "id": 2
+    }
+  ],
+  "leads": [
+    {
+      "id": "kkddecn1",
+      "commercial_name": "Paulão Borracharia",
+      "business_type": "borracharia",
+      "tpv": 25000,
+      "address": {
+        "street": "R. dos Estudantes, 438 - Sé",
+        "lat": -23.5553725,
+        "lng": -46.6308493
+      },
+      "visit_numbers": 2,
+      "negotiation_status": "quente",
+      "last_visit": "01/01/2021",
+      "visit_today": false,
+      "send_proposal": false,
+      "client_id": ""
+    },
+    {
+      "id": "kkddf1p6",
+      "commercial_name": "Santo Pão",
+      "business_type": "padaria",
+      "tpv": 18000,
+      "address": {
+        "street": "Praça Almeida Júnior, 19 - Liberdade",
+        "lat": -23.5560374,
+        "lng": -46.6339956
+      },
+      "visit_numbers": 1,
+      "negotiation_status": "",
+      "last_visit": "20/05/2021",
+      "visit_today": true,
+      "send_proposal": false,
+      "client_id": 1
+    },
+    {
+      "id": "kkddfzba",
+      "commercial_name": "Pastelão SP",
+      "business_type": "pastelaria",
+      "tpv": 9000,
+      "address": {
+        "street": "R. Conselheiro Furtado, 38 - Liberdade",
+        "lat": -23.5532477,
+        "lng": -46.6333701
+      },
+      "visit_numbers": 0,
+      "negotiation_status": "fria",
+      "last_visit": "",
+      "visit_today": false,
+      "send_proposal": false,
+      "client_id": ""
+    },
+    {
+      "id": "kkddgvmc",
+      "commercial_name": "Badyear",
+      "business_type": "borracharia",
+      "tpv": 19000,
+      "address": {
+        "street": "R. Silveira Martins, 161 - Sé",
+        "lat": -23.5522362,
+        "lng": -46.6306234
+      },
+      "visit_numbers": 0,
+      "negotiation_status": "quente",
+      "last_visit": "",
+      "visit_today": true,
+      "send_proposal": false,
+      "client_id": ""
+    },
+    {
+      "id": "kkddirrv",
+      "commercial_name": "Mercado SP",
+      "business_type": "marcado",
+      "tpv": 95000,
+      "address": {
+        "street": "R. Mituto Mizumoto, 196 - Sé",
+        "lat": -23.5585502,
+        "lng": -46.6320225
+      },
+      "visit_numbers": 0,
+      "negotiation_status": "",
+      "last_visit": "",
+      "visit_today": false,
+      "send_proposal": false,
+      "client_id": 2
+    }
+  ],
+  "script": [
+    {
+      "id": "scripts",
+      "allScript": []
+    }
+  ]
+}
