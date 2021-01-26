@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useClienteData } from "../../store/Clients";
 import Button from "@material-ui/core/Button";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import InputLabel from "@material-ui/core/InputLabel";
 import HelpIcon from "@material-ui/icons/Help";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import EventIcon from "@material-ui/icons/Event";
 import Typography from "@material-ui/core/Typography";
-import Checkbox from "@material-ui/core/Checkbox";
 import FormControl from "@material-ui/core/FormControl";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import Select from "@material-ui/core/Select";
@@ -17,7 +15,7 @@ import { useStyles } from "./styles";
 
 export default function Filter() {
   const classes = useStyles();
-  const { dispatchScreen, leadsData, clientsData, screen } = useClienteData();
+  const { dispatchScreen, leadsData, clientsData } = useClienteData();
   const [filterForm, setFilterForm] = useState({
     proposal: false,
     type: false,
@@ -45,7 +43,6 @@ export default function Filter() {
       type: "ACTIVE_FUNNEL",
       payload: false,
     });
-    console.log(filterForm);
     getFiltredItensLead();
     if (!filterForm.proposal) {
       getFiltredItensClients();
@@ -58,7 +55,7 @@ export default function Filter() {
 
     dispatchScreen({
       type: "ACTIVE_FILTER_PIN_FILTRED",
-      payload: true
+      payload: true,
     });
     dispatchScreen({
       type: "ACTIVE_FILTER_PIN_SCRIPT",
@@ -72,7 +69,6 @@ export default function Filter() {
       type: "ACTIVE_FILTER_PIN_LEAD",
       payload: false,
     });
-  
   };
 
   const removeEqualType = () => {
@@ -92,7 +88,6 @@ export default function Filter() {
     if (filterForm.type)
       request += `&business_type=${filterForm.type}&client_id=`;
     if (filterForm.tpv) request += `${tpvChosed(filterForm.tpv)}&client_id=`;
-    console.log(request);
     const filtredItens = await fetch(`http://localhost:3001/leads?${request}`);
     const filtredData = await filtredItens.json();
     if (filtredItens.ok) {
@@ -107,8 +102,6 @@ export default function Filter() {
         });
       }
     }
-
-    console.log(filtredData);
     return filtredData;
   };
 
@@ -117,12 +110,10 @@ export default function Filter() {
     if (filterForm.visit) request += `&visit_today=${filterForm.visit}`;
     if (filterForm.type) request += `&business_type=${filterForm.type}`;
     if (filterForm.tpv) request += `${tpvChosed(filterForm.tpv)}`;
-    console.log(request);
     const filtredItens = await fetch(
       `http://localhost:3001/clients?${request}`
     );
     const filtredData = await filtredItens.json();
-    console.log(filtredData);
     if (filtredItens.ok) {
       if (filtredData.length !== 0) {
         dispatchScreen({

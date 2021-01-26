@@ -33,9 +33,7 @@ export default function SelectCostumer() {
 
   useEffect(() => {
     setInList(walkScriptData[0].allScript);
-
     setOutList([...leadList, ...clientsData]);
-    console.log(outList)
   }, [walkScriptData, clientsData, leadsData]);
 
   const mainMenu = (type) => {
@@ -47,14 +45,12 @@ export default function SelectCostumer() {
     setInList([...IntList, e]);
     let idClient = e.id;
     setOutList(outList.filter((e) => e.id !== idClient));
-    console.log(IntList);
   };
 
   const removeIntList = (e) => {
     setOutList([...outList, e]);
     let idClient = e.id;
     setInList(IntList.filter((e) => e.id !== idClient));
-    console.log(IntList);
   };
 
   

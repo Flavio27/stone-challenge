@@ -3,14 +3,12 @@ import { useClienteData } from "../../store/Clients";
 import PersonPinCircleIcon from "@material-ui/icons/PersonPinCircle";
 import ClientInfo from "../clientInfo";
 import LeadInfo from "../leadinfo";
-import NewLead from "../newLead";
 import Dialog from "@material-ui/core/Dialog";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import NotListedLocationIcon from "@material-ui/icons/NotListedLocation";
 import DirectionsWalkIcon from "@material-ui/icons/DirectionsWalk";
-import EditLocationIcon from "@material-ui/icons/EditLocation";
 import { useStyles } from "./styles";
 
 function Pin({ info, type, number }) {
@@ -25,8 +23,8 @@ function Pin({ info, type, number }) {
     setOpen(false);
   };
 
-  const filtredLead = <LeadInfo client={info} />
-  const filtredClient= <ClientInfo client={info} />
+  const filtredLead = <LeadInfo client={info} />;
+  const filtredClient = <ClientInfo client={info} />;
 
   return (
     <div>
@@ -79,7 +77,8 @@ function Pin({ info, type, number }) {
         >
           <CloseIcon />
         </IconButton>
-        {type === "filtred" && info.satisfaction ? filtredClient : filtredLead}
+        {type === "filtred" && info.satisfaction && filtredClient}
+        {type === "filtred" && !info.satisfaction && filtredLead}
         {type === "client" && <ClientInfo client={info} />}
         {type === "lead" && <LeadInfo client={info} />}
       </Dialog>

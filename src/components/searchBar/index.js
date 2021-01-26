@@ -11,7 +11,6 @@ function SearchBarApp() {
   const { screen, dispatchScreen } = useClienteData();
 
   const searchOnFocus = () => {
-    console.log("search ativada");
     dispatchScreen({ type: "ACTIVE_SEARCH", payload: true });
   };
   const onChangeValue = (value) => {
@@ -22,7 +21,6 @@ function SearchBarApp() {
       
   };
   const searchOnBlur = () => {
-    console.log("search desativada");
     dispatchScreen({ type: "ACTIVE_SEARCH", payload: false });
   };
 

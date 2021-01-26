@@ -1,7 +1,6 @@
 import React, { useState, memo } from "react";
 import { useClienteData } from "../../store/Clients";
 import EditClient from "./editClient";
-import Alert from "../alert";
 import Card from "@material-ui/core/Card";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import SentimentSatisfiedAltIcon from "@material-ui/icons/SentimentSatisfiedAlt";
@@ -20,7 +19,6 @@ function ClientInfo({ client }) {
     localization,
     setLocalization,
     dispatchScreen,
-    screen,
   } = useClienteData();
   const [editClient, setEditClient] = useState(false);
   const classes = useStyles();

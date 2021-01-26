@@ -42,7 +42,6 @@ function Input({ type }) {
       (es, i) => allEstablishments.indexOf(es) === i
     );
     setestablishment(filtredEstablishments);
-    console.log(filtredEstablishments);
   };
 
   useEffect(() => {

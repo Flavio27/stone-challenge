@@ -51,7 +51,6 @@ function Map() {
     if (screen.newLead.clickOn) {
       const lt = event.lat;
       const lg = event.lng;
-      console.log("onClick map: ", lt, lg);
       const response = await fetch(`${GET_ADDRES_API}${lt},${lg}&key=${KEY}`);
       const data = await response.json();
       const addresData = await data.results[0].formatted_address;
@@ -65,7 +64,6 @@ function Map() {
         position: positionData,
       };
       setMarkers([{ lat: lt, lng: lg, location: info }]);
-      console.log(markers);
       dispatchScreen({
         type: "PUSH_ADDRESS",
         payload: info,

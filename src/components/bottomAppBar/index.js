@@ -8,7 +8,6 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import MapIcon from "@material-ui/icons/Map";
-import EventIcon from "@material-ui/icons/Event";
 import DirectionsWalkIcon from "@material-ui/icons/DirectionsWalk";
 import { Link } from "react-router-dom";
 import { history } from "../../config/history";
@@ -27,8 +26,6 @@ function BottomAppBar() {
       type: "ACTIVE_ALERT_FILTER",
       payload: false,
     });
-
-
   };
   const goToList = () => {
     history.push("/list");
@@ -88,12 +85,7 @@ function BottomAppBar() {
               <Typography className={classes.info}>Roteiro</Typography>
             </div>
           </Link>
-          <div
-            className={classes.item}
-            onClick={() => {
-              console.log(screen.AllFiltred);
-            }}
-          >
+          <div className={classes.item} onClick={() => {}}>
             <MoreIcon />
             <div className={classes.info}>
               <Typography className={classes.info}>Mais</Typography>

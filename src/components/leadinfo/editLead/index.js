@@ -17,7 +17,7 @@ import { useStyles } from "./styles";
 
 function EditLead({ info, back }) {
   const classes = useStyles();
-  const { dispatchScreen, dispatchLead, dispatch, screen } = useClienteData();
+  const { dispatchScreen, dispatchLead, dispatch } = useClienteData();
   const [errorSignup, setErrorSignup] = useState(false);
   const [confirmDelet, setconfirmDelet] = useState(false);
   const [convert, setConvert] = useState(false);
