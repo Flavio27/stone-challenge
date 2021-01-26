@@ -16,11 +16,11 @@
 * Abra o terminal e navegue até a pasta do projeto/static-api;
 * No terminal execute o comando: `npm install`;
 * obs: caso não tenha JSON server instalado em sua maquina terá de instalar globalmente.
-* Apos a instalação das depedências execute o comando `npm start`;
-* Caso haja algum problema verifique o arquivo package.json 
+* Apos a instalação das depedências execute o comando `npm start`; 
 * Abra o browser no endereco: http://localhost:3001
 
-Obs: há o script "start": "json-server --watch stonedata.json --port 3001"
+* Caso haja algum problema verifique se o arquivo package.json contem o script:
+"start": "json-server --watch stonedata.json --port 3001"
 
 
 
