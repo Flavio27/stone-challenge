@@ -21,6 +21,7 @@
 
 * Caso haja algum problema verifique se o arquivo package.json contem o script:
 "start": "json-server --watch stonedata.json --port 3001"
+<br />
 *Endpoints da API: 
 <br />
 http://localhost:3001/clients
