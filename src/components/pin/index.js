@@ -25,6 +25,9 @@ function Pin({ info, type, number }) {
     setOpen(false);
   };
 
+  const filtredLead = <LeadInfo client={info} />
+  const filtredClient= <ClientInfo client={info} />
+
   return (
     <div>
       <div onClick={handleClickOpen} className={classes.divPin}>
@@ -40,19 +43,26 @@ function Pin({ info, type, number }) {
         {type === "client" && (
           <PersonPinCircleIcon fontSize="large" style={{ color: "#38bc72" }} />
         )}
-        {type === "newLead" && (
-          <EditLocationIcon fontSize="large" style={{ color: "#757575" }} />
-        )}
+
+        {type === "filtred" &&
+          (info.percentage_migration ? (
+            <PersonPinCircleIcon
+              fontSize="large"
+              style={{ color: "#38bc72" }}
+            />
+          ) : (
+            <NotListedLocationIcon
+              fontSize="large"
+              style={{ color: "#c66b2f" }}
+            />
+          ))}
         {type === "script" && (
           <>
-          <DirectionsWalkIcon style={{ color: "#013a83" }}/>
-          <div fontSize="large" className={classes.scriptDiv}>
-            <h2>{number+1}º</h2>
-          </div>
-          <Typography>
-            {info.commercial_name}
-          </Typography>
-          
+            <DirectionsWalkIcon style={{ color: "#013a83" }} />
+            <div fontSize="large" className={classes.scriptDiv}>
+              <h2>{number + 1}º</h2>
+            </div>
+            <Typography>{info.commercial_name}</Typography>
           </>
         )}
       </div>
@@ -69,7 +79,7 @@ function Pin({ info, type, number }) {
         >
           <CloseIcon />
         </IconButton>
-        {type === "newLead" && <NewLead client={info} />}
+        {type === "filtred" && info.satisfaction ? filtredClient : filtredLead}
         {type === "client" && <ClientInfo client={info} />}
         {type === "lead" && <LeadInfo client={info} />}
       </Dialog>

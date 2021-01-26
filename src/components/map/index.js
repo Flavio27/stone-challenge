@@ -151,9 +151,18 @@ function Map() {
               info={clientPin}
             />
           ))}
-        {FiltredList.map((clientPin, index) => (
-          <div style={{ width: 50, background: "red" }} />
-        ))}
+        {screen.filter.filtred &&
+          screen.AllFiltred.map((clientPin, index) => (
+            <Pin
+              key={clientPin.id}
+              type={"filtred"}
+              number={index}
+              lat={clientPin.address.lat}
+              lng={clientPin.address.lng}
+              info={clientPin}
+            />
+          ))}
+     
       </GoogleMapReact>
     </div>
   );

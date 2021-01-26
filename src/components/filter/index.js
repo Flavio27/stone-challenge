@@ -55,6 +55,23 @@ export default function Filter() {
       type: "ACTIVE_ALERT_FILTER",
       payload: true,
     });
+
+    dispatchScreen({
+      type: "ACTIVE_FILTER_PIN_FILTRED",
+      payload: true
+    });
+    dispatchScreen({
+      type: "ACTIVE_FILTER_PIN_SCRIPT",
+      payload: false,
+    });
+    dispatchScreen({
+      type: "ACTIVE_FILTER_PIN_CLIENT",
+      payload: false,
+    });
+    dispatchScreen({
+      type: "ACTIVE_FILTER_PIN_LEAD",
+      payload: false,
+    });
   
   };
 

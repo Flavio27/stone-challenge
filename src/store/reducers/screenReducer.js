@@ -66,7 +66,6 @@ export const screenReducer = (state, action) => {
           ...action.payload,
         ];
       }
-
       return funnelFiltredAll;
     // Alerts for register, edit, delet or save
     case "ACTIVE_ALERT_SIGNUP":

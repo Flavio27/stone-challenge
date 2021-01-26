@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useClienteData } from "../../store/Clients";
 import NotListedLocationIcon from "@material-ui/icons/NotListedLocation";
 import PersonPinCircleIcon from "@material-ui/icons/PersonPinCircle";
 import AddLocationIcon from "@material-ui/icons/AddLocation";
 import AppBar from "@material-ui/core/AppBar";
-import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
+import FilterListIcon from "@material-ui/icons/FilterList";
+import DirectionsWalkIcon from "@material-ui/icons/DirectionsWalk";
 import Typography from "@material-ui/core/Typography";
 import Badge from "@material-ui/core/Badge";
 import { useStyles } from "./styles";
@@ -17,12 +18,12 @@ function PinFilterBar() {
     dispatchScreen,
     localization,
     setLocalization,
-    walkScriptData
+    walkScriptData,
   } = useClienteData();
   const [activeLeads, setActiveLeads] = useState(0);
   const classes = useStyles();
-  let numberLeads = leadsData.filter(e => e.client_id === "" )
-  
+  let numberLeads = leadsData.filter((e) => e.client_id === "");
+
   const newLead = () => {
     dispatchScreen({
       type: "PUSH_ADDRESS",
@@ -37,7 +38,7 @@ function PinFilterBar() {
   };
 
   const filterScript = () => {
-     dispatchScreen({
+    dispatchScreen({
       type: "ACTIVE_FILTER_PIN_SCRIPT",
       payload: screen.filter.script ? false : true,
     });
@@ -49,7 +50,11 @@ function PinFilterBar() {
       type: "ACTIVE_FILTER_PIN_LEAD",
       payload: false,
     });
-  }
+    dispatchScreen({
+      type: "ACTIVE_FILTER_PIN_FILTRED",
+      payload: false
+    });
+  };
 
   const filterLeads = () => {
     dispatchScreen({
@@ -59,6 +64,10 @@ function PinFilterBar() {
 
     dispatchScreen({
       type: "ACTIVE_FILTER_PIN_SCRIPT",
+      payload: false,
+    });
+    dispatchScreen({
+      type: "ACTIVE_FILTER_PIN_FILTRED",
       payload: false
     });
   };
@@ -70,13 +79,32 @@ function PinFilterBar() {
     });
     dispatchScreen({
       type: "ACTIVE_FILTER_PIN_SCRIPT",
+      payload: false,
+    });
+    dispatchScreen({
+      type: "ACTIVE_FILTER_PIN_FILTRED",
       payload: false
     });
-    
   };
 
-  
-
+  const funnelFiltred = () => {
+    dispatchScreen({
+      type: "ACTIVE_FILTER_PIN_FILTRED",
+      payload: screen.filter.filtred ? false : true
+    });
+    dispatchScreen({
+      type: "ACTIVE_FILTER_PIN_SCRIPT",
+      payload: false,
+    });
+    dispatchScreen({
+      type: "ACTIVE_FILTER_PIN_CLIENT",
+      payload: false,
+    });
+    dispatchScreen({
+      type: "ACTIVE_FILTER_PIN_LEAD",
+      payload: false,
+    });
+  };
 
   return (
     <div className={classes.main}>
@@ -92,7 +120,10 @@ function PinFilterBar() {
               </div>
             </div>
             <div className={classes.item} onClick={filterScript}>
-              <Badge badgeContent={walkScriptData[0].allScript.length} color="secondary">
+              <Badge
+                badgeContent={walkScriptData[0].allScript.length}
+                color="secondary"
+              >
                 <DirectionsWalkIcon style={{ color: "#013a83" }} />
               </Badge>
               <div className={classes.info}>
@@ -113,6 +144,14 @@ function PinFilterBar() {
               </Badge>
               <div className={classes.info}>
                 <Typography className={classes.info}>Clientes</Typography>
+              </div>
+            </div>
+            <div className={classes.item} onClick={funnelFiltred}>
+              <Badge badgeContent={screen.AllFiltred.length} color="secondary">
+                <FilterListIcon style={{ color: "#000000" }} />
+              </Badge>
+              <div className={classes.info}>
+                <Typography className={classes.info}>Filtrados</Typography>
               </div>
             </div>
           </div>
